@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Penalmentes 2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Pantalla de manual -->
+  <div id="manual">
+    <h1>¡Juego de Penales!</h1>
+    <p>Cómo jugar:</p>
+    <ul>
+      <li>Contesta la pregunta correcta antes de tirar el penal.</li>
+      <li>La respuesta correcta define dónde irá el balón.</li>
+      <li>Si fallas, verás la explicación y podrás continuar.</li>
+      <li>Tienes 5 tiros y 3 vidas por ronda.</li>
+      <li>Sube niveles respondiendo correctamente: 5 niveles en total.</li>
+    </ul>
+    <button id="startBtn">Comenzar Juego</button>
+  </div>
+
+  <!-- Interfaz -->
+  <div id="ui">
+    <p><strong>Penalmentes</strong></p>
+    <p>Nivel: <span id="nivel">1</span></p>
+    <p>Goles: <span id="goles">0</span> &nbsp; Tiros: <span id="tiros">0</span>/5 &nbsp; Vidas: <span id="vidas">3</span></p>
+  </div>
+
+  <!-- Pregunta y opciones -->
+  <div id="question-container">
+    <p id="question"></p>
+    <div id="options">
+      <button class="option" data-dir="-2"></button>
+      <button class="option" data-dir="0"></button>
+      <button class="option" data-dir="2"></button>
+    </div>
+  </div>
+
+  <!-- Modal de explicación -->
+  <div id="explanation" style="display:none;">
+    <p id="explanation-text"></p>
+    <div style="text-align:center; margin-top:10px;">
+      <button id="continueBtn">Seguir Juego</button>
+      <button id="moreInfoBtn">Más Info</button>
+    </div>
+  </div>
+
+  <!-- Portero -->
+  <img id="keeper" src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/portero.png" alt="Portero">
+
+  <!-- Slider inferior tipo footer -->
+  <div class="sponsor-slider footer">
+    <div class="slide-track">
+      <a href="https://www.caliente.mx" target="_blank">
+        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Grupo_Caliente_Logo.png" alt="Caliente">
+      </a>
+      <a href="https://www.milenio.com/" target="_blank">
+        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png" alt="Milenio">
+      </a>
+      <a href="https://www.codere.mx" target="_blank">
+        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Codere.png" alt="Codere">
+      </a>
+      <a href="https://www.adidas.com" target="_blank">
+        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Adidas_Logo.png" alt="Adidas">
+      </a>
+      <a href="https://www.coca-cola.com" target="_blank">
+        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Coca-Cola_logo.png" alt="Coca Cola">
+      </a>
+    </div>
+  </div>
+
+  <!-- Three.js -->
+  <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+    
+</body>
+</html>

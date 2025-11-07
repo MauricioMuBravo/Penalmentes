@@ -1,0 +1,221 @@
+/* ============================= */
+/*  RESET Y CONFIGURACIÓN BASE   */
+/* ============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Cancha.png') no-repeat center bottom;
+  background-size: cover; /* Se adapta a todas las pantallas */
+  background-attachment: fixed;
+  background-color: #1e7a1e; /* Color de respaldo */
+}
+
+/* ============================= */
+/*  ESCENA Y CAPAS BASE          */
+/* ============================= */
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2; /* fondo visible detrás del juego */
+  display: block;
+}
+
+/* ============================= */
+/*  MANUAL DE INSTRUCCIONES      */
+/* ============================= */
+#manual {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  text-align: center;
+}
+
+#manual h1 { font-size: 3em; margin-bottom: 20px; }
+#manual ul { margin: 15px 0 25px; text-align: left; }
+
+#manual button {
+  padding: 12px 25px;
+  font-size: 1.2em;
+  background: #e7dd27;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#manual button:hover { background: #28a745; }
+
+/* ============================= */
+/*  INTERFAZ DEL JUEGO           */
+/* ============================= */
+#ui {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  z-index: 15;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* ============================= */
+/*  CONTENEDOR DE PREGUNTAS      */
+/* ============================= */
+#question-container {
+  position: absolute;
+  bottom: 530px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  z-index: 16;
+  display: none;
+}
+
+#question-container p { font-size: 18px; margin-bottom: 10px; }
+
+.option {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.option:hover { background: #28a745; transform: scale(1.05); }
+
+/* ============================= */
+/*  MODAL DE EXPLICACIÓN         */
+/* ============================= */
+#explanation {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 80%;
+  text-align: center;
+  z-index: 18;
+  display: none;
+}
+
+#continueBtn, #moreInfoBtn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#continueBtn { background-color: #28a745; color: #fff; }
+#moreInfoBtn { background-color: #ffc107; color: #000; }
+
+/* ============================= */
+/*  PORTERO                      */
+/* ============================= */
+#keeper {
+  position: absolute;
+  bottom: 145px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 200px;
+  z-index: 12;
+  display: none;
+  transition: transform 0.5s ease-out;
+}
+/* ============================= */
+/*  SHAKE AL FALLAR ⚡           */
+/* ============================= */
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-10px, 0); }
+  20%, 40%, 60%, 80% { transform: translate(10px, 0); }
+}
+
+.shake {
+  animation: shake 1s ease;
+}
+
+/* ============================= */
+/*  SLIDERS DE PATROCINADORES    */
+/* ============================= */
+.sponsor-slider.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 14;
+}
+
+.sponsor-slider.footer .slide-track {
+  display: flex;
+  animation: scroll-horizontal 22s linear infinite;
+}
+
+.sponsor-slider.footer img {
+  width: 200px;
+  margin: 0 30px;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+}
+.sponsor-slider.footer img:hover { transform: scale(1.15); }
+
+@keyframes scroll-horizontal {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================= */
+/*  RESPONSIVE DESIGN            */
+/* ============================= */
+@media (max-width: 768px) {
+  #question-container {
+    bottom: 320px;
+    max-width: 90%;
+  }
+
+  #keeper {
+    height: 150px;
+    bottom: 120px;
+  }
+
+  .sponsor-slider.footer {
+    height: 90px;
+  }
+
+  .sponsor-slider.footer img {
+    width: 130px;
+    margin: 0 15px;
+  }
+}
