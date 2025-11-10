@@ -1,41 +1,37 @@
-// --- THREE.JS ESCENA ---
 const scene = new THREE.Scene();
-
-// Fondo transparente para mostrar imagen CSS
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setClearColor(0x000000, 0); // <- transparencia total
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+renderer.setClearColor(0x000000,0);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1,1000);
+camera.position.set(0,2,8);
 
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 2, 8);
-
-
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-// LUZ
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(5, 10, 10);
+const light = new THREE.DirectionalLight(0xffffff,1);
+light.position.set(5,10,10);
 scene.add(light);
-scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+scene.add(new THREE.AmbientLight(0xffffff,0.5));
 
-// BALÓN
-const ballMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
-const ball = new THREE.Mesh(new THREE.SphereGeometry(0.25, 16, 16), ballMat);
-ball.position.set(0, 0.25, 6);
+const ballMat = new THREE.MeshStandardMaterial({color:0xffffff});
+const ball = new THREE.Mesh(new THREE.SphereGeometry(0.25,16,16),ballMat);
+ball.position.set(0,0.25,6);
 scene.add(ball);
 
-// AUDIO
+// ============================
+// AUDIOS
+// ============================
 const audioShoot = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/tiro.mp3');
 const audioGoal = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Gool.mp3');
 const audioFail = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/fallo.mp3');
 const audioCrowd = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/gente.mp3');
+const audioLevelUp = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_52c9866d55.mp3?filename=level-up-191997.mp3');
+
 audioCrowd.loop = true;
 audioCrowd.volume = 0.4;
 
-// HTML ELEMENTOS
+// ============================
+// ELEMENTOS HTML
+// ============================
 const startBtn = document.getElementById('startBtn');
 const questionEl = document.getElementById('question');
 const optionsEl = document.querySelectorAll('.option');
@@ -48,21 +44,40 @@ const explanationText = document.getElementById('explanation-text');
 const continueBtn = document.getElementById('continueBtn');
 const moreInfoBtn = document.getElementById('moreInfoBtn');
 const manualDiv = document.getElementById('manual');
-
-// PORTERO
-let keeperImg = document.getElementById('keeper');
+const keeperImg = document.getElementById('keeper');
 keeperImg.style.display = 'none';
-keeperImg.style.width = '70px';
-keeperImg.style.position = 'absolute';
-keeperImg.style.bottom = '200px';
-keeperImg.style.left = '50%';
-keeperImg.style.transform = 'translateX(-50%)';
-keeperImg.style.zIndex = 12;
 
-// ESTADO DEL JUEGO
+// ============================
+// BOTON SILENCIAR PÚBLICO
+// ============================
+const muteCrowdBtn = document.getElementById('muteCrowd');
+let crowdMuted = false;
+muteCrowdBtn.addEventListener('click', () => {
+  crowdMuted = !crowdMuted;
+  audioCrowd.muted = crowdMuted;
+  muteCrowdBtn.textContent = crowdMuted ? "🔇 Público silenciado" : "🔊 Silenciar público";
+});
+
+// ============================
+// ESTADO
+// ============================
 let goles = 0, tiros = 0, vidas = 3, nivel = 1, busy = false;
 const maxTiros = 5;
 let currentQuestionObj = null;
+let preguntasRestantes = []; // almacena preguntas sin repetir
+
+// ============================
+// FUNCIONES AUX
+// ============================
+function updateUI() {
+  golesEl.textContent = goles;
+  tirosEl.textContent = tiros;
+  vidasEl.textContent = vidas;
+  nivelEl.textContent = nivel;
+}
+
+function shuffle(arr){ return arr.sort(()=>Math.random()-0.5);}
+function easeOutQuad(t){ return t*(2-t); }
 // ============================
 // PREGUNTAS
 // ============================
@@ -103,274 +118,271 @@ const preguntas = [
     { q:"Cuál fue el máximo goleador de 2006?", a:"Miroslav Klose", options:["Ronaldo","Miroslav Klose","Thierry Henry"], exp:"Klose marcó 5 goles en 2006.", link:"https://es.wikipedia.org/wiki/Miroslav_Klose" }
   ]
 ];
+
 // ============================
-// FUNCIONES
-function updateUI() {
-  golesEl.textContent = goles;
-  tirosEl.textContent = tiros;
-  vidasEl.textContent = vidas;
-  nivelEl.textContent = nivel;
+// NUEVA PREGUNTA
+// ============================
+function cargarPreguntasNivel(){
+  const pool = preguntas[Math.max(0, Math.min(preguntas.length-1,nivel-1))];
+  preguntasRestantes = shuffle([...pool]);
 }
 
-function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+// ============================
+// NUEVA PREGUNTA
+// ============================
+function nuevaPregunta(){
+  if(preguntasRestantes.length === 0){
+    subirNivel();
+    return;
+  }
 
-function nuevaPregunta() {
   keeperImg.style.transform = `translateX(-50%)`;
-  ball.position.set(0, 0.25, 6);
-  const pool = preguntas[Math.max(0, Math.min(preguntas.length - 1, nivel - 1))];
-  currentQuestionObj = pool[Math.floor(Math.random() * pool.length)];
+  ball.position.set(0,0.25,6);
+
+  currentQuestionObj = preguntasRestantes.pop();
+
+  const qBox = document.getElementById('question-container');
+  qBox.style.display = 'block';
+  qBox.style.opacity = '0';
+  setTimeout(()=>qBox.style.opacity='1',50);
 
   questionEl.textContent = currentQuestionObj.q;
   const opts = shuffle([...currentQuestionObj.options]);
-  optionsEl.forEach((btn, i) => {
+  optionsEl.forEach((btn,i)=>{
     btn.textContent = opts[i] || '';
     btn.dataset.correct = (opts[i] === currentQuestionObj.a) ? 'true' : 'false';
     btn.dataset.exp = currentQuestionObj.exp;
     btn.dataset.link = currentQuestionObj.link;
     btn.dataset.index = i;
   });
-  document.getElementById('question-container').style.display = 'block';
 }
 
 // ============================
-// ANIMACIÓN DEL PENAL
+// ANIMACION PENAL + PORTERO
 // ============================
-function animarPenal(correct, btn) {
-  if (busy) return;
-  busy = true;
-  audioShoot.play().catch(() => {});
+function animarPenal(correct, btn){
+  if(busy) return;
+  busy=true;
+  audioShoot.play().catch(()=>{});
 
   const index = parseInt(btn.dataset.index);
-  const positions = [-2, 0, 2];
+  const positions = [-2,0,2];
   const targetX = positions[index] || 0;
-  const duration = 1.2;
   const startBall = ball.position.clone();
-  const endBallGol = new THREE.Vector3(targetX, 0.25, -7);
-  const endKeeperX = targetX * 60;
-
+  const endBallGol = new THREE.Vector3(targetX,0.25,-7);
   let t = 0;
 
-  // Tipo de fallo aleatorio
-  const falloTipo = Math.random() < 0.5 ? 'detenido' : 'tribuna';
-
-  function step() {
-    t += 0.02 / duration;
-    if (t > 1) t = 1;
-
-    if (correct) {
-      // Gol normal
-      const controlPoint = new THREE.Vector3((startBall.x + endBallGol.x)/2, 2.5, (startBall.z + endBallGol.z)/2);
-      const a = startBall.clone().lerp(controlPoint, t);
-      const b = controlPoint.clone().lerp(endBallGol, t);
-      ball.position.lerpVectors(a, b, t);
-      keeperImg.style.transform = `translateX(calc(-50% + ${endKeeperX * Math.random() * 0.5}px))`;
-    } else {
-      if(falloTipo === 'detenido') {
-        // Portero toca el balón
-        if(t < 0.5){
-          const midPoint = new THREE.Vector3(targetX, 0.25, -7);
-          ball.position.lerpVectors(startBall, midPoint, t*2);
-          keeperImg.style.transform = `translateX(calc(-50% + ${endKeeperX * t}px)) rotateZ(${t*25}deg)`;
-        } else {
-          // Rebote ligero y giro
-          const desvio = new THREE.Vector3(
-            targetX + (Math.random()*1.5-0.75),
-            0.25 + Math.random()*0.5,
-            -7 - Math.random()*0.5
-          );
-          ball.position.lerpVectors(new THREE.Vector3(targetX, 0.25, -7), desvio, (t-0.5)*2);
-          ball.rotation.y += 0.1; // rotación sutil
-          keeperImg.style.transform = `translateX(calc(-50% + ${endKeeperX}px)) rotateZ(15deg)`;
-        }
-      } else {
-        // Balón a tribuna
-        const falloEnd = new THREE.Vector3(
-          targetX + (Math.random()*2-1),
-          3 + Math.random()*2,
-          -5 - Math.random()*2
-        );
-        if(t < 0.5){
-          const midPoint = new THREE.Vector3(targetX, 0.25, -7);
-          ball.position.lerpVectors(startBall, midPoint, t*2);
-          keeperImg.style.transform = `translateX(calc(-50% + ${endKeeperX * t}px)) rotateZ(${t*25}deg)`;
-        } else {
-          ball.position.lerpVectors(new THREE.Vector3(targetX, 0.25, -7), falloEnd, (t-0.5)*2);
-          ball.rotation.x += 0.15; // rotación dramática
-          ball.rotation.y += 0.1;
-          keeperImg.style.transform = `translateX(calc(-50% + ${endKeeperX}px)) rotateZ(20deg)`;
-        }
-      }
-    }
-
-    if(t < 1) requestAnimationFrame(step);
+  function step(){
+    t += 0.02/1.2;
+    if(t>1) t=1;
+    const easedT = easeOutQuad(t);
+    const y = startBall.y + Math.sin(Math.PI*easedT)*2;
+    ball.position.set(
+      startBall.x + (endBallGol.x-startBall.x)*easedT,
+      y,
+      startBall.z + (endBallGol.z-startBall.z)*easedT
+    );
+    keeperImg.style.transform = `translateX(calc(-50% + ${targetX*60*easedT}px)) rotateZ(${t*20}deg)`;
+    if(t<1) requestAnimationFrame(step);
     else finalizarAnimacion();
   }
 
-  function finalizarAnimacion() {
-    tiros++;
-    if(correct){
-      goles++;
-      audioGoal.play().catch(()=>{});
-      lanzarConfeti();
-      reaccionPublico('gol');
+  function finalizarAnimacion(){
+  tiros++;
+  const qBox = document.getElementById('question-container');
+
+  if(correct){
+    goles++;
+    audioGoal.play().catch(()=>{});
+    lanzarConfeti();
+    shakeEstadio('gol');
+
+    // ✅ Mensaje gol solo, sin botones
+    explanationText.textContent = "¡Goool! 🎉";
+    explanationEl.style.display = 'block';
+    continueBtn.style.display = 'none';
+    moreInfoBtn.style.display = 'none';
+
+    // Ocultar automáticamente después de 2 segundos y mostrar siguiente pregunta
+    setTimeout(()=>{
+      explanationEl.style.display = 'none';
+      qBox.style.display = 'block';
+      qBox.style.opacity = '1';
       nuevaPregunta();
-    } else {
-      vidas--;
-      audioFail.play().catch(()=>{});
-      shakeEstadio();
-      reaccionPublico('fallo');
+      busy = false;
+    }, 2000);
 
-      explanationText.textContent = btn.dataset.exp;
-      explanationEl.style.display = 'block';
-      moreInfoBtn.onclick = ()=>window.open(btn.dataset.link,'_blank');
-      continueBtn.onclick = ()=>{
-        explanationEl.style.display='none';
-        nuevaPregunta();
-      };
-    }
+  } else {
+    vidas--;
+    audioFail.play().catch(()=>{});
+    shakeEstadio('fallo'); 
+    explanationText.textContent = btn.dataset.exp;
+    explanationEl.style.display='block';
+    continueBtn.style.display = 'inline-block';
+    moreInfoBtn.style.display = 'inline-block';
+    moreInfoBtn.onclick = ()=>window.open(btn.dataset.link,'_blank');
 
-    updateUI();
-    busy = false;
-
-    if(vidas <= 0){
-      alert(`Se acabaron las vidas. Goles: ${goles}`);
-      resetJuego();
-    } else if(tiros >= maxTiros){
-      alert(`Fin de ronda. Goles: ${goles}`);
-      resetJuego();
-    }
+    // Mantener los botones y permitir al jugador continuar
+    continueBtn.onclick = ()=>{
+      explanationEl.style.display='none';
+      qBox.style.display='block';
+      qBox.style.opacity='1';
+      nuevaPregunta();
+      busy=false;
+    };
   }
+
+  updateUI();
+  if(vidas <= 0) mostrarGameOver("Sin vidas 😢");
+}
 
   step();
 }
-// ============================
-// EVENTOS DE RESPUESTAS
-// ============================
-optionsEl.forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (busy) return;
-    const correct = btn.dataset.correct === 'true';
-    const exp = btn.dataset.exp;
-    const link = btn.dataset.link;
 
-    document.getElementById('question-container').style.display = 'none';
-    animarPenal(correct, btn);
+// ============================
+// SUBIR DE NIVEL
+// ============================
+function subirNivel(){
+  if(nivel >= preguntas.length){
+    mostrarGameOver("🏆 ¡Has completado todos los niveles!");
+    return;
+  }
 
-    if (!correct) {
-      setTimeout(() => {
-        explanationText.textContent = exp;
-        explanationEl.style.display = 'block';
-        moreInfoBtn.onclick = () => window.open(link, '_blank');
-        continueBtn.onclick = () => {
-          explanationEl.style.display = 'none';
-          nuevaPregunta();
-        };
-      }, 1300);
-    }
+  nivel++;
+  goles=0;
+  tiros=0;
+  cargarPreguntasNivel();
+  updateUI();
+  audioLevelUp.play().catch(()=>{});
+
+  const lvlMsg = document.createElement('div');
+  lvlMsg.className='level-up';
+  lvlMsg.textContent = `🏆 ¡Nivel ${nivel} desbloqueado!`;
+  document.body.appendChild(lvlMsg);
+
+  setTimeout(()=> lvlMsg.classList.add('show'),50);
+  setTimeout(()=>{
+    lvlMsg.classList.remove('show');
+    setTimeout(()=>lvlMsg.remove(),500);
+  },4000);
+
+  setTimeout(()=> nuevaPregunta(),4200);
+}
+
+// ============================
+// EVENTOS RESPUESTA
+// ============================
+optionsEl.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(busy) return;
+    const correct = btn.dataset.correct==='true';
+    const qBox = document.getElementById('question-container');
+    qBox.style.opacity='0';
+    setTimeout(()=>qBox.style.display='none',500);
+    animarPenal(correct,btn);
   });
 });
 
 // ============================
-// INICIO DE JUEGO
+// BALÓN DE INICIO
 // ============================
 startBtn.addEventListener('click', () => {
-  manualDiv.style.display = 'none';
-  keeperImg.style.display = 'block';
-  keeperImg.style.opacity = '0';
-  keeperImg.style.transition = 'opacity 1s, transform 1s';
-  keeperImg.style.transform = 'translateX(-50%) translateY(50px)';
-  setTimeout(() => {
-    keeperImg.style.opacity = '1';
-    keeperImg.style.transform = 'translateX(-50%) translateY(0)';
-  }, 100);
-  updateUI();
-  nuevaPregunta();
-  audioCrowd.play().catch(() => {});
+  const startBall = document.createElement('div');
+  startBall.id='start-ball';
+  document.body.appendChild(startBall);
+  setTimeout(()=> startBall.classList.add('shoot'),100);
+
+  manualDiv.style.transition='opacity 0.8s ease';
+  manualDiv.style.opacity='0';
+
+  setTimeout(()=>{
+    manualDiv.style.display='none';
+    startBall.remove();
+
+    keeperImg.style.display='block';
+    keeperImg.style.width='200px';
+    keeperImg.style.bottom='145px';
+    keeperImg.style.left='50%';
+    keeperImg.style.transform='translateX(-50%)';
+    keeperImg.style.opacity='1';
+
+    cargarPreguntasNivel();
+    updateUI();
+    nuevaPregunta();
+    audioCrowd.play().catch(()=>{});
+  },1000);
 });
 
 // ============================
-// REINICIO
+// EFECTOS
 // ============================
-function resetJuego() {
-  goles = 0; tiros = 0; vidas = 3; nivel = 1;
+function lanzarConfeti(){ 
+  const duration=2000; 
+  const end = Date.now()+duration; 
+  (function frame(){ 
+    confetti({ particleCount:5, angle:60, spread:100, origin:{x:Math.random(),y:Math.random()-0.2} }); 
+    if(Date.now()<end) requestAnimationFrame(frame); 
+  })(); 
+}
+
+function shakeEstadio(tipo='fallo'){
+  const body=document.body;
+  body.classList.add('shake');
+  body.style.transition='background-color 0.3s ease';
+  body.style.backgroundColor = tipo==='gol'
+    ? 'rgba(0,255,0,0.1)'
+    : 'rgba(255,0,0,0.1)';
+  setTimeout(()=>{
+    body.classList.remove('shake');
+    body.style.backgroundColor='';
+  },800);
+}
+
+// ============================
+// FIN DE JUEGO
+// ============================
+function mostrarGameOver(mensaje){
+  const modal = document.getElementById('game-over-modal');
+  document.getElementById('game-over-msg').textContent = mensaje;
+  document.getElementById('final-score').textContent = goles;
+  modal.style.display='flex';
+  document.getElementById('retryBtn').onclick = ()=>{
+    modal.style.display='none';
+    resetJuego();
+  };
+}
+
+function resetJuego(){
+  goles = 0;
+  tiros = 0;
+  vidas = 3;
+  nivel = 1;
   updateUI();
+
   manualDiv.style.display = 'flex';
+  manualDiv.style.opacity = '1';
   keeperImg.style.display = 'none';
+  
+  // ✅ Ocultar modal de explicación al reiniciar
+  explanationEl.style.display = 'none';
+  continueBtn.style.display = 'inline-block'; // opcional, dejar como default
+  moreInfoBtn.style.display = 'inline-block'; // opcional, dejar como default
+
   audioCrowd.pause();
   audioCrowd.currentTime = 0;
 }
 
 // ============================
-// EFECTOS
+// LOOP PRINCIPAL THREE.JS
 // ============================
-function lanzarConfeti() {
-  const duration = 4000;
-  const end = Date.now() + duration;
-  (function frame() {
-    confetti({
-      particleCount: 4,
-      angle: 60,
-      spread: 100,
-      origin: { x: Math.random(), y: Math.random() - 0.2 }
-    });
-    if (Date.now() < end) requestAnimationFrame(frame);
-  })();
-}
-
-function shakeEstadio() {
-  document.body.classList.add('shake');
-  setTimeout(() => document.body.classList.remove('shake'), 1000);
-}
-
-function crearGradas() {
-  const stadium = document.createElement('div');
-  stadium.id = 'stadium';
-  document.body.appendChild(stadium);
-  const zonas = ['izquierda', 'derecha', 'arriba'];
-  zonas.forEach(zona => {
-    const grada = document.createElement('div');
-    grada.classList.add('grada', zona);
-    for (let i = 0; i < 150; i++) {
-      const fan = document.createElement('div');
-      fan.classList.add('fan');
-      fan.style.background = `hsl(${Math.random() * 40 + 10}, 70%, 50%)`;
-      grada.appendChild(fan);
-    }
-    stadium.appendChild(grada);
-  });
-}
-crearGradas();
-
-function reaccionPublico(tipo = 'gol') {
-  const fans = document.querySelectorAll('.fan');
-  fans.forEach(fan => {
-    const original = fan.style.background || '#ff0000';
-    fan.style.transition = 'all 0.3s ease';
-    if (tipo === 'gol') {
-      fan.style.background = 'radial-gradient(circle, #fff700, #ff0000)';
-      fan.style.transform = 'scale(1.4) translateY(-8px)';
-    } else {
-      fan.style.background = 'radial-gradient(circle, #001133, #000000)';
-      fan.style.transform = 'scale(0.8) translateY(3px)';
-      fan.style.opacity = '0.6';
-    }
-    setTimeout(() => {
-      fan.style.background = original;
-      fan.style.transform = 'scale(1) translateY(0)';
-      fan.style.opacity = '1';
-    }, 700);
-  });
-}
-
-// LOOP PRINCIPAL
-function animate() {
+function animate(){
   requestAnimationFrame(animate);
-  renderer.render(scene, camera);
+  renderer.render(scene,camera);
 }
 animate();
 
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
+window.addEventListener('resize',()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth,window.innerHeight);
 });

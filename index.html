@@ -40,7 +40,7 @@
   </div>
 
   <!-- Modal de explicación -->
-  <div id="explanation" style="display:none;">
+  <div id="explanation">
     <p id="explanation-text"></p>
     <div style="text-align:center; margin-top:10px;">
       <button id="continueBtn">Seguir Juego</button>
@@ -48,34 +48,35 @@
     </div>
   </div>
 
+  <!-- Modal de fin de juego -->
+  <div id="game-over-modal" class="hidden">
+    <div class="modal-content">
+      <h2 id="game-over-msg"></h2>
+      <p>Goles: <span id="final-score"></span></p>
+      <button id="retryBtn">Volver a jugar</button>
+    </div>
+  </div>
+
+    <button id="muteCrowd" style="margin-top:5px; padding:5px 10px; font-size:14px;">🔊 Silenciar público</button>
+
   <!-- Portero -->
   <img id="keeper" src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/portero.png" alt="Portero">
 
   <!-- Slider inferior tipo footer -->
   <div class="sponsor-slider footer">
     <div class="slide-track">
-      <a href="https://www.caliente.mx" target="_blank">
-        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Grupo_Caliente_Logo.png" alt="Caliente">
-      </a>
-      <a href="https://www.milenio.com/" target="_blank">
-        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png" alt="Milenio">
-      </a>
-      <a href="https://www.codere.mx" target="_blank">
-        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Codere.png" alt="Codere">
-      </a>
-      <a href="https://www.adidas.com" target="_blank">
-        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Adidas_Logo.png" alt="Adidas">
-      </a>
-      <a href="https://www.coca-cola.com" target="_blank">
-        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Coca-Cola_logo.png" alt="Coca Cola">
-      </a>
+      <a href="https://www.caliente.mx" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Grupo_Caliente_Logo.png" alt="Caliente"></a>
+      <a href="https://www.milenio.com/" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png" alt="Milenio"></a>
+      <a href="https://www.codere.mx" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Codere.png" alt="Codere"></a>
+      <a href="https://www.adidas.com" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Adidas_Logo.png" alt="Adidas"></a>
+      <a href="https://www.coca-cola.com" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Coca-Cola_logo.png" alt="Coca Cola"></a>
     </div>
   </div>
 
-  <!-- Three.js -->
+  <!-- Three.js y confeti -->
   <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>
-    
+
 </body>
 </html>

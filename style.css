@@ -1,199 +1,90 @@
-/* ============================= */
-/*  RESET Y CONFIGURACIÓN BASE   */
-/* ============================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+/* RESET Y BASE */
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
+html, body { width:100%; height:100%; overflow:hidden; background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Cancha.png') no-repeat center bottom; background-size: cover; background-attachment: fixed; background-color:#1e7a1e; }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Cancha.png') no-repeat center bottom;
-  background-size: cover; /* Se adapta a todas las pantallas */
-  background-attachment: fixed;
-  background-color: #1e7a1e; /* Color de respaldo */
-}
+/* MANUAL */
+#manual { position:absolute; width:100%; height:100%; background: rgba(0,0,0,0.8); color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:20; text-align:center; opacity:1; transition: opacity 0.8s ease;}
+#manual h1 { font-size:3em; margin-bottom:20px;}
+#manual ul { margin:15px 0 25px; text-align:left;}
+#manual button { padding:12px 25px; font-size:1.2em; background:#e7dd27; color:#fff; border:none; border-radius:6px; cursor:pointer; transition: background 0.3s;}
+#manual button:hover{ background:#28a745; }
 
-/* ============================= */
-/*  ESCENA Y CAPAS BASE          */
-/* ============================= */
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2; /* fondo visible detrás del juego */
-  display: block;
-}
+/* INTERFAZ */
+#ui { position:absolute; top:10px; left:10px; color:white; font-size:16px; z-index:15; text-shadow:1px 1px 2px black; }
 
-/* ============================= */
-/*  MANUAL DE INSTRUCCIONES      */
-/* ============================= */
-#manual {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 20;
-  text-align: center;
-}
+/* PREGUNTAS */
+#question-container { position:absolute; bottom:530px; left:50%; transform:translateX(-50%); background: rgba(255,255,255,0.95); padding:15px 20px; border-radius:12px; text-align:center; max-width:400px; z-index:16; display:none; opacity:0; transition: opacity 0.5s ease;}
+#question-container p{ font-size:18px; margin-bottom:10px; }
+.option{ background:#28a745; color:#fff; border:none; padding:8px 15px; margin:5px; border-radius:6px; cursor:pointer; font-weight:bold; transition:0.3s;}
+.option:hover{ transform: scale(1.05);}
 
-#manual h1 { font-size: 3em; margin-bottom: 20px; }
-#manual ul { margin: 15px 0 25px; text-align: left; }
+/* MODAL EXPLICACION / FIN */
+#explanation, #game-over-modal { position:absolute; top:25%; left:50%; transform:translateX(-50%); background:rgba(255,255,255,0.95); padding:20px; border-radius:12px; max-width:80%; text-align:center; z-index:18; display:none; }
+#continueBtn, #moreInfoBtn, #retryBtn{ padding:8px 16px; border:none; border-radius:6px; margin:5px; cursor:pointer; font-weight:bold; transition:0.3s;}
+#continueBtn { background-color:#28a745; color:#fff;}
+#moreInfoBtn { background-color:#ffc107; color:#000;}
+.modal-content { background:#1e7a1e; color:#fff; padding:20px 30px; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.6); animation: pop 0.6s ease; }
+@keyframes pop{0%{transform:scale(0.7);opacity:0;}100%{transform:scale(1);opacity:1;}}
 
-#manual button {
-  padding: 12px 25px;
-  font-size: 1.2em;
-  background: #e7dd27;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-#manual button:hover { background: #28a745; }
+/* PORTERO */
+#keeper{ position:absolute; bottom:145px; left:50%; transform:translateX(-50%); height:200px; z-index:12; display:none; transition: transform 0.5s ease-out;}
 
-/* ============================= */
-/*  INTERFAZ DEL JUEGO           */
-/* ============================= */
-#ui {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: white;
-  font-size: 16px;
-  z-index: 15;
-  text-shadow: 1px 1px 2px black;
-}
+/* FLASH TIRO */
+.flash-tiro{ position:absolute; top:40%; width:80px; height:80px; background: radial-gradient(circle, rgba(255,255,255,0.9), transparent); border-radius:50%; animation: flash 0.4s ease-out; }
+@keyframes flash{ 0%{opacity:1;} 100%{opacity:0; transform:scale(2);} }
 
-/* ============================= */
-/*  CONTENEDOR DE PREGUNTAS      */
-/* ============================= */
-#question-container {
-  position: absolute;
-  bottom: 530px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.95);
-  padding: 15px 20px;
-  border-radius: 12px;
-  text-align: center;
-  max-width: 400px;
-  z-index: 16;
-  display: none;
-}
-
-#question-container p { font-size: 18px; margin-bottom: 10px; }
-
-.option {
-  background: #28a745;
-  color: #fff;
-  border: none;
-  padding: 8px 15px;
-  margin: 5px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-.option:hover { background: #28a745; transform: scale(1.05); }
-
-/* ============================= */
-/*  MODAL DE EXPLICACIÓN         */
-/* ============================= */
-#explanation {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.95);
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 80%;
-  text-align: center;
-  z-index: 18;
-  display: none;
-}
-
-#continueBtn, #moreInfoBtn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  margin: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-#continueBtn { background-color: #28a745; color: #fff; }
-#moreInfoBtn { background-color: #ffc107; color: #000; }
-
-/* ============================= */
-/*  PORTERO                      */
-/* ============================= */
-#keeper {
-  position: absolute;
-  bottom: 145px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 200px;
-  z-index: 12;
-  display: none;
-  transition: transform 0.5s ease-out;
-}
-/* ============================= */
-/*  SHAKE AL FALLAR ⚡           */
-/* ============================= */
-@keyframes shake {
-  0%, 100% { transform: translate(0, 0); }
-  10%, 30%, 50%, 70%, 90% { transform: translate(-10px, 0); }
-  20%, 40%, 60%, 80% { transform: translate(10px, 0); }
-}
-
-.shake {
-  animation: shake 1s ease;
-}
-
-/* ============================= */
-/*  SLIDERS DE PATROCINADORES    */
-/* ============================= */
-.sponsor-slider.footer {
+/* BALON INICIO */
+#start-ball {
   position: fixed;
-  bottom: 0;
-  width: 100%;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%) scale(1);
+  width: 120px;
   height: 120px;
-  background: rgba(0,0,0,0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 14;
+  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png') no-repeat center/contain;
+  z-index: 30;
+  transition: transform 1s ease-in, opacity 1s ease-in;
+}
+#start-ball.shoot {
+  transform: translate(-50%, -300%) scale(0.3);
+  opacity: 0;
+}
+#muteCrowd {
+  position: fixed;
+  top: 20px;        /* distancia desde la parte superior */
+  right: 20px;      /* distancia desde el borde derecho */
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ffc107;
+  color: #000;
+  cursor: pointer;
+  z-index: 50;      /* encima de todo */
+  transition: 0.3s;
+}
+#muteCrowd:hover {
+  background-color: #e0a800;
 }
 
-.sponsor-slider.footer .slide-track {
-  display: flex;
-  animation: scroll-horizontal 22s linear infinite;
+/* SLIDER PATROCINADORES */
+.sponsor-slider.footer { position:fixed; bottom:0; width:100%; height:120px; background:rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; overflow:hidden; z-index:14;}
+.sponsor-slider.footer .slide-track { display:flex; animation: scroll-horizontal 22s linear infinite;}
+.sponsor-slider.footer img{ width:200px; margin:0 30px; transition: transform 0.3s ease; filter:drop-shadow(0 3px 5px rgba(0,0,0,0.3)); }
+.sponsor-slider.footer img:hover{ transform: scale(1.15); }
+@keyframes scroll-horizontal{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+  #question-container{ bottom:320px; max-width:90%;}
+  #keeper{height:150px; bottom:120px;}
+  .sponsor-slider.footer{ height:90px;}
+  .sponsor-slider.footer img{ width:130px; margin:0 15px;}
 }
 
-.sponsor-slider.footer img {
-  width: 200px;
-  margin: 0 30px;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
-}
-.sponsor-slider.footer img:hover { transform: scale(1.15); }
-
-@keyframes scroll-horizontal {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@media (max-height:600px){
+  #question-container{ bottom:250px;}
+  #keeper{height:130px; bottom:100px;}
 }
 
 /* ============================= */
@@ -218,4 +109,54 @@ canvas {
     width: 130px;
     margin: 0 15px;
   }
+    .level-up {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: radial-gradient(circle, #fff, #ffd700);
+  color: #000;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 20px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px gold;
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: 1000;
+}
+.level-up.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+    .level-up {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: gold;
+  color: #000;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 20px 40px;
+  border-radius: 15px;
+  opacity: 0;
+  z-index: 100;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255,255,0,0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.level-up.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  animation: shine 1s ease-in-out infinite alternate;
+}
+
+@keyframes shine {
+  0% { text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0; }
+  50% { text-shadow: 0 0 20px #fff, 0 0 30px #ff0, 0 0 40px #ff0; }
+  100% { text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0; }
+}
+
 }
