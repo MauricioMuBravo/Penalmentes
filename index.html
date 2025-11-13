@@ -57,7 +57,11 @@
     </div>
   </div>
 
-    <button id="muteCrowd" style="margin-top:5px; padding:5px 10px; font-size:14px;">🔊 Silenciar público</button>
+  <!-- Contenedor de botones flotantes -->
+  <div id="sound-controls">
+    <button id="muteCrowd">🔊 Silenciar público</button>
+    <button id="creditsBtn">👤 Créditos</button>
+  </div>
 
   <!-- Portero -->
   <img id="keeper" src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/portero.png" alt="Portero">
@@ -73,7 +77,20 @@
     </div>
   </div>
 
-  <!-- Three.js y confeti -->
+  <!-- Modal de créditos -->
+  <div id="creditsModal" class="hidden">
+    <div class="modal-content">
+      <h2>Créditos</h2>
+      <p><strong>Proyecto:</strong> Penalmentes 2026</p>
+      <p><strong>Desarrollado:</strong> Mauricio Muñoz Bravp</p>
+      <p><strong>Diseñador:</strong> Lic.Jesus Mauricio Segura Herra</p>
+      <p><strong>QA:</strong> Lorelei Ocampo Nieto</p>
+      <p><strong>Redacción:</strong> Mario Dominguez Martinez</p>
+      <button id="closeCreditsBtn">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>

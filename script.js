@@ -156,54 +156,122 @@ function nuevaPregunta(){
     btn.dataset.index = i;
   });
 }
-
 // ============================
-// ANIMACION PENAL + PORTERO
+// ANIMACION PENAL + PORTERO (con rebote realista al atajar)
 // ============================
 function animarPenal(correct, btn){
   if(busy) return;
-  busy=true;
+  busy = true;
   audioShoot.play().catch(()=>{});
 
   const index = parseInt(btn.dataset.index);
-  const positions = [-2,0,2];
+  const positions = [-2, 0, 2];
   const targetX = positions[index] || 0;
   const startBall = ball.position.clone();
-  const endBallGol = new THREE.Vector3(targetX,0.25,-7);
+
+  // Destino del balón (más corto si el portero la ataja)
+  const endBall = correct
+    ? new THREE.Vector3(targetX, 0.25, -7)
+    : new THREE.Vector3(targetX, 0.25, -2.8);
+
   let t = 0;
 
+  // Movimiento del portero
+  const keeperStartX = 0;
+  let keeperDir;
+
+  // Si el tiro es al centro, el portero elige aleatoriamente hacia dónde lanzarse
+  if (targetX === 0) {
+    keeperDir = Math.random() < 0.5 ? -1 : 1;
+  } else {
+    // Si acierta, el portero se lanza al lado contrario
+    keeperDir = correct ? -Math.sign(targetX) : Math.sign(targetX);
+  }
+
+  const keeperTilt = correct ? 15 : 25;
+
+  let rebote = false; // control para el rebote
+
   function step(){
-    t += 0.02/1.2;
-    if(t>1) t=1;
+    t += 0.02 / 1.2;
+    if (t > 1) t = 1;
     const easedT = easeOutQuad(t);
-    const y = startBall.y + Math.sin(Math.PI*easedT)*2;
+    const y = startBall.y + Math.sin(Math.PI * easedT) * 2;
+
+    // Movimiento del balón
     ball.position.set(
-      startBall.x + (endBallGol.x-startBall.x)*easedT,
+      startBall.x + (endBall.x - startBall.x) * easedT,
       y,
-      startBall.z + (endBallGol.z-startBall.z)*easedT
+      startBall.z + (endBall.z - startBall.z) * easedT
     );
-    keeperImg.style.transform = `translateX(calc(-50% + ${targetX*60*easedT}px)) rotateZ(${t*20}deg)`;
-    if(t<1) requestAnimationFrame(step);
+
+    // Movimiento del portero
+const keeperStartX = 0;
+let keeperDir;
+
+// Si el tiro es al centro, el portero se lanza más fuerte a un lado aleatorio
+if (targetX === 0) {
+  keeperDir = Math.random() < 0.5 ? -1 : 1;
+} else {
+  // Si acierta, el portero se lanza al lado contrario
+  keeperDir = correct ? -Math.sign(targetX) : Math.sign(targetX);
+}
+
+// Más amplitud del movimiento si el tiro es al centro
+const keeperMoveAmp = targetX === 0 ? 120 : 60; // 120px si es al centro
+const keeperTilt = correct ? 15 : 25;
+
+// Dentro del step()
+const keeperX = keeperStartX + keeperDir * keeperMoveAmp * easedT;
+const keeperY = Math.sin(Math.PI * easedT) * (correct ? 5 : 10);
+const keeperRot = keeperDir * keeperTilt * easedT;
+keeperImg.style.transform = `translate(calc(-50% + ${keeperX}px), ${-keeperY}px) rotateZ(${keeperRot}deg)`;
+
+    // 🧤 Simular atajada: rebote del balón
+    if(!correct && t >= 0.85 && !rebote){
+      rebote = true;
+      // sonido del fallo
+      audioFail.play().catch(()=>{});
+      // rebote corto hacia adelante
+      const reboteDist = 0.5;
+      const reboteTime = 0.3;
+      const startZ = ball.position.z;
+      const endZ = startZ + reboteDist;
+      const startY = ball.position.y;
+      const endY = 0.2;
+
+      let rT = 0;
+      function reboteAnim(){
+        rT += 0.05 / reboteTime;
+        if(rT > 1) rT = 1;
+        ball.position.z = startZ + (endZ - startZ) * rT;
+        ball.position.y = startY + (endY - startY) * (1 - rT);
+        if(rT < 1) requestAnimationFrame(reboteAnim);
+      }
+      reboteAnim();
+    }
+
+    if (t < 1) requestAnimationFrame(step);
     else finalizarAnimacion();
   }
 
-  function finalizarAnimacion(){
+ function finalizarAnimacion(){
   tiros++;
   const qBox = document.getElementById('question-container');
 
   if(correct){
+    // 🟢 GOL ANIMACIÓN NORMAL
     goles++;
     audioGoal.play().catch(()=>{});
     lanzarConfeti();
     shakeEstadio('gol');
 
-    // ✅ Mensaje gol solo, sin botones
     explanationText.textContent = "¡Goool! 🎉";
     explanationEl.style.display = 'block';
     continueBtn.style.display = 'none';
     moreInfoBtn.style.display = 'none';
 
-    // Ocultar automáticamente después de 2 segundos y mostrar siguiente pregunta
+    // Ocultar automáticamente y pasar a la siguiente pregunta
     setTimeout(()=>{
       explanationEl.style.display = 'none';
       qBox.style.display = 'block';
@@ -213,16 +281,65 @@ function animarPenal(correct, btn){
     }, 2000);
 
   } else {
+    // 🔴 FALLA: el balón se ataja o se vuela
     vidas--;
     audioFail.play().catch(()=>{});
     shakeEstadio('fallo'); 
+
+    // decidir al azar entre atajada o balón volado
+    const falloTipo = Math.random() < 0.7 ? 'atajada' : 'volado'; // 70% ataja
+
+    if (falloTipo === 'atajada') {
+      // portero se lanza hacia la dirección del tiro
+      const dir = targetX > 0 ? 1 : (targetX < 0 ? -1 : (Math.random() < 0.5 ? -1 : 1));
+      keeperImg.style.transition = "transform 0.4s ease";
+      keeperImg.style.transform = `translateX(calc(-50% + ${dir*80}px)) rotateZ(${dir*30}deg)`;
+
+      // el balón rebota al lado contrario, ligeramente hacia arriba
+      let reboteT = 0;
+      const start = ball.position.clone();
+      const reboteX = -dir * 1.5;
+      const reboteY = 0.8;
+      const reboteZ = 1.2;
+
+      function animarRebote(){
+        reboteT += 0.05;
+        if(reboteT <= 1){
+          ball.position.set(
+            start.x + reboteX * reboteT,
+            start.y + Math.sin(reboteT * Math.PI) * reboteY,
+            start.z + reboteZ * reboteT
+          );
+          requestAnimationFrame(animarRebote);
+        }
+      }
+      animarRebote();
+
+    } else {
+      // balón se va alto, como volado a la tribuna
+      const start = ball.position.clone();
+      let t = 0;
+      function animarVuelo(){
+        t += 0.04;
+        if(t <= 1){
+          ball.position.set(
+            start.x,
+            start.y + Math.sin(t*Math.PI)*3.5,
+            start.z - t*6
+          );
+          requestAnimationFrame(animarVuelo);
+        }
+      }
+      animarVuelo();
+    }
+
+    // Mostrar explicación con botones
     explanationText.textContent = btn.dataset.exp;
     explanationEl.style.display='block';
     continueBtn.style.display = 'inline-block';
     moreInfoBtn.style.display = 'inline-block';
     moreInfoBtn.onclick = ()=>window.open(btn.dataset.link,'_blank');
 
-    // Mantener los botones y permitir al jugador continuar
     continueBtn.onclick = ()=>{
       explanationEl.style.display='none';
       qBox.style.display='block';
@@ -235,10 +352,8 @@ function animarPenal(correct, btn){
   updateUI();
   if(vidas <= 0) mostrarGameOver("Sin vidas 😢");
 }
-
   step();
 }
-
 // ============================
 // SUBIR DE NIVEL
 // ============================
@@ -357,20 +472,39 @@ function resetJuego(){
   tiros = 0;
   vidas = 3;
   nivel = 1;
+  busy = false;
   updateUI();
 
-  manualDiv.style.display = 'flex';
-  manualDiv.style.opacity = '1';
+  // 🔁 Reiniciar entorno visual
   keeperImg.style.display = 'none';
-  
-  // ✅ Ocultar modal de explicación al reiniciar
   explanationEl.style.display = 'none';
-  continueBtn.style.display = 'inline-block'; // opcional, dejar como default
-  moreInfoBtn.style.display = 'inline-block'; // opcional, dejar como default
+  continueBtn.style.display = 'inline-block';
+  moreInfoBtn.style.display = 'inline-block';
 
+  // 🎵 Detener sonido del público
   audioCrowd.pause();
   audioCrowd.currentTime = 0;
+
+  // 📖 Mostrar nuevamente el manual
+  manualDiv.style.display = 'flex';
+  manualDiv.style.opacity = '1';
+
+  // ✅ Asegurar que no queden preguntas activas
+  preguntasRestantes = [];
 }
+
+// --- Créditos ---
+const creditsBtn = document.getElementById('creditsBtn');
+const creditsModal = document.getElementById('creditsModal');
+const closeCreditsBtn = document.getElementById('closeCreditsBtn');
+
+creditsBtn.addEventListener('click', () => {
+  creditsModal.classList.remove('hidden');
+});
+
+closeCreditsBtn.addEventListener('click', () => {
+  creditsModal.classList.add('hidden');
+});
 
 // ============================
 // LOOP PRINCIPAL THREE.JS

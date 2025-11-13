@@ -1,39 +1,263 @@
-/* RESET Y BASE */
-* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
-html, body { width:100%; height:100%; overflow:hidden; background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Cancha.png') no-repeat center bottom; background-size: cover; background-attachment: fixed; background-color:#1e7a1e; }
+/* ============================== */
+/* RESET Y BASE                   */
+/* ============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-/* MANUAL */
-#manual { position:absolute; width:100%; height:100%; background: rgba(0,0,0,0.8); color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:20; text-align:center; opacity:1; transition: opacity 0.8s ease;}
-#manual h1 { font-size:3em; margin-bottom:20px;}
-#manual ul { margin:15px 0 25px; text-align:left;}
-#manual button { padding:12px 25px; font-size:1.2em; background:#e7dd27; color:#fff; border:none; border-radius:6px; cursor:pointer; transition: background 0.3s;}
-#manual button:hover{ background:#28a745; }
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Cancha.png') no-repeat center bottom;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #1e7a1e;
+}
 
-/* INTERFAZ */
-#ui { position:absolute; top:10px; left:10px; color:white; font-size:16px; z-index:15; text-shadow:1px 1px 2px black; }
+/* ============================== */
+/* ESTILO GLOBAL BOTONES          */
+/* ============================== */
+button {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-/* PREGUNTAS */
-#question-container { position:absolute; bottom:530px; left:50%; transform:translateX(-50%); background: rgba(255,255,255,0.95); padding:15px 20px; border-radius:12px; text-align:center; max-width:400px; z-index:16; display:none; opacity:0; transition: opacity 0.5s ease;}
-#question-container p{ font-size:18px; margin-bottom:10px; }
-.option{ background:#28a745; color:#fff; border:none; padding:8px 15px; margin:5px; border-radius:6px; cursor:pointer; font-weight:bold; transition:0.3s;}
-.option:hover{ transform: scale(1.05);}
+/* BOTONES PRINCIPALES (respuestas, iniciar, continuar, más info, reiniciar) */
+button#startBtn,
+.option {
+  background-color: #28a745;
+  color: #fff;
+}
 
-/* MODAL EXPLICACION / FIN */
-#explanation, #game-over-modal { position:absolute; top:25%; left:50%; transform:translateX(-50%); background:rgba(255,255,255,0.95); padding:20px; border-radius:12px; max-width:80%; text-align:center; z-index:18; display:none; }
-#continueBtn, #moreInfoBtn, #retryBtn{ padding:8px 16px; border:none; border-radius:6px; margin:5px; cursor:pointer; font-weight:bold; transition:0.3s;}
-#continueBtn { background-color:#28a745; color:#fff;}
-#moreInfoBtn { background-color:#ffc107; color:#000;}
-.modal-content { background:#1e7a1e; color:#fff; padding:20px 30px; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.6); animation: pop 0.6s ease; }
-@keyframes pop{0%{transform:scale(0.7);opacity:0;}100%{transform:scale(1);opacity:1;}}
+button#startBtn:hover,
+.option:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
 
-/* PORTERO */
-#keeper{ position:absolute; bottom:145px; left:50%; transform:translateX(-50%); height:200px; z-index:12; display:none; transition: transform 0.5s ease-out;}
+/* BOTONES SECUNDARIOS (flotantes: silenciar público, créditos) */
+#sound-controls button {
+  background-color: #ffc107;
+  color: #000;
+}
 
-/* FLASH TIRO */
-.flash-tiro{ position:absolute; top:40%; width:80px; height:80px; background: radial-gradient(circle, rgba(255,255,255,0.9), transparent); border-radius:50%; animation: flash 0.4s ease-out; }
-@keyframes flash{ 0%{opacity:1;} 100%{opacity:0; transform:scale(2);} }
+#sound-controls button:hover {
+  background-color: #e0a800;
+  transform: scale(1.05);
+}
 
-/* BALON INICIO */
+/* ============================== */
+/* BOTONES EN MODALES (explicación y game over) */
+/* ============================== */
+#continueBtn, #moreInfoBtn, #retryBtn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* Botón continuar */
+#continueBtn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Botón más info */
+#moreInfoBtn {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+/* Botón reiniciar */
+#retryBtn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Hover efectos */
+#continueBtn:hover,
+#retryBtn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+#moreInfoBtn:hover {
+  background-color: #e0a800;
+  transform: scale(1.05);
+}
+
+/* ============================== */
+/* MODALES EXPLICACIÓN Y GAME OVER */
+/* ============================== */
+#explanation,
+#game-over-modal {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 80%;
+  text-align: center;
+  z-index: 18;
+  display: none;
+}
+
+/* ============================== */
+/* MODAL CRÉDITOS                  */
+/* ============================== */
+#creditsModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#creditsModal.hidden {
+  display: none;
+}
+
+#creditsModal .modal-content {
+  background: #28a745;
+  padding: 30px 40px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+#creditsModal h2 {
+  margin-bottom: 15px;
+}
+
+#creditsModal p {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+#creditsModal button {
+  margin-top: 15px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #0077ff;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#creditsModal button:hover {
+  background-color: #005bbb;
+}
+
+/* ============================== */
+/* MANUAL                         */
+/* ============================== */
+#manual {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+#manual h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+#manual ul {
+  margin: 15px 0 25px;
+  text-align: left;
+}
+
+/* ============================== */
+/* INTERFAZ                        */
+/* ============================== */
+#ui {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  z-index: 15;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* ============================== */
+/* PREGUNTAS                       */
+/* ============================== */
+#question-container {
+  position: absolute;
+  bottom: 530px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  z-index: 16;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#question-container p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.option {
+  margin: 5px;
+  font-weight: bold;
+}
+
+/* ============================== */
+/* PORTERO                        */
+/* ============================== */
+#keeper {
+  position: absolute;
+  bottom: 145px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 200px;
+  z-index: 12;
+  display: none;
+  transition: transform 0.5s ease-out;
+}
+
+/* ============================== */
+/* BALÓN DE INICIO                 */
+/* ============================== */
 #start-ball {
   position: fixed;
   bottom: 50%;
@@ -45,71 +269,66 @@ html, body { width:100%; height:100%; overflow:hidden; background: url('https://
   z-index: 30;
   transition: transform 1s ease-in, opacity 1s ease-in;
 }
+
 #start-ball.shoot {
   transform: translate(-50%, -300%) scale(0.3);
   opacity: 0;
 }
-#muteCrowd {
+
+/* ============================== */
+/* BOTONES FLOTANTES               */
+/* ============================== */
+#sound-controls {
   position: fixed;
-  top: 20px;        /* distancia desde la parte superior */
-  right: 20px;      /* distancia desde el borde derecho */
-  padding: 8px 12px;
-  font-size: 14px;
-  border: none;
-  border-radius: 6px;
-  background-color: #ffc107;
-  color: #000;
-  cursor: pointer;
-  z-index: 50;      /* encima de todo */
-  transition: 0.3s;
-}
-#muteCrowd:hover {
-  background-color: #e0a800;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 50;
 }
 
-/* SLIDER PATROCINADORES */
-.sponsor-slider.footer { position:fixed; bottom:0; width:100%; height:120px; background:rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; overflow:hidden; z-index:14;}
-.sponsor-slider.footer .slide-track { display:flex; animation: scroll-horizontal 22s linear infinite;}
-.sponsor-slider.footer img{ width:200px; margin:0 30px; transition: transform 0.3s ease; filter:drop-shadow(0 3px 5px rgba(0,0,0,0.3)); }
-.sponsor-slider.footer img:hover{ transform: scale(1.15); }
-@keyframes scroll-horizontal{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-
-/* RESPONSIVE */
-@media (max-width:768px){
-  #question-container{ bottom:320px; max-width:90%;}
-  #keeper{height:150px; bottom:120px;}
-  .sponsor-slider.footer{ height:90px;}
-  .sponsor-slider.footer img{ width:130px; margin:0 15px;}
+/* ============================== */
+/* SLIDER PATROCINADORES           */
+/* ============================== */
+.sponsor-slider.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 14;
 }
 
-@media (max-height:600px){
-  #question-container{ bottom:250px;}
-  #keeper{height:130px; bottom:100px;}
+.sponsor-slider.footer .slide-track {
+  display: flex;
+  animation: scroll-horizontal 22s linear infinite;
 }
 
-/* ============================= */
-/*  RESPONSIVE DESIGN            */
-/* ============================= */
-@media (max-width: 768px) {
-  #question-container {
-    bottom: 320px;
-    max-width: 90%;
-  }
+.sponsor-slider.footer img {
+  width: 200px;
+  margin: 0 30px;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+}
 
-  #keeper {
-    height: 150px;
-    bottom: 120px;
-  }
+.sponsor-slider.footer img:hover {
+  transform: scale(1.15);
+}
 
-  .sponsor-slider.footer {
-    height: 90px;
-  }
+@keyframes scroll-horizontal {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
-  .sponsor-slider.footer img {
-    width: 130px;
-    margin: 0 15px;
-  }
-    .level-up {
+/* ============================== */
+/* LEVEL UP                        */
+/* ============================== */
+.level-up {
   position: fixed;
   top: 40%;
   left: 50%;
@@ -124,27 +343,7 @@ html, body { width:100%; height:100%; overflow:hidden; background: url('https://
   opacity: 0;
   transition: all 0.6s ease;
   z-index: 1000;
-}
-.level-up.show {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-    .level-up {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  background: gold;
-  color: #000;
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 20px 40px;
-  border-radius: 15px;
-  opacity: 0;
-  z-index: 100;
   text-align: center;
-  box-shadow: 0 0 20px rgba(255,255,0,0.5);
-  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .level-up.show {
@@ -159,4 +358,17 @@ html, body { width:100%; height:100%; overflow:hidden; background: url('https://
   100% { text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0; }
 }
 
+/* ============================== */
+/* RESPONSIVE                      */
+/* ============================== */
+@media (max-width:768px){
+  #question-container{ bottom:320px; max-width:90%; }
+  #keeper{ height:150px; bottom:120px; }
+  .sponsor-slider.footer{ height:90px; }
+  .sponsor-slider.footer img{ width:130px; margin:0 15px; }
+}
+
+@media (max-height:600px){
+  #question-container{ bottom:250px; }
+  #keeper{ height:130px; bottom:100px; }
 }
