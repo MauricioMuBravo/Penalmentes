@@ -31,7 +31,7 @@ button {
   transition: all 0.3s ease;
 }
 
-/* BOTONES PRINCIPALES (respuestas, iniciar, continuar, más info, reiniciar) */
+/* BOTONES PRINCIPALES */
 button#startBtn,
 .option {
   background-color: #28a745;
@@ -44,7 +44,7 @@ button#startBtn:hover,
   transform: scale(1.05);
 }
 
-/* BOTONES SECUNDARIOS (flotantes: silenciar público, créditos) */
+/* BOTONES SECUNDARIOS */
 #sound-controls button {
   background-color: #ffc107;
   color: #000;
@@ -55,9 +55,7 @@ button#startBtn:hover,
   transform: scale(1.05);
 }
 
-/* ============================== */
-/* BOTONES EN MODALES (explicación y game over) */
-/* ============================== */
+/* BOTONES EN MODALES */
 #continueBtn, #moreInfoBtn, #retryBtn {
   padding: 8px 16px;
   border: none;
@@ -68,35 +66,13 @@ button#startBtn:hover,
   transition: 0.3s;
 }
 
-/* Botón continuar */
-#continueBtn {
-  background-color: #28a745;
-  color: #fff;
-}
+#continueBtn { background-color: #28a745; color: #fff; }
+#moreInfoBtn { background-color: #ffc107 !important; color: #000 !important; }
+#retryBtn { background-color: #28a745; color: #fff; }
 
-/* Botón más info */
-#moreInfoBtn {
-  background-color: #ffc107 !important;
-  color: #000 !important;
-}
-
-/* Botón reiniciar */
-#retryBtn {
-  background-color: #28a745;
-  color: #fff;
-}
-
-/* Hover efectos */
 #continueBtn:hover,
-#retryBtn:hover {
-  background-color: #218838;
-  transform: scale(1.05);
-}
-
-#moreInfoBtn:hover {
-  background-color: #e0a800;
-  transform: scale(1.05);
-}
+#retryBtn:hover { background-color: #218838; transform: scale(1.05); }
+#moreInfoBtn:hover { background-color: #e0a800; transform: scale(1.05); }
 
 /* ============================== */
 /* MODALES EXPLICACIÓN Y GAME OVER */
@@ -132,9 +108,7 @@ button#startBtn:hover,
   z-index: 9999;
 }
 
-#creditsModal.hidden {
-  display: none;
-}
+#creditsModal.hidden { display: none; }
 
 #creditsModal .modal-content {
   background: #28a745;
@@ -146,15 +120,8 @@ button#startBtn:hover,
   box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
-#creditsModal h2 {
-  margin-bottom: 15px;
-}
-
-#creditsModal p {
-  margin: 8px 0;
-  line-height: 1.4;
-}
-
+#creditsModal h2 { margin-bottom: 15px; }
+#creditsModal p { margin: 8px 0; line-height: 1.4; }
 #creditsModal button {
   margin-top: 15px;
   padding: 8px 20px;
@@ -165,10 +132,7 @@ button#startBtn:hover,
   font-weight: bold;
   cursor: pointer;
 }
-
-#creditsModal button:hover {
-  background-color: #005bbb;
-}
+#creditsModal button:hover { background-color: #005bbb; }
 
 /* ============================== */
 /* MANUAL                         */
@@ -189,15 +153,9 @@ button#startBtn:hover,
   transition: opacity 0.8s ease;
 }
 
-#manual h1 {
-  font-size: 3em;
-  margin-bottom: 20px;
-}
-
-#manual ul {
-  margin: 15px 0 25px;
-  text-align: left;
-}
+#manual h1 { font-size: 3em; margin-bottom: 20px; }
+#manual ul { margin: 15px 0 25px; text-align: left; }
+#manual img { width: 30px; vertical-align: middle; }
 
 /* ============================== */
 /* INTERFAZ                        */
@@ -231,15 +189,8 @@ button#startBtn:hover,
   transition: opacity 0.5s ease;
 }
 
-#question-container p {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.option {
-  margin: 5px;
-  font-weight: bold;
-}
+#question-container p { font-size: 18px; margin-bottom: 10px; }
+.option { margin: 5px; font-weight: bold; }
 
 /* ============================== */
 /* PORTERO                        */
@@ -276,6 +227,52 @@ button#startBtn:hover,
 }
 
 /* ============================== */
+/* BALÓN DE PISTA                  */
+/* ============================== */
+#hintBall {
+  position: fixed;
+  bottom: 320px;      /* Altura de gradas */
+  right: 40px;        /* Cambiar por left:40px si quieres lado izquierdo */
+  width: 70px;
+  height: 70px;
+  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png') no-repeat center/contain;
+  cursor: pointer;
+  z-index: 2000;
+  animation: spinBall 3s linear infinite;
+  transition: transform 0.3s ease;
+}
+#hintBall:hover { transform: scale(1.15); }
+@keyframes spinBall { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ============================== */
+/* MODAL PISTA                     */
+/* ============================== */
+#hintModal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5000;
+}
+#hintModal.hidden { display: none; }
+#hintModal .hint-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  max-width: 350px;
+  text-align: center;
+}
+#hintModal button {
+  margin-top: 15px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ============================== */
 /* BOTONES FLOTANTES               */
 /* ============================== */
 #sound-controls {
@@ -303,27 +300,19 @@ button#startBtn:hover,
   overflow: hidden;
   z-index: 14;
 }
-
 .sponsor-slider.footer .slide-track {
   display: flex;
   animation: scroll-horizontal 22s linear infinite;
 }
-
 .sponsor-slider.footer img {
   width: 200px;
   margin: 0 30px;
   transition: transform 0.3s ease;
   filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
 }
+.sponsor-slider.footer img:hover { transform: scale(1.15); }
 
-.sponsor-slider.footer img:hover {
-  transform: scale(1.15);
-}
-
-@keyframes scroll-horizontal {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+@keyframes scroll-horizontal { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ============================== */
 /* LEVEL UP                        */
@@ -345,13 +334,11 @@ button#startBtn:hover,
   z-index: 1000;
   text-align: center;
 }
-
 .level-up.show {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
   animation: shine 1s ease-in-out infinite alternate;
 }
-
 @keyframes shine {
   0% { text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0; }
   50% { text-shadow: 0 0 20px #fff, 0 0 30px #ff0, 0 0 40px #ff0; }
