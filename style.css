@@ -231,8 +231,8 @@ button#startBtn:hover,
 /* ============================== */
 #hintBall {
   position: fixed;
-  bottom: 320px;      /* Altura de gradas */
-  right: 40px;        /* Cambiar por left:40px si quieres lado izquierdo */
+  bottom: 320px;
+  right: 40px;
   width: 70px;
   height: 70px;
   background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png') no-repeat center/contain;
@@ -286,34 +286,68 @@ button#startBtn:hover,
 }
 
 /* ============================== */
-/* SLIDER PATROCINADORES           */
+/* SLIDER PATROCINADORES ESTADIO   */
 /* ============================== */
-.sponsor-slider.footer {
-  position: fixed;
-  bottom: 0;
+.stadium-ad-horizontal {
+  position: absolute;
+  left: 0;
   width: 100%;
-  height: 120px;
-  background: rgba(0,0,0,0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
   z-index: 14;
 }
-.sponsor-slider.footer .slide-track {
+
+.stadium-ad-horizontal .stadium-ads-track {
   display: flex;
   animation: scroll-horizontal 22s linear infinite;
 }
-.sponsor-slider.footer img {
-  width: 200px;
-  margin: 0 30px;
+
+.stadium-ad-horizontal img {
+  height: 80%;   /* Se adapta al contenedor */
+  width: auto;    /* Mantiene proporción */
+  margin: 0 8px;
   transition: transform 0.3s ease;
-  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
 }
-.sponsor-slider.footer img:hover { transform: scale(1.15); }
+.stadium-ad-horizontal img:hover {
+  transform: scale(1.05);
+}
 
-@keyframes scroll-horizontal { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+/* UBICACIÓN EN LA CANCHA */
+.top-ads {
+  top: 32%;       /* Ajustar según barra superior */
+  height: 41px;   /* Altura de la franja naranja superior */
+}
 
+.bottom-ads {
+  top: 65%;       /* Ajustar según barra inferior */
+  height: 32px;   /* Altura de la franja naranja inferior */
+  z-index: 11;    /* para no tapar portero */
+}
+
+/* SCROLL HORIZONTAL */
+@keyframes scroll-horizontal { 
+  0% { transform: translateX(0); } 
+  100% { transform: translateX(-50%); } 
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+  .top-ads, .bottom-ads {
+    height: 25px;
+    top: 27%; /* Ajustar según proporción en mobile */
+  }
+  .stadium-ad-horizontal img {
+    margin: 0 2px;
+    height: 100%;
+  }
+}
+
+@media (max-height:600px){
+  .top-ads, .bottom-ads {
+    height: 20px;
+  }
+}
 /* ============================== */
 /* LEVEL UP                        */
 /* ============================== */
@@ -351,8 +385,7 @@ button#startBtn:hover,
 @media (max-width:768px){
   #question-container{ bottom:320px; max-width:90%; }
   #keeper{ height:150px; bottom:120px; }
-  .sponsor-slider.footer{ height:90px; }
-  .sponsor-slider.footer img{ width:130px; margin:0 15px; }
+  .stadium-ad-horizontal { display: none; } /* opcional ocultar ads en móvil */
 }
 
 @media (max-height:600px){

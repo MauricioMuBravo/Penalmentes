@@ -18,22 +18,23 @@
       <li>Si fallas, verás la explicación y podrás continuar.</li>
       <li>Tienes 5 tiros y 3 vidas por ronda.</li>
       <li>Sube niveles respondiendo correctamente: 5 niveles en total.</li>
-      <li>Haz clic en el balón giratorio <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png" 
+      <li>Haz clic en el balón giratorio 
+        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png" 
         alt="Balón pista" style="width:30px; vertical-align:middle;"> 
-        para recibir una pista histórica que te ayudará a responder la pregunta.
+        para recibir una pista histórica que te ayudará a responder.
       </li>
     </ul>
     <button id="startBtn">Comenzar Juego</button>
   </div>
 
-  <!-- Interfaz -->
+  <!-- UI -->
   <div id="ui">
     <p><strong>Penalmentes</strong></p>
     <p>Nivel: <span id="nivel">1</span></p>
     <p>Goles: <span id="goles">0</span> &nbsp; Tiros: <span id="tiros">0</span>/5 &nbsp; Vidas: <span id="vidas">3</span></p>
   </div>
 
-  <!-- Pregunta y opciones -->
+  <!-- Pregunta -->
   <div id="question-container">
     <p id="question"></p>
     <div id="options">
@@ -43,7 +44,7 @@
     </div>
   </div>
 
-  <!-- Modal de explicación -->
+  <!-- Explicación -->
   <div id="explanation">
     <p id="explanation-text"></p>
     <div style="text-align:center; margin-top:10px;">
@@ -52,7 +53,7 @@
     </div>
   </div>
 
-  <!-- Modal de fin de juego -->
+  <!-- Game Over -->
   <div id="game-over-modal" class="hidden">
     <div class="modal-content">
       <h2 id="game-over-msg"></h2>
@@ -61,7 +62,7 @@
     </div>
   </div>
 
-  <!-- Contenedor de botones flotantes -->
+  <!-- Botones flotantes -->
   <div id="sound-controls">
     <button id="muteCrowd">🔊 Silenciar público</button>
     <button id="creditsBtn">👤 Créditos</button>
@@ -70,18 +71,42 @@
   <!-- Portero -->
   <img id="keeper" src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/portero.png" alt="Portero">
 
-  <!-- Slider inferior tipo footer -->
-  <div class="sponsor-slider footer">
-    <div class="slide-track">
-      <a href="https://www.caliente.mx" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Grupo_Caliente_Logo.png" alt="Caliente"></a>
-      <a href="https://www.milenio.com/" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png" alt="Milenio"></a>
-      <a href="https://www.codere.mx" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Codere.png" alt="Codere"></a>
-      <a href="https://www.adidas.com" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Adidas_Logo.png" alt="Adidas"></a>
-      <a href="https://www.coca-cola.com" target="_blank"><img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Coca-Cola_logo.png" alt="Coca Cola"></a>
+  <!-- ADS SUPERIOR sobre barra naranja -->
+  <div class="stadium-ad-horizontal top-ads">
+    <div class="stadium-ads-track">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <!-- Duplica para loop -->
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
     </div>
   </div>
 
-  <!-- Modal de créditos -->
+  <!-- ADS INFERIOR sobre barra naranja -->
+  <div class="stadium-ad-horizontal bottom-ads">
+    <div class="stadium-ads-track">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png"> 
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <!-- duplicadas -->
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+    </div>
+  </div>
+
+  <!-- Modal créditos -->
   <div id="creditsModal" class="hidden">
     <div class="modal-content">
       <h2>Créditos</h2>
@@ -97,7 +122,7 @@
   <!-- Balón de pista -->
   <div id="hintBall"></div>
 
-  <!-- Modal de pista -->
+  <!-- Modal Pista -->
   <div id="hintModal" class="hidden">
     <div class="hint-content">
       <h2>Pista</h2>
