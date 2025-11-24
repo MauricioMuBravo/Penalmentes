@@ -148,7 +148,6 @@ hintBall.style.display = 'block';
 hintBall.style.display = 'none';
 }
 }
-
 // ============================
 // NUEVA PREGUNTA
 // ============================
@@ -156,7 +155,6 @@ function cargarPreguntasNivel(){
 const pool = preguntas[Math.max(0, Math.min(preguntas.length-1,nivel-1))];
 preguntasRestantes = shuffle([...pool]);
 }
-
 function nuevaPregunta(){
 if(preguntasRestantes.length === 0){
 subirNivel();
@@ -197,9 +195,11 @@ function animarPenal(correct, btn){
   const positions = [-2, 0, 2];
   const targetX = positions[index] || 0;
   const startBall = ball.position.clone();
+
+  // Balón más atrás si el portero detiene
   const endBall = correct
-    ? new THREE.Vector3(targetX, 0.25, -7)
-    : new THREE.Vector3(targetX, 0.25, -2.8);
+    ? new THREE.Vector3(targetX, 0.25, -7) // gol
+    : new THREE.Vector3(targetX, 0.25, -5.5); // portero detiene
 
   let t = 0;
   let rebote = false;
@@ -221,18 +221,24 @@ function animarPenal(correct, btn){
     if(targetX === 0) keeperDir = Math.random() < 0.5 ? -1 : 1;
     else keeperDir = correct ? -Math.sign(targetX) : Math.sign(targetX);
 
-    const keeperMoveAmp = targetX===0 ? 120 : 60;
-    const keeperTilt = correct ? 15 : 25;
+    const keeperMoveAmp = targetX===0 ? 100 : 50;
+    const keeperTilt = correct ? 15 : 20;
     const keeperX = keeperStartX + keeperDir * keeperMoveAmp * easedT;
-    const keeperY = Math.sin(Math.PI * easedT) * (correct ? 5 : 10);
+    const keeperY = Math.sin(Math.PI * easedT) * (correct ? 5 : 12);
     const keeperRot = keeperDir * keeperTilt * easedT;
+
+    // Portero más atrás en la vista web
+    keeperImg.style.bottom = '130px';
     keeperImg.style.transform = `translate(calc(-50% + ${keeperX}px), ${-keeperY}px) rotateZ(${keeperRot}deg)`;
 
-    if(!correct && t>=0.85 && !rebote){
+    // Simula parada real del portero
+    if(!correct && t>=0.75 && !rebote){
       rebote = true;
       audioFail.play().catch(()=>{});
-      const startZ = ball.position.z, endZ = startZ + 0.5;
-      const startY = ball.position.y, endY = 0.2;
+      const startZ = ball.position.z;
+      const endZ = startZ + 0.3; // se detiene frente al portero
+      const startY = ball.position.y;
+      const endY = 0.25;
       let rT = 0;
       function reboteAnim(){
         rT += 0.05/0.3;
@@ -248,8 +254,9 @@ function animarPenal(correct, btn){
     else finalizarAnimacion();
   }
 
+  step();
+
   function finalizarAnimacion(){
-    // ... lógica de finalización (gol, fallo, UI, rebotes, botones) ...
     tiros++;
     const qBox = document.getElementById('question-container');
 
@@ -273,7 +280,6 @@ function animarPenal(correct, btn){
       vidas--;
       audioFail.play().catch(()=>{});
       shakeEstadio('fallo');
-      // manejo de rebote o balón volado...
       explanationText.textContent = btn.dataset.exp;
       explanationEl.style.display='block';
       continueBtn.style.display='inline-block';
@@ -291,8 +297,6 @@ function animarPenal(correct, btn){
     updateUI();
     if(vidas<=0) mostrarGameOver("Sin vidas 😢");
   }
-
-  step();
 }
 // ============================
 // SUBIR DE NIVEL
@@ -415,21 +419,21 @@ function resetJuego(){
   busy = false;
   updateUI();
 
-  // 🔁 Reiniciar entorno visual
+  // Reiniciar entorno visual
   keeperImg.style.display = 'none';
   explanationEl.style.display = 'none';
   continueBtn.style.display = 'inline-block';
   moreInfoBtn.style.display = 'inline-block';
 
-  // 🎵 Detener sonido del público
+  //Detener sonido del público
   audioCrowd.pause();
   audioCrowd.currentTime = 0;
 
-  // 📖 Mostrar nuevamente el manual
+  //Mostrar nuevamente el manual
   manualDiv.style.display = 'flex';
   manualDiv.style.opacity = '1';
 
-  // ✅ Asegurar que no queden preguntas activas
+  //Asegurar que no queden preguntas activas
   preguntasRestantes = [];
 }
 
