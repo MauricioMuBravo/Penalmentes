@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Penalmentes 2026</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -17,21 +17,28 @@
       <li>La respuesta correcta define dónde irá el balón.</li>
       <li>Si fallas, verás la explicación y podrás continuar.</li>
       <li>Tienes 5 tiros y 3 vidas por ronda.</li>
-      <li>Sube niveles respondiendo correctamente: 5 niveles en total.</li>
-      <li>Haz clic en el balón giratorio 
-        <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png" 
-        alt="Balón pista" style="width:30px; vertical-align:middle;"> 
-        para recibir una pista histórica que te ayudará a responder.
+      <li>Avanza niveles respondiendo correctamente (5 niveles).</li>
+      <li>
+        Haz clic en el balón de pista 
+        <img 
+          src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png" 
+          alt="Balón pista" 
+          style="width:30px; vertical-align:middle;">
+        para recibir ayuda histórica.
       </li>
     </ul>
     <button id="startBtn">Comenzar Juego</button>
   </div>
 
-  <!-- UI -->
+  <!-- UI principal -->
   <div id="ui">
     <p><strong>Penalmentes</strong></p>
     <p>Nivel: <span id="nivel">1</span></p>
-    <p>Goles: <span id="goles">0</span> &nbsp; Tiros: <span id="tiros">0</span>/5 &nbsp; Vidas: <span id="vidas">3</span></p>
+    <p>
+      Goles: <span id="goles">0</span>
+      &nbsp; Tiros: <span id="tiros">0</span>/5
+      &nbsp; Vidas: <span id="vidas">3</span>
+    </p>
   </div>
 
   <!-- Pregunta -->
@@ -47,7 +54,7 @@
   <!-- Explicación -->
   <div id="explanation">
     <p id="explanation-text"></p>
-    <div style="text-align:center; margin-top:10px;">
+    <div class="explanation-buttons">
       <button id="continueBtn">Seguir Juego</button>
       <button id="moreInfoBtn">Más Info</button>
     </div>
@@ -69,27 +76,26 @@
   </div>
 
   <!-- Portero -->
-  <img id="keeper" src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/portero.svg" alt="Portero">
+  <img 
+    id="keeper" 
+    src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/portero.svg" 
+    alt="Portero">
 
-  <!-- ADS SUPERIOR sobre barra naranja -->
+  <!-- Slider superior -->
   <div class="stadium-ad-horizontal top-ads">
     <div class="stadium-ads-track">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
+       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
-      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
-      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
-      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
-      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
-      <!-- Duplica para loop -->
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
     </div>
   </div>
 
-  <!-- ADS INFERIOR sobre barra naranja -->
+  <!-- Slider inferior -->
   <div class="stadium-ad-horizontal bottom-ads">
     <div class="stadium-ads-track">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
@@ -97,16 +103,13 @@
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
-      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png"> 
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
-      <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
-      <!-- duplicadas -->
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
       <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/Milenio.png">
     </div>
   </div>
 
-  <!-- Modal créditos -->
+  <!-- Modal Créditos -->
   <div id="creditsModal" class="hidden">
     <div class="modal-content">
       <h2>Créditos</h2>
@@ -122,7 +125,7 @@
   <!-- Balón de pista -->
   <div id="hintBall"></div>
 
-  <!-- Modal Pista -->
+  <!-- Modal de Pista -->
   <div id="hintModal" class="hidden">
     <div class="hint-content">
       <h2>Pista</h2>

@@ -19,7 +19,7 @@ html, body {
 }
 
 /* ============================== */
-/* BOTONES                          */
+/* BOTONES                        */
 /* ============================== */
 button {
   padding: 8px 14px;
@@ -70,7 +70,7 @@ button#startBtn:hover,
 #moreInfoBtn:hover { background-color: #e0a800; transform: scale(1.05); }
 
 /* ============================== */
-/* MODALES Y MANUALES               */
+/* MODALES Y MANUALES              */
 /* ============================== */
 #manual {
   position: absolute;
@@ -249,52 +249,60 @@ button#startBtn:hover,
 }
 
 /* ============================== */
-/* SLIDER PATROCINADORES ESTADIO   */
+/* SLIDERS SUPERIOR E INFERIOR (imágenes Milenio ajustadas) */
 /* ============================== */
-.stadium-ad-horizontal {
-  position:absolute;
-  left:0;
-  width:100%;
-  overflow:hidden;
-  display:flex;
-  justify-content:center;
-  z-index:14;
+.top-ads {
+  position: absolute;
+  top: 32%;          
+  left: 0;
+  width: 100%;
+  height: 3vh;       
+  overflow: hidden;
+  z-index: 14;
+}
+.top-ads .stadium-ads-track {
+  display: flex;
+  animation: scroll-top 22s linear infinite; 
+}
+.top-ads img {
+  height: 100%;              
+  max-height: 3vh;           
+  width: auto;                
+  object-fit: contain;        
+  margin: 0 4px;             
+  transition: transform 0.3s ease;
 }
 
-.stadium-ads-track {
-  display:flex;
-  animation: scroll-horizontal 22s linear infinite;
+.bottom-ads {
+  position: absolute;
+  top: 69%;          
+  left: 0;
+  width: 100%;
+  height: 3vh;       
+  overflow: hidden;
+  z-index: 10;
+}
+.bottom-ads .stadium-ads-track {
+  display: flex;
+  animation: scroll-bottom 20s linear infinite; 
+}
+.bottom-ads img {
+  height: 100%;              
+  max-height: 3vh;           
+  width: auto;                
+  object-fit: contain;        
+  margin: 0 4px;             
+  transition: transform 0.3s ease;
 }
 
-.stadium-ad-horizontal img {
-  height:85%;
-  width:auto;
-  margin:0 6px;
-  transition:transform 0.3s ease;
+/* Animaciones scroll */
+@keyframes scroll-top {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-.stadium-ad-horizontal img:hover {transform:scale(1.05);}
-
-/* POSICIÓN EXACTA EN LAS BARRAS */
-.top-ads { top:31.8%; height:4.4vh;}
-.bottom-ads { top:64.5%; height:4vh; z-index:11;}
-
-/* SCROLL HORIZONTAL */
-@keyframes scroll-horizontal { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  #question-container{bottom:320px; max-width:90%;}
-  #keeper{height:20vh; bottom:15vh;}
-  .top-ads{top:28%; height:3.1vh;}
-  .bottom-ads{top:60%; height:2.7vh;}
-  .stadium-ad-horizontal img{height:100%; margin:0 2px;}
-}
-
-@media(max-height:600px){
-  #question-container{bottom:250px;}
-  #keeper{height:18vh; bottom:12vh;}
-  .top-ads{top:27%; height:2.6vh;}
-  .bottom-ads{top:58%; height:2.3vh;}
+@keyframes scroll-bottom {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* ============================== */
@@ -326,4 +334,36 @@ button#startBtn:hover,
   0%{text-shadow:0 0 10px #fff,0 0 20px #ff0,0 0 30px #ff0;}
   50%{text-shadow:0 0 20px #fff,0 0 30px #ff0,0 0 40px #ff0;}
   100%{text-shadow:0 0 10px #fff,0 0 20px #ff0,0 0 30px #ff0;}
+}
+
+/* ============================== */
+/* MEDIA QUERIES: TABLET & MOBILE  */
+/* ============================== */
+
+/* Tablet: ancho máximo 1024px */
+@media (max-width: 1024px) {
+  #question-container { bottom: 450px; max-width: 350px; }
+  #keeper { height: 18vh; bottom: 12vh; }
+  
+  .top-ads { top: 43%; height: 2.5vh; }
+  .bottom-ads { top: 74%; height: 2.5vh; }
+  .top-ads img, .bottom-ads img { max-height: 2.5vh; }
+
+  #start-ball { width: 100px; height: 100px; }
+  #hintBall { width: 60px; height: 60px; bottom: 280px; }
+}
+
+/* Mobile: ancho máximo 768px */
+@media (max-width: 768px) {
+  #question-container { bottom: 400px; max-width: 300px; font-size: 16px; }
+  #keeper { height: 15vh; bottom: 10vh; }
+  
+  .top-ads { top: 43%; height: 2vh; }
+  .bottom-ads { top: 75%; height: 2vh; }
+  .top-ads img, .bottom-ads img { max-height: 2vh; }
+
+  #start-ball { width: 80px; height: 80px; }
+  #hintBall { width: 50px; height: 50px; bottom: 240px; }
+  
+  #ui { font-size: 14px; top: 8px; left: 8px; }
 }
