@@ -171,16 +171,15 @@ button#startBtn:hover,
 /* PORTERO – alineación real        */
 /* ============================== */
 #keeper {
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  height:22vh;
-  bottom:13vh;
-  z-index:12;
-  display:block;
+  position: absolute;
+  left: 50%;
+  bottom: 12vh;                 /* línea de gol aproximada */
+  transform: translateX(-50%) translateY(90vh); /* desplaza hacia atrás */
+  height: 27vh;
+  z-index: 18;
+  display: block;
   transition: transform 0.5s ease-out;
 }
-
 /* ============================== */
 /* BALÓN DE INICIO                 */
 /* ============================== */
@@ -335,7 +334,6 @@ button#startBtn:hover,
   50%{text-shadow:0 0 20px #fff,0 0 30px #ff0,0 0 40px #ff0;}
   100%{text-shadow:0 0 10px #fff,0 0 20px #ff0,0 0 30px #ff0;}
 }
-
 /* ============================== */
 /* MEDIA QUERIES: TABLET & MOBILE  */
 /* ============================== */
