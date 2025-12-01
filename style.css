@@ -237,6 +237,49 @@ button#startBtn:hover,
     height: 17vh;
   }
 }
+/* ============================== */
+/* AJUSTE DE FALLO – TABLET       */
+/* ============================== */
+@media (max-width: 1024px) {
+
+  /* Fallo hacia la izquierda */
+  #ball.miss-left {
+    transform: translate(-18vw, -6vh) rotate(-40deg) !important;
+  }
+
+  /* Fallo hacia la derecha */
+  #ball.miss-right {
+    transform: translate(18vw, -6vh) rotate(40deg) !important;
+  }
+
+  /* Fallo al centro (si lo tienes) */
+  #ball.miss-center {
+    transform: translate(0, -12vh) !important;
+  }
+}
+/* ============================== */
+/* AJUSTE DE GOL – TABLET         */
+/* ============================== */
+@media (max-width: 1024px) {
+
+  #ball.goal,
+  #ball.scored,
+  #ball.in-goal {
+    transform: translate(-50%, -26vh) !important;
+  }
+}
+/* ============================== */
+/* AJUSTE DE GOL – MÓVIL          */
+/* ============================== */
+@media (max-width: 768px) {
+
+  #ball.goal,
+  #ball.scored,
+  #ball.in-goal {
+    transform: translate(-50%, -38vh) !important; /* MÁS BAJITO */
+  }
+}
+
 
 /* ============================== */
 /* BALÓN DE INICIO                 */
