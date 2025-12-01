@@ -168,18 +168,76 @@ button#startBtn:hover,
 .option {margin:5px; font-weight:bold;}
 
 /* ============================== */
-/* PORTERO – alineación real        */
+/* PORTERO                        */
 /* ============================== */
 #keeper {
   position: absolute;
   left: 50%;
-  bottom: 12vh;                 /* línea de gol aproximada */
-  transform: translateX(-50%) translateY(90vh); /* desplaza hacia atrás */
+  bottom: 12vh;
+  transform: translateX(-50%) translateY(90vh);
   height: 27vh;
   z-index: 18;
   display: block;
   transition: transform 0.5s ease-out;
 }
+
+/* ============================== */
+/* BALÓN – Proporcional           */
+/* ============================== */
+#ball {
+  position: absolute;
+  width: 5vw;  /* proporcional */
+  height: 5vw;
+  max-width: 50px;
+  max-height: 50px;
+  bottom: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 17;
+  pointer-events: none;
+  transition: transform 0.1s linear;
+}
+
+#ball.spin {
+  animation: spinFast 0.3s linear infinite;
+}
+
+@keyframes spinFast {
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+/* ============================== */
+/* BALÓN – Tablet                 */
+/* ============================== */
+@media (max-width: 1024px) {
+  #ball {
+    width: 4.2vw;
+    height: 4.2vw;
+    max-width: 28px;
+    max-height: 28px;
+  }
+
+  #keeper {
+    height: 20vh;
+  }
+}
+
+/* ============================== */
+/* BALÓN – Móvil                  */
+/* ============================== */
+@media (max-width: 768px) {
+  #ball {
+    width: 5.5vw;
+    height: 5.5vw;
+    max-width: 22px;
+    max-height: 22px;
+  }
+
+  #keeper {
+    height: 17vh;
+  }
+}
+
 /* ============================== */
 /* BALÓN DE INICIO                 */
 /* ============================== */
@@ -248,7 +306,7 @@ button#startBtn:hover,
 }
 
 /* ============================== */
-/* SLIDERS SUPERIOR E INFERIOR (imágenes Milenio ajustadas) */
+/* SLIDERS SUPERIOR E INFERIOR    */
 /* ============================== */
 .top-ads {
   position: absolute;
@@ -303,7 +361,33 @@ button#startBtn:hover,
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+/* ============================== */
+/*     RESPONSIVE SLIDER ADS      */
+/* ============================== */
 
+/* Tablets */
+@media (max-width: 1024px) {
+  .top-ads,
+  .bottom-ads {
+    height: 2.5vh;
+  }
+  .top-ads img,
+  .bottom-ads img {
+    max-height: 2.5vh;
+  }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+  .top-ads,
+  .bottom-ads {
+    height: 2vh;
+  }
+  .top-ads img,
+  .bottom-ads img {
+    max-height: 2vh;
+  }
+}
 /* ============================== */
 /* LEVEL UP                        */
 /* ============================== */
@@ -334,34 +418,19 @@ button#startBtn:hover,
   50%{text-shadow:0 0 20px #fff,0 0 30px #ff0,0 0 40px #ff0;}
   100%{text-shadow:0 0 10px #fff,0 0 20px #ff0,0 0 30px #ff0;}
 }
-/* ============================== */
-/* MEDIA QUERIES: TABLET & MOBILE  */
-/* ============================== */
 
-/* Tablet: ancho máximo 1024px */
+/* ============================== */
+/* MEDIA QUERIES EXTRA            */
+/* ============================== */
 @media (max-width: 1024px) {
   #question-container { bottom: 450px; max-width: 350px; }
-  #keeper { height: 18vh; bottom: 12vh; }
-  
   .top-ads { top: 43%; height: 2.5vh; }
   .bottom-ads { top: 74%; height: 2.5vh; }
-  .top-ads img, .bottom-ads img { max-height: 2.5vh; }
-
-  #start-ball { width: 100px; height: 100px; }
-  #hintBall { width: 60px; height: 60px; bottom: 280px; }
 }
 
-/* Mobile: ancho máximo 768px */
 @media (max-width: 768px) {
   #question-container { bottom: 400px; max-width: 300px; font-size: 16px; }
-  #keeper { height: 15vh; bottom: 10vh; }
-  
   .top-ads { top: 43%; height: 2vh; }
   .bottom-ads { top: 75%; height: 2vh; }
-  .top-ads img, .bottom-ads img { max-height: 2vh; }
-
-  #start-ball { width: 80px; height: 80px; }
-  #hintBall { width: 50px; height: 50px; bottom: 240px; }
-  
   #ui { font-size: 14px; top: 8px; left: 8px; }
 }
