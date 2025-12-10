@@ -339,21 +339,30 @@ button#startBtn:hover,
 /* BOTONES FLOTANTES               */
 /* ============================== */
 #sound-controls {
-  position:fixed;
-  top:20px;
-  right:20px;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  z-index:50;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;       /* Centra botones y logo */
+  z-index: 50;
 }
+
+#sound-controls img#gameLogo {
+  margin-top: 12px;         /* espacio sobre el logo */
+  width: 80px;              /* ajusta el tamaño según quieras */
+  height: auto;
+  pointer-events: none;     /* evita que el logo bloquee clicks en botones */
+}
+
 
 /* ============================== */
 /* SLIDERS SUPERIOR E INFERIOR    */
 /* ============================== */
 .top-ads {
   position: absolute;
-  top: 32%;          
+  top: 21%;          
   left: 0;
   width: 100%;
   height: 3vh;       
@@ -362,7 +371,7 @@ button#startBtn:hover,
 }
 .top-ads .stadium-ads-track {
   display: flex;
-  animation: scroll-top 22s linear infinite; 
+  animation: scroll-top 15s linear infinite; 
 }
 .top-ads img {
   height: 100%;              
@@ -375,7 +384,7 @@ button#startBtn:hover,
 
 .bottom-ads {
   position: absolute;
-  top: 69%;          
+  top: 65%;          
   left: 0;
   width: 100%;
   height: 3vh;       
@@ -384,7 +393,7 @@ button#startBtn:hover,
 }
 .bottom-ads .stadium-ads-track {
   display: flex;
-  animation: scroll-bottom 20s linear infinite; 
+  animation: scroll-bottom 15s linear infinite; 
 }
 .bottom-ads img {
   height: 100%;              
