@@ -1,7 +1,7 @@
 /* ===========================================================
 ELEMENTOS HTML
 =========================================================== */
-const ballHTML = document.getElementById("ball"); // usamos TU IMG del HTML
+const ballHTML = document.getElementById("ball");
 ballHTML.style.display = "none";
 
 const startBtn = document.getElementById('startBtn');
@@ -50,11 +50,17 @@ scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 /* ===========================================================
 AUDIOS
 =========================================================== */
+const audioIntro = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/QueRuedeElBalon.mp3');
 const audioShoot = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/tiro.mp3');
 const audioGoal = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Gool.mp3');
 const audioFail = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/fallo.mp3');
 const audioCrowd = new Audio('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/gente.mp3');
 const audioLevelUp = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_52c9866d55.mp3?filename=level-up-191997.mp3');
+
+[audioIntro, audioShoot, audioGoal, audioFail, audioCrowd, audioLevelUp].forEach(a => a.load());
+
+audioIntro.loop = true;
+audioIntro.volume = 0.5;
 
 audioCrowd.loop = true;
 audioCrowd.volume = 0.4;
@@ -116,6 +122,16 @@ function actualizarHintBall() {
   hintBall.style.display =
     currentQuestionObj && nivel > 0 ? "block" : "none";
 }
+
+/* ===========================================================
+AJUSTE DE VOLUMEN DINÁMICO
+=========================================================== */
+function ajustarVolumenCrowd(tipo){
+  if(crowdMuted) return;
+  if(tipo==="gol") audioCrowd.volume = 0.6;
+  else if(tipo==="fallo") audioCrowd.volume = 0.3;
+  else audioCrowd.volume = 0.4;
+}
 // ============================
 // PREGUNTAS
 // ============================
@@ -156,9 +172,6 @@ const preguntas = [
     { q:"Cuál fue el máximo goleador de 2006?", a:"Miroslav Klose", options:["Ronaldo","Miroslav Klose","Thierry Henry"], hintText:"Delantero alemán con 5 goles.", hintLink:"https://es.wikipedia.org/wiki/Miroslav_Klose", exp:"Klose marcó 5 goles en 2006.", link:"https://es.wikipedia.org/wiki/Miroslav_Klose" }
   ]
 ];
-/* ===========================================================
-NUEVA PREGUNTA
-=========================================================== */
 function cargarPreguntasNivel() {
   const pool =
     preguntas[Math.min(preguntas.length - 1, nivel - 1)];
@@ -228,7 +241,7 @@ function subirNivel() {
 }
 
 /* ===========================================================
-ANIMACIÓN DE PENAL (SIN REBOTE, EXACTO COMO LO TENÍAS)
+ANIMACIÓN DE PENAL
 =========================================================== */
 function animarPenal(correct, btn) {
   if (busy) return;
@@ -237,12 +250,10 @@ function animarPenal(correct, btn) {
   audioShoot.play().catch(() => {});
 
   const index = parseInt(btn.dataset.index);
-
   let targetXValues = [-2, 0, 2];
   const targetX = targetXValues[index];
 
   let xPX, targetYpx;
-
   const screenW = window.innerWidth;
 
   if (screenW > 1024) {
@@ -281,6 +292,7 @@ function animarPenal(correct, btn) {
     if (correct) {
       goles++;
       audioGoal.play().catch(() => {});
+      ajustarVolumenCrowd("gol");
       lanzarConfeti();
 
       explanationText.textContent = "¡Goool! 🎉";
@@ -300,6 +312,7 @@ function animarPenal(correct, btn) {
     } else {
       vidas--;
       audioFail.play().catch(() => {});
+      ajustarVolumenCrowd("fallo");
 
       shakeEstadio("fallo");
 
@@ -316,17 +329,17 @@ function animarPenal(correct, btn) {
         nuevaPregunta();
         busy = false;
       };
-    // 🔥 AQUÍ ES DONDE SE MANIPULA LA ANIMACIÓN DEL FALLO
-  let fy = targetYpx;
-  function falloAnim() {
-    fy -= 8; // <- velocidad hacia arriba
-    ballHTML.style.transform =
-      `translateX(calc(-50% + ${xPX}px)) translateY(${fy}px)`;
 
-    if (fy > -500) requestAnimationFrame(falloAnim);
-  }
-  falloAnim();
-}
+      // Animación de fallo
+      let fy = targetYpx;
+      function falloAnim() {
+        fy -= 8; // velocidad hacia arriba
+        ballHTML.style.transform =
+          `translateX(calc(-50% + ${xPX}px)) translateY(${fy}px)`;
+        if (fy > -500) requestAnimationFrame(falloAnim);
+      }
+      falloAnim();
+    }
 
     updateUI();
 
@@ -373,35 +386,50 @@ optionsEl.forEach((btn) => {
 INICIO DEL JUEGO
 =========================================================== */
 startBtn.addEventListener("click", () => {
+  // 🔹 Ocultar manual y preparar animación de inicio
   hintBall.style.display = "none";
-
   const startBall = document.createElement("div");
   startBall.id = "start-ball";
   document.body.appendChild(startBall);
-
   setTimeout(() => startBall.classList.add("shoot"), 60);
-
   manualDiv.style.opacity = "0";
 
   setTimeout(() => {
     manualDiv.style.display = "none";
     startBall.remove();
 
+    // 🔹 Detener audio de intro
+    audioIntro.pause();
+    audioIntro.currentTime = 0;
+
+    // 🔹 Reproducir audio de público
+    audioCrowd.volume = 0.4;
+    audioCrowd.loop = true;
+    audioCrowd.muted = crowdMuted;
+    audioCrowd.play().catch((e) => {
+      console.warn("No se pudo reproducir el audio del público:", e);
+    });
+
+    // 🔹 Mostrar portero
     keeperImg.style.display = "block";
     keeperImg.style.width = "200px";
     keeperImg.style.bottom = "145px";
     keeperImg.style.left = "50%";
 
+    // 🔹 Iniciar juego
     nivel = 1;
     cargarPreguntasNivel();
     updateUI();
     nuevaPregunta();
 
-    audioCrowd.play().catch(() => {});
-
     hintBall.style.display = "block";
   }, 1000);
 });
+
+// 🔹 Click fallback para intro audio en móviles
+manualDiv.addEventListener('click', () => {
+  if (audioIntro.paused) audioIntro.play().catch(()=>{});
+}, { once: true });
 
 /* ===========================================================
 EFECTOS VISUALES
@@ -439,7 +467,6 @@ function mostrarGameOver(msg) {
     resetJuego();
   };
 }
-
 function resetJuego() {
   goles = 0;
   tiros = 0;
@@ -453,8 +480,11 @@ function resetJuego() {
   manualDiv.style.display = "flex";
   manualDiv.style.opacity = "1";
 
+  // 🔹 Detener todos los audios
   audioCrowd.pause();
   audioCrowd.currentTime = 0;
+  audioIntro.pause();
+  audioIntro.currentTime = 0;
 
   preguntasRestantes = [];
 
@@ -473,7 +503,6 @@ function resetJuego() {
 
   ballHTML.style.display = "none";
   ballHTML.style.transform = "translateX(-50%) translateY(0px)";
-
   keeperImg.style.transform = "translateX(-50%)";
 }
 
@@ -504,4 +533,59 @@ window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// 🔹 Reproducir audio de introducción al cargar el menú
+window.addEventListener("load", () => {
+  audioIntro.volume = 0.5;
+  audioIntro.loop = true;
+  audioIntro.play().catch(() => {
+    // Para móviles/navegadores que bloquean autoplay, esperar primer click
+    const playIntro = () => {
+      audioIntro.play().catch(()=>{});
+      window.removeEventListener("click", playIntro);
+    };
+    window.addEventListener("click", playIntro);
+  });
+});
+
+// 🔹 Inicio del juego
+startBtn.addEventListener("click", () => {
+  // Detener audio de introducción inmediatamente
+  audioIntro.pause();
+  audioIntro.currentTime = 0;
+
+  // Ocultar manual y animación de inicio
+  hintBall.style.display = "none";
+  const startBall = document.createElement("div");
+  startBall.id = "start-ball";
+  document.body.appendChild(startBall);
+  setTimeout(() => startBall.classList.add("shoot"), 60);
+  manualDiv.style.opacity = "0";
+
+  setTimeout(() => {
+    manualDiv.style.display = "none";
+    startBall.remove();
+
+    // Reproducir audio del público
+    audioCrowd.volume = 0.4;
+    audioCrowd.loop = true;
+    audioCrowd.muted = crowdMuted;
+    audioCrowd.play().catch((e) => {
+      console.warn("No se pudo reproducir el audio del público:", e);
+    });
+
+    // Mostrar portero y empezar juego
+    keeperImg.style.display = "block";
+    keeperImg.style.width = "200px";
+    keeperImg.style.bottom = "145px";
+    keeperImg.style.left = "50%";
+
+    nivel = 1;
+    cargarPreguntasNivel();
+    updateUI();
+    nuevaPregunta();
+
+    hintBall.style.display = "block";
+  }, 1000);
 });
