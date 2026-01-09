@@ -12,7 +12,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Cancha.png') no-repeat center bottom;
+  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/gradayporteria.jpg') no-repeat center bottom;
   background-size: cover;
   background-attachment: fixed;
   background-color: #1e7a1e;
@@ -291,7 +291,7 @@ button#startBtn:hover,
   transform:translate(-50%,50%) scale(1);
   width:120px;
   height:120px;
-  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png') no-repeat center/contain;
+  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png') no-repeat center/contain;
   z-index:30;
   transition: transform 1s ease-in, opacity 1s ease-in;
 }
@@ -301,7 +301,7 @@ button#startBtn:hover,
 }
 
 /* ============================== */
-/* BALÓN DE PISTA                  */
+/* COPA DE PISTA                  */
 /* ============================== */
 #hintBall {
   position: fixed;
@@ -309,7 +309,7 @@ button#startBtn:hover,
   right:40px;
   width:70px;
   height:70px;
-  background:url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/balon.png') no-repeat center/contain;
+  background:url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/copa.png') no-repeat center/contain;
   cursor:pointer;
   z-index:2000;
   animation: spinBall 3s linear infinite;
