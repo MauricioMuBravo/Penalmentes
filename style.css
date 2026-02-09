@@ -1,488 +1,307 @@
-/* ============================== */
-/* RESET Y BASE                   */
-/* ============================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+/* =========================================================
+   1. ESTILOS BASE Y FONDO GLOBAL
+   ========================================================= */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/gradayporteria.jpg') no-repeat center bottom;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: #1e7a1e;
+body { 
+    background: url("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/gradayporteria.jpg") center/cover no-repeat fixed;
+    width: 100vw; 
+    height: 100vh; 
+    overflow: hidden; 
+    font-family: 'Arial Black', Arial, sans-serif; 
 }
 
-/* ============================== */
-/* BOTONES                        */
-/* ============================== */
-button {
-  padding: 8px 14px;
-  font-size: 14px;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* =========================================================
+   2. VALLA PUBLICITARIA ANIMADA
+   ========================================================= */
+.valla-publicitaria {
+    position: absolute;
+    top: 55.5%;
+    left: 0;
+    width: 100vw;
+    height: 75px;
+    overflow: hidden;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
 }
 
-button#startBtn,
-.option {
-  background-color: #28a745;
-  color: #fff;
-}
-button#startBtn:hover,
-.option:hover {
-  background-color: #218838;
-  transform: scale(1.05);
+.slider-track {
+    display: flex;
+    width: calc(200px * 16);
+    animation: scroll-valla 25s linear infinite;
 }
 
-#sound-controls button {
-  background-color: #ffc107;
-  color: #000;
-}
-#sound-controls button:hover {
-  background-color: #e0a800;
-  transform: scale(1.05);
+.logo-valla {
+    height: 18px;
+    margin: 0 80px;
+    opacity: 0.8;
 }
 
-#continueBtn, #moreInfoBtn, #retryBtn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  margin: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
+@keyframes scroll-valla {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-#continueBtn { background-color: #28a745; color: #fff; }
-#moreInfoBtn { background-color: #ffc107 !important; color: #000 !important; }
-#retryBtn { background-color: #28a745; color: #fff; }
-
-#continueBtn:hover,
-#retryBtn:hover { background-color: #218838; transform: scale(1.05); }
-#moreInfoBtn:hover { background-color: #e0a800; transform: scale(1.05); }
-
-/* ============================== */
-/* MODALES Y MANUALES              */
-/* ============================== */
-#manual {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 20;
-  text-align: center;
-  opacity: 1;
-  transition: opacity 0.8s ease;
-}
-#manual h1 { font-size: 3em; margin-bottom: 20px; }
-#manual ul { margin: 15px 0 25px; text-align: left; }
-#manual img { width: 30px; vertical-align: middle; }
-
-#explanation,
-#game-over-modal {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.95);
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 80%;
-  text-align: center;
-  z-index: 18;
-  display: none;
+/* =========================================================
+   3. MENÚ PRINCIPAL
+   ========================================================= */
+.menu {
+    position: relative; 
+    width: 100vw; 
+    height: 100vh;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 10;
 }
 
-#creditsModal {
-  position: fixed;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-#creditsModal.hidden { display:none; }
-#creditsModal .modal-content {
-  background:#28a745;
-  padding:30px 40px;
-  border-radius:12px;
-  max-width:400px;
-  width:90%;
-  text-align:center;
-  box-shadow:0 5px 20px rgba(0,0,0,0.5);
-}
-#creditsModal h2 {margin-bottom:15px;}
-#creditsModal p {margin:8px 0; line-height:1.4;}
-#creditsModal button { margin-top:15px; padding:8px 20px; border:none; border-radius:6px; background-color:#0077ff; color:#fff; font-weight:bold; cursor:pointer;}
-#creditsModal button:hover {background-color:#005bbb;}
-
-/* ============================== */
-/* INTERFAZ                        */
-/* ============================== */
-#ui {
-  position:absolute;
-  top:10px;
-  left:10px;
-  color:white;
-  font-size:16px;
-  z-index:15;
-  text-shadow:1px 1px 2px black;
+.overlay { 
+    position: absolute; 
+    inset: 0; 
+    background: rgba(0,0,0,0.5); 
+    z-index: 1; 
 }
 
-/* ============================== */
-/* PREGUNTAS                       */
-/* ============================== */
-#question-container {
-  position:absolute;
-  bottom:530px;
-  left:50%;
-  transform:translateX(-50%);
-  background: rgba(255,255,255,0.95);
-  padding:15px 20px;
-  border-radius:12px;
-  text-align:center;
-  max-width:400px;
-  z-index:16;
-  display:none;
-  opacity:0;
-  transition:opacity 0.5s ease;
-}
-#question-container p { font-size:18px; margin-bottom:10px;}
-.option {margin:5px; font-weight:bold;}
+.logo-aficion-main { position: absolute; top: 15px; left: 15px; width: 170px; z-index: 2; }
 
-/* ============================== */
-/* PORTERO                        */
-/* ============================== */
-#keeper {
-  position: absolute;
-  left: 50%;
-  bottom: 12vh;
-  transform: translateX(-50%) translateY(90vh);
-  height: 27vh;
-  z-index: 18;
-  display: block;
-  transition: transform 0.5s ease-out;
+.side-controls { 
+    position: absolute; 
+    top: 15px; 
+    right: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-end; 
+    gap: 12px; 
+    z-index: 2; 
 }
 
-/* ============================== */
-/* BALÓN – Proporcional           */
-/* ============================== */
-#ball {
-  position: absolute;
-  width: 5vw;  /* proporcional */
-  height: 5vw;
-  max-width: 50px;
-  max-height: 50px;
-  bottom: 10vh;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 17;
-  pointer-events: none;
-  transition: transform 0.1s linear;
+.icons { display: flex; gap: 12px; }
+.icons img { width: 45px; cursor: pointer; transition: transform 0.2s; }
+.icons img:hover { transform: scale(1.1); }
+.logo-mundial { width: 140px; }
+
+.titulo-container { 
+    position: relative; 
+    width: 55vw; 
+    max-width: 700px; 
+    margin-top: -12vh; 
+    z-index: 2; 
+}
+.fondo-verde-titulo { width: 100%; }
+.titulo-texto { 
+    position: absolute; 
+    width: 80%; 
+    left: 10%; 
+    top: 22%; 
+    z-index: 3; 
 }
 
-#ball.spin {
-  animation: spinFast 0.3s linear infinite;
+/* NUEVO CONTENEDOR PARA JUGAR E INFO */
+.main-buttons-container {
+    position: absolute;
+    bottom: 18vh;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 20;
 }
 
-@keyframes spinFast {
-  to { transform: translateX(-50%) rotate(360deg); }
+.btn-jugar { 
+    width: 280px; 
+    cursor: pointer; 
+    transition: transform 0.2s;
 }
 
-/* ============================== */
-/* BALÓN – Tablet                 */
-/* ============================== */
-@media (max-width: 1024px) {
-  #ball {
-    width: 4.2vw;
-    height: 4.2vw;
-    max-width: 28px;
-    max-height: 28px;
-  }
-
-  #keeper {
-    height: 20vh;
-  }
+.btn-info-main {
+    width: 65px;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-/* ============================== */
-/* BALÓN – Móvil                  */
-/* ============================== */
-@media (max-width: 768px) {
-  #ball {
-    width: 5.5vw;
-    height: 5.5vw;
-    max-width: 22px;
-    max-height: 22px;
-  }
+.btn-jugar:hover, .btn-info-main:hover { transform: scale(1.05); }
 
-  #keeper {
-    height: 17vh;
-  }
+.copa { position: absolute; bottom: 0; left: 0; width: 18vw; max-width: 300px; z-index: 2; }
+.balon { position: absolute; bottom: 20px; right: 20px; width: 20vw; max-width: 350px; z-index: 2; }
+
+/* =========================================================
+   4. MODALES
+   ========================================================= */
+.modal { 
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0,0,0,0.85); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 100; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s; 
 }
-/* ============================== */
-/* AJUSTE DE FALLO – TABLET       */
-/* ============================== */
-@media (max-width: 1024px) {
+.modal.active { opacity: 1; pointer-events: auto; }
 
-  /* Fallo hacia la izquierda */
-  #ball.miss-left {
-    transform: translate(-18vw, -6vh) rotate(-40deg) !important;
-  }
-
-  /* Fallo hacia la derecha */
-  #ball.miss-right {
-    transform: translate(18vw, -6vh) rotate(40deg) !important;
-  }
-
-  /* Fallo al centro (si lo tienes) */
-  #ball.miss-center {
-    transform: translate(0, -12vh) !important;
-  }
-}
-/* ============================== */
-/* AJUSTE DE GOL – TABLET         */
-/* ============================== */
-@media (max-width: 1024px) {
-
-  #ball.goal,
-  #ball.scored,
-  #ball.in-goal {
-    transform: translate(-50%, -26vh) !important;
-  }
-}
-/* ============================== */
-/* AJUSTE DE GOL – MÓVIL          */
-/* ============================== */
-@media (max-width: 768px) {
-
-  #ball.goal,
-  #ball.scored,
-  #ball.in-goal {
-    transform: translate(-50%, -38vh) !important; /* MÁS BAJITO */
-  }
+.modal-wrapper, .modal-wrapper-creditos { 
+    position: relative; 
+    width: 75vw; 
+    max-width: 850px; 
 }
 
+.bg-instrucciones, .bg-panel-creditos { width: 100%; position: relative; z-index: 5; }
 
-/* ============================== */
-/* BALÓN DE INICIO                 */
-/* ============================== */
+.modal-header-logo { 
+    position: absolute; 
+    top: -55px; 
+    left: -40px; 
+    width: 220px; 
+    z-index: 10; 
+}
+.m-fondo { width: 100%; position: absolute; }
+.m-texto { width: 85%; position: relative; top: 22px; left: 18px; }
+
+.modal-aficion, .modal-aficion-creditos { position: absolute; bottom: 15px; left: -35px; width: 220px; z-index: 10; }
+
+.modal-buttons, .modal-buttons-creditos { 
+    position: absolute; 
+    top: 10%; 
+    right: -75px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    z-index: 15; 
+}
+
+.btn-side { width: 55px; cursor: pointer; transition: transform 0.2s; }
+.btn-side:hover { transform: scale(1.1); }
+.btn-static { cursor: default !important; }
+
+.modal-copa-creditos { position: absolute; left: -180px; top: 50%; transform: translateY(-50%); width: 280px; z-index: 10; }
+.modal-balon-creditos { position: absolute; right: -150px; bottom: -60px; width: 250px; z-index: 10; }
+.global-controls {
+    position: fixed;
+    top: 20px; /* Ajusta según necesites */
+    right: 20px; /* Ajusta según necesites */
+    z-index: 10000; /* Siempre por encima de todo */
+}
+
+#btn-volumen {
+    width: 45px; /* O el tamaño de tus otros iconos */
+    cursor: pointer;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+}
+
+/* =========================================================
+   5. UI DE JUEGO
+   ========================================================= */
+#question-container { 
+    position: absolute; 
+    top: 12%; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 90%; 
+    max-width: 550px; 
+    background: white; 
+    padding: 20px; 
+    border-radius: 20px; 
+    z-index: 60; 
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+#question {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.options-grid { display: flex; justify-content: center; gap: 12px; }
+
+.option { 
+    flex: 1;
+    padding: 12px 10px; 
+    background: #1c5d2b; 
+    color: white; 
+    border: 2px solid white; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    font-size: 0.9rem; 
+    font-weight: bold;
+    transition: all 0.2s;
+    box-shadow: 0 4px 0 #0e3318;
+}
+
+.option:hover { background: #247536; }
+.option:active { transform: translateY(3px); box-shadow: 0 1px 0 #0e3318; }
+
+.scoreboard-container { position: absolute; bottom: 20px; right: 20px; width: 300px; z-index: 70; }
+.bg-marcador-img { width: 100%; display: block; }
+
+.stats-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    padding: 25px 35px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stats-overlay p { font-size: 1.1rem; margin: 2px 0; text-shadow: 1px 1px 2px #000; }
+.stat-row { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+#tiros-icons, #vidas-icons { display: flex; gap: 4px; }
+.icon-mini-ball, .icon-mini-vida { width: 22px; }
+
+#ball { position: absolute; bottom: 60px; left: 50%; width: 70px; transform: translateX(-50%); z-index: 20; }
+#keeper { position: absolute; bottom: 160px; left: 50%; width: 180px; transform: translateX(-50%); z-index: 15; }
+.logo-2026-corner { position: absolute; bottom: 20px; left: 20px; width: 140px; z-index: 20; }
+
+/* Balón que aparece al dar clic en jugar */
 #start-ball {
-  position: fixed;
-  bottom:50%;
-  left:50%;
-  transform:translate(-50%,50%) scale(1);
-  width:120px;
-  height:120px;
-  background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png') no-repeat center/contain;
-  z-index:30;
-  transition: transform 1s ease-in, opacity 1s ease-in;
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%) scale(1);
+    width: 120px;
+    height: 120px;
+    background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png') no-repeat center/contain;
+    z-index: 2000;
+    transition: transform 1s ease-in, opacity 1s ease-in;
+    pointer-events: none;
 }
+
+/* Efecto de disparo hacia la pantalla */
 #start-ball.shoot {
-  transform: translate(-50%, -300%) scale(0.3);
-  opacity:0;
+    transform: translate(-50%, 50%) scale(10);
+    opacity: 0;
 }
 
-/* ============================== */
-/* COPA DE PISTA                  */
-/* ============================== */
-#hintBall {
-  position: fixed;
-  bottom:320px;
-  right:40px;
-  width:70px;
-  height:70px;
-  background:url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/copa.png') no-repeat center/contain;
-  cursor:pointer;
-  z-index:2000;
-  animation: spinBall 3s linear infinite;
-  transition: transform 0.3s ease;
-}
-#hintBall:hover { transform: scale(1.15);}
-@keyframes spinBall { from{transform:rotate(0deg);} to{transform:rotate(360deg);}}
+/* =========================================================
+   6. RESPONSIVO MÓVIL
+   ========================================================= */
+@media screen and (max-width: 768px) {
+    .main-buttons-container { bottom: 15vh; gap: 10px; }
+    .btn-jugar { width: 200px; }
+    .btn-info-main { width: 45px; }
 
-/* ============================== */
-/* MODAL PISTA                     */
-/* ============================== */
-#hintModal {
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.7);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:5000;
-}
-#hintModal.hidden {display:none;}
-#hintModal .hint-content {background:#fff;border-radius:12px;padding:20px 30px;max-width:350px;text-align:center;}
-#hintModal button {margin-top:15px;padding:8px 18px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;}
+    .valla-publicitaria { top: 48%; height: 25px; }
+    .logo-valla { height: 12px; margin: 0 40px; }
 
-/* ============================== */
-/* BOTONES FLOTANTES               */
-/* ============================== */
-#sound-controls {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;       /* Centra botones y logo */
-  z-index: 50;
-}
+    .modal-wrapper, .modal-wrapper-creditos { width: 85vw; }
+    .modal-buttons, .modal-buttons-creditos { right: -45px; gap: 8px; }
+    .btn-side { width: 45px; }
 
-#sound-controls img#gameLogo {
-  margin-top: 12px;         /* espacio sobre el logo */
-  width: 80px;              /* ajusta el tamaño según quieras */
-  height: auto;
-  pointer-events: none;     /* evita que el logo bloquee clicks en botones */
-}
+    #question-container { width: 95%; top: 8%; padding: 15px; }
+    #question { font-size: 1rem; }
+    .option { padding: 8px 5px; font-size: 0.75rem; }
 
-
-/* ============================== */
-/* SLIDERS SUPERIOR E INFERIOR    */
-/* ============================== */
-.top-ads {
-  position: absolute;
-  top: 21%;          
-  left: 0;
-  width: 100%;
-  height: 3vh;       
-  overflow: hidden;
-  z-index: 14;
-}
-.top-ads .stadium-ads-track {
-  display: flex;
-  animation: scroll-top 15s linear infinite; 
-}
-.top-ads img {
-  height: 100%;              
-  max-height: 3vh;           
-  width: auto;                
-  object-fit: contain;        
-  margin: 0 4px;             
-  transition: transform 0.3s ease;
-}
-
-.bottom-ads {
-  position: absolute;
-  top: 65%;          
-  left: 0;
-  width: 100%;
-  height: 3vh;       
-  overflow: hidden;
-  z-index: 10;
-}
-.bottom-ads .stadium-ads-track {
-  display: flex;
-  animation: scroll-bottom 15s linear infinite; 
-}
-.bottom-ads img {
-  height: 100%;              
-  max-height: 3vh;           
-  width: auto;                
-  object-fit: contain;        
-  margin: 0 4px;             
-  transition: transform 0.3s ease;
-}
-
-/* Animaciones scroll */
-@keyframes scroll-top {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes scroll-bottom {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-/* ============================== */
-/*     RESPONSIVE SLIDER ADS      */
-/* ============================== */
-
-/* Tablets */
-@media (max-width: 1024px) {
-  .top-ads,
-  .bottom-ads {
-    height: 2.5vh;
-  }
-  .top-ads img,
-  .bottom-ads img {
-    max-height: 2.5vh;
-  }
-}
-
-/* Móviles */
-@media (max-width: 768px) {
-  .top-ads,
-  .bottom-ads {
-    height: 2vh;
-  }
-  .top-ads img,
-  .bottom-ads img {
-    max-height: 2vh;
-  }
-}
-/* ============================== */
-/* LEVEL UP                        */
-/* ============================== */
-.level-up {
-  position: fixed;
-  top:40%;
-  left:50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  background: radial-gradient(circle,#fff,#ffd700);
-  color:#000;
-  font-size:2rem;
-  font-weight:bold;
-  padding:20px 40px;
-  border-radius:20px;
-  box-shadow:0 0 20px gold;
-  opacity:0;
-  transition: all 0.6s ease;
-  z-index:1000;
-  text-align:center;
-}
-.level-up.show{
-  opacity:1;
-  transform:translate(-50%,-50%) scale(1);
-  animation: shine 1s ease-in-out infinite alternate;
-}
-@keyframes shine{
-  0%{text-shadow:0 0 10px #fff,0 0 20px #ff0,0 0 30px #ff0;}
-  50%{text-shadow:0 0 20px #fff,0 0 30px #ff0,0 0 40px #ff0;}
-  100%{text-shadow:0 0 10px #fff,0 0 20px #ff0,0 0 30px #ff0;}
-}
-
-/* ============================== */
-/* MEDIA QUERIES EXTRA            */
-/* ============================== */
-@media (max-width: 1024px) {
-  #question-container { bottom: 450px; max-width: 350px; }
-  .top-ads { top: 43%; height: 2.5vh; }
-  .bottom-ads { top: 74%; height: 2.5vh; }
-}
-
-@media (max-width: 768px) {
-  #question-container { bottom: 400px; max-width: 300px; font-size: 16px; }
-  .top-ads { top: 43%; height: 2vh; }
-  .bottom-ads { top: 75%; height: 2vh; }
-  #ui { font-size: 14px; top: 8px; left: 8px; }
+    .scoreboard-container { width: 240px; bottom: 10px; right: 10px; }
+    .stats-overlay { padding: 15px 25px; }
+    #keeper { width: 140px; bottom: 150px; }
+    #ball { width: 50px; bottom: 50px; }
 }
