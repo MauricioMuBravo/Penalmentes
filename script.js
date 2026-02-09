@@ -35,7 +35,7 @@ const bancoPreguntas = [
     { q:"¿Cuál fue el primer Mundial televisado?", a:"1954", options:["1950","1954","1962"], hintText:"Ocurrió en Suiza durante los años 50.", exp:"1954 fue el primero con retransmisión televisiva." },
     { q:"¿Qué país ganó el Mundial 1938?", a:"Italia", options:["Italia","Hungría","Brasil"], hintText:"Lograron el bicampeonato antes de la Segunda Guerra Mundial.", exp:"Italia ganó en Francia 1938." },
     { q:"¿Quién fue goleador en 1974?", a:"Grzegorz Lato", options:["Johan Cruyff","Grzegorz Lato","Gerd Müller"], hintText:"Leyenda del fútbol polaco.", exp:"Lato anotó 7 goles en 1974." },
-    { q:"¿Quién ganó el Mundial 1990?", a:"Alemania Occidental", options:["Alemania Occidental","Argentina","Italia"], hintText:"Venció a la Argentina de Maradona con un penal.", exp:"Alemania ganó 1-0 a Argentina en 1990." },
+    { q:"¿Quién ganó el Mundial 1990?", a:"Alemania Occidental", options:["Alemania Occidental","Argentina","Italia"], hintText:"Venció a la Argentina de Maradona con un penal.", exp:"Alemania ganó 1-0 a Argentina in 1990." },
     { q:"¿Qué país ganó el Mundial 1966?", a:"Inglaterra", options:["Inglaterra","Alemania","Brasil"], hintText:"Ganaron su único título en el estadio de Wembley.", exp:"Inglaterra ganó 4-2 a Alemania en 1966." }
   ],
   [ // Nivel 5: Final
@@ -58,6 +58,13 @@ const audioTiro = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEd
 const audioFallo = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/fallo.mp3");
 const audioGol = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Gool.mp3");
 
+// Lógica de desbloqueo de audio (Navegadores)
+window.addEventListener('click', () => {
+    if (audioMenu.paused) {
+        audioMenu.play().catch(() => {});
+    }
+}, { once: true });
+
 /* ===========================================================
    3. ELEMENTOS DEL DOM
    =========================================================== */
@@ -75,9 +82,10 @@ document.querySelector('.btn-jugar').onclick = () => {
 
     setTimeout(() => startBall.classList.add("shoot"), 60);
 
+    // Cambio de atmósfera sonora
     audioMenu.pause();
     audioMenu.currentTime = 0;
-    audioEstadio.play().catch(() => console.log("Interacción requerida"));
+    audioEstadio.play().catch(() => console.log("Estadio requiere interacción"));
 
     setTimeout(() => {
         document.querySelector('.menu').style.display = 'none';
@@ -92,9 +100,7 @@ document.querySelector('.btn-jugar').onclick = () => {
 };
 
 // Modales
-document.getElementById('btn-info').onclick = (e) => {
-    document.getElementById('modal-instrucciones').classList.add('active');
-};
+document.getElementById('btn-info').onclick = () => document.getElementById('modal-instrucciones').classList.add('active');
 document.getElementById('btn-open-creditos').onclick = () => {
     document.getElementById('modal-instrucciones').classList.remove('active');
     document.getElementById('modal-creditos').classList.add('active');
@@ -178,13 +184,14 @@ function procesarRespuesta(esCorrecto, i) {
     qContainer.style.opacity = "0";
     qContainer.style.pointerEvents = "none";
 
+    // Offset para tiro a la izquierda, centro o derecha
     const offset = [ -160, 0, 160 ];
     const destinoX = offset[i];
     
     ball.style.transition = "transform 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
     ball.style.transform = `translate(calc(-50% + ${destinoX}px), -380px) scale(0.4) rotate(720deg)`;
 
-    // Dificultad: el portero es más rápido en niveles altos
+    // IA del Portero según nivel
     const velocidadPortero = 0.5 - (nivel * 0.05); 
     let porteroX = esCorrecto ? (destinoX === 0 ? 120 : -120) : destinoX;
     keeper.style.transition = `transform ${velocidadPortero}s ease-out`;
@@ -197,6 +204,7 @@ function finalizarTiro(esCorrecto) {
     const modalExp = document.getElementById('explanation');
     const txtExp = document.getElementById('explanation-text');
     const btnCont = document.getElementById('continueBtn');
+    btnCont.style.display = "inline-block";
 
     if (esCorrecto) {
         goles++;
