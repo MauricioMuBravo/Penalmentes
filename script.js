@@ -287,3 +287,26 @@ function resetEscena() {
     keeper.style.transition = "none";
     keeper.style.transform = "translateX(-50%) rotate(0deg)";
 }
+window.addEventListener('DOMContentLoaded', () => {
+    const musica = document.getElementById('musica-fondo');
+
+    // Intentar reproducir automáticamente (puede fallar por políticas del navegador)
+    const playPromise = musica.play();
+
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            console.log("Autoplay bloqueado. Esperando interacción del usuario.");
+            
+            // Si el autoplay falla, se reproduce al primer clic en cualquier parte del documento
+            const reproducirAlInteractuar = () => {
+                musica.play();
+                // Eliminamos el evento para que no se ejecute cada vez que haga clic
+                document.removeEventListener('click', reproducirAlInteractuar);
+                document.removeEventListener('touchstart', reproducirAlInteractuar);
+            };
+
+            document.addEventListener('click', reproducirAlInteractuar);
+            document.addEventListener('touchstart', reproducirAlInteractuar);
+        });
+    }
+});
