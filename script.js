@@ -28,14 +28,14 @@ const bancoPreguntas = [
     { q:"¿Qué selección ganó el Mundial 1978?", a:"Argentina", options:["Argentina","Holanda","Alemania"], hintText:"Ganó su primer título como local ante Holanda.", exp:"Argentina ganó 3-1 a Holanda en tiempo extra." },
     { q:"¿Quién fue el máximo goleador de 1986?", a:"Gary Lineker", options:["Diego Maradona","Gary Lineker","Careca"], hintText:"Delantero inglés, hoy comentarista famoso.", exp:"Lineker marcó 6 goles en 1986." },
     { q:"¿Cuál fue la final del Mundial 2006?", a:"Italia vs Francia", options:["Italia vs Francia","Brasil vs Alemania","España vs Holanda"], hintText:"Duelo europeo marcado por la despedida de Zidane.", exp:"Italia ganó 5-3 en penales a Francia." },
-    { q:"¿Qué país ganó el Mundial 1934?", a:"Italia", options:["Italia","Checoslovaquia","Alemania"], hintText:"Fue el primer campeón europeo.", exp:"Italia ganó en 1934." },
+    { q:"¿Qué país ganó el Mundial 1934?", a:"Italia", options:["Italia","Checoslovaquia","Alemania"], hintText:"Fue el primer campeón europeo.", exp:"Italia ganó in 1934." },
     { q:"¿Quién marcó el gol de la final 2010?", a:"Andrés Iniesta", options:["David Villa","Andrés Iniesta","Xavi Hernández"], hintText:"'El Caballero Pálido' del FC Barcelona.", exp:"Iniesta marcó el gol del título en 2010." }
   ],
   [ // Nivel 4: Semifinal
     { q:"¿Cuál fue el primer Mundial televisado?", a:"1954", options:["1950","1954","1962"], hintText:"Ocurrió en Suiza durante los años 50.", exp:"1954 fue el primero con retransmisión televisiva." },
     { q:"¿Qué país ganó el Mundial 1938?", a:"Italia", options:["Italia","Hungría","Brasil"], hintText:"Lograron el bicampeonato antes de la Segunda Guerra Mundial.", exp:"Italia ganó en Francia 1938." },
     { q:"¿Quién fue goleador en 1974?", a:"Grzegorz Lato", options:["Johan Cruyff","Grzegorz Lato","Gerd Müller"], hintText:"Leyenda del fútbol polaco.", exp:"Lato anotó 7 goles en 1974." },
-    { q:"¿Quién ganó el Mundial 1990?", a:"Alemania Occidental", options:["Alemania Occidental","Argentina","Italia"], hintText:"Venció a la Argentina de Maradona con un penal.", exp:"Alemania ganó 1-0 a Argentina in 1990." },
+    { q:"¿Quién ganó el Mundial 1990?", a:"Alemania Occidental", options:["Alemania Occidental","Argentina","Italia"], hintText:"Venció a la Argentina de Maradona con un penal.", exp:"Alemania ganó 1-0 a Argentina en 1990." },
     { q:"¿Qué país ganó el Mundial 1966?", a:"Inglaterra", options:["Inglaterra","Alemania","Brasil"], hintText:"Ganaron su único título en el estadio de Wembley.", exp:"Inglaterra ganó 4-2 a Alemania en 1966." }
   ],
   [ // Nivel 5: Final
@@ -58,10 +58,10 @@ const audioTiro = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEd
 const audioFallo = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/fallo.mp3");
 const audioGol = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Gool.mp3");
 
-// Lógica de desbloqueo de audio (Navegadores)
+// Desbloqueo automático al primer clic
 window.addEventListener('click', () => {
-    if (audioMenu.paused) {
-        audioMenu.play().catch(() => {});
+    if (audioMenu.paused && document.querySelector('.menu').style.display !== 'none') {
+        audioMenu.play().catch(e => console.log("Audio bloqueado"));
     }
 }, { once: true });
 
@@ -82,10 +82,10 @@ document.querySelector('.btn-jugar').onclick = () => {
 
     setTimeout(() => startBall.classList.add("shoot"), 60);
 
-    // Cambio de atmósfera sonora
+    // Ajuste de Audios al iniciar
     audioMenu.pause();
     audioMenu.currentTime = 0;
-    audioEstadio.play().catch(() => console.log("Estadio requiere interacción"));
+    audioEstadio.play().catch(() => {});
 
     setTimeout(() => {
         document.querySelector('.menu').style.display = 'none';
@@ -116,11 +116,13 @@ document.querySelectorAll('.btn-back-main').forEach(btn => {
     };
 });
 
-// Volumen
+// Control de Volumen Global
 let mute = false;
 document.getElementById('btn-volumen').onclick = (e) => {
     mute = !mute;
-    [audioMenu, audioEstadio, audioTiro, audioFallo, audioGol].forEach(a => a.muted = mute);
+    const allAudios = [audioMenu, audioEstadio, audioTiro, audioFallo, audioGol];
+    allAudios.forEach(a => a.muted = mute);
+    
     e.target.src = mute 
         ? "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/boton_mute.png"
         : "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/boton_vol.png";
@@ -151,7 +153,6 @@ function nuevaPregunta() {
     preguntaActual = preguntasRestantes.pop();
     document.getElementById('question').textContent = preguntaActual.q;
     
-    // Reset Pista
     const hintTextEl = document.getElementById('hint-text');
     hintTextEl.style.display = 'none';
     hintTextEl.textContent = preguntaActual.hintText;
@@ -184,14 +185,12 @@ function procesarRespuesta(esCorrecto, i) {
     qContainer.style.opacity = "0";
     qContainer.style.pointerEvents = "none";
 
-    // Offset para tiro a la izquierda, centro o derecha
     const offset = [ -160, 0, 160 ];
     const destinoX = offset[i];
     
     ball.style.transition = "transform 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
     ball.style.transform = `translate(calc(-50% + ${destinoX}px), -380px) scale(0.4) rotate(720deg)`;
 
-    // IA del Portero según nivel
     const velocidadPortero = 0.5 - (nivel * 0.05); 
     let porteroX = esCorrecto ? (destinoX === 0 ? 120 : -120) : destinoX;
     keeper.style.transition = `transform ${velocidadPortero}s ease-out`;
