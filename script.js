@@ -1,3 +1,4 @@
+
 /* ===========================================================
    1. BANCO DE PREGUNTAS (NIVELES 1 AL 5)
    =========================================================== */
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- BOTÓN JUGAR ---
-    document.querySelector('.btn-jugar').onclick = () => {
+   document.querySelector('.btn-jugar').onclick = () => {
         const startBall = document.createElement("div");
         startBall.id = "start-ball";
         document.body.appendChild(startBall);
@@ -104,6 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         audioMenu.pause();
         audioEstadio.play().catch(() => {});
+        // Esto busca el logo verde y le pone la clase para ocultarlo
+        document.querySelector('.logo-mundial-global').classList.add('oculto');
 
         setTimeout(() => {
             document.querySelector('.menu').style.display = 'none';
