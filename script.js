@@ -1,4 +1,3 @@
-
 /* ===========================================================
    1. BANCO DE PREGUNTAS (NIVELES 1 AL 5)
    =========================================================== */
@@ -45,34 +44,39 @@ const bancoPreguntas = [
    =========================================================== */
 let mute = false;
 const audioMenu = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3");
-audioMenu.loop = true;
-
 const audioEstadio = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/gente.mp3");
-audioEstadio.loop = true;
-
 const audioTiro = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/tiro.mp3");
 const audioFallo = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/fallo.mp3");
 const audioGol = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Gool.mp3");
 const audioSilbato = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/silbato.mp3");
 
+audioMenu.loop = true;
+audioEstadio.loop = true;
+
 /* ===========================================================
    3. VARIABLES DE JUEGO
    =========================================================== */
 let nivel = 1, goles = 0, tirosRonda = 0, vidas = 3, bloqueado = false;
-let preguntaActual = null, preguntasRestantes = [];
-let tiroRealizado = false;
+let preguntaActual = null, preguntasRestantes = [], tiroRealizado = false;
 
 /* ===========================================================
-   4. INICIALIZACIÓN (DOMContentLoaded)
+   4. LÓGICA DE INICIO Y MODALES
    =========================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    
     const ball = document.getElementById('ball');
     const keeper = document.getElementById('keeper');
     const qContainer = document.getElementById('question-container');
     const hintTextEl = document.getElementById('hint-text');
 
-    // Activar audio intro al primer clic
+    // Forzar ajuste de imagen de créditos por JS (Preventivo)
+    const imgCreditos = document.querySelector('.bg-panel-creditos');
+    if (imgCreditos) {
+        imgCreditos.style.maxWidth = "100%";
+        imgCreditos.style.height = "auto";
+        imgCreditos.style.display = "block";
+    }
+
+    // Bypass Audio
     document.body.addEventListener('click', () => {
         if(audioMenu.paused && document.querySelector('.menu').style.display !== 'none') {
             audioMenu.play().catch(() => {});
@@ -80,24 +84,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }, {once: true});
 
     // --- MANEJO DE MODALES ---
-    document.getElementById('btn-info').onclick = () => document.getElementById('modal-instrucciones').classList.add('active');
+    const modInst = document.getElementById('modal-instrucciones');
+    const modCred = document.getElementById('modal-creditos');
+
+    document.getElementById('btn-info').onclick = () => {
+        modInst.classList.add('active');
+    };
+
     document.getElementById('btn-open-creditos').onclick = () => {
-        document.getElementById('modal-instrucciones').classList.remove('active');
-        document.getElementById('modal-creditos').classList.add('active');
+        modInst.classList.remove('active');
+        modCred.classList.add('active');
     };
-    document.getElementById('btn-regresar-info').onclick = () => {
-        document.getElementById('modal-creditos').classList.remove('active');
-        document.getElementById('modal-instrucciones').classList.add('active');
-    };
+
+    const btnRegInfo = document.getElementById('btn-regresar-info');
+    if(btnRegInfo) {
+        btnRegInfo.onclick = () => {
+            modCred.classList.remove('active');
+            modInst.classList.add('active');
+        };
+    }
+
     document.querySelectorAll('.btn-back-main').forEach(btn => {
         btn.onclick = () => {
-            document.getElementById('modal-instrucciones').classList.remove('active');
-            document.getElementById('modal-creditos').classList.remove('active');
+            modInst.classList.remove('active');
+            modCred.classList.remove('active');
         };
     });
 
-    // --- BOTÓN JUGAR ---
-   document.querySelector('.btn-jugar').onclick = () => {
+    // Volumen
+    document.getElementById('btn-volumen').onclick = (e) => {
+        mute = !mute;
+        [audioMenu, audioEstadio, audioTiro, audioFallo, audioGol, audioSilbato].forEach(a => a.muted = mute);
+        e.target.src = mute 
+            ? "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/boton_mute.png"
+            : "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/boton_vol.png";
+    };
+
+    // Botón Jugar
+    document.querySelector('.btn-jugar').onclick = () => {
         const startBall = document.createElement("div");
         startBall.id = "start-ball";
         document.body.appendChild(startBall);
@@ -105,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         audioMenu.pause();
         audioEstadio.play().catch(() => {});
-        // Esto busca el logo verde y le pone la clase para ocultarlo
         document.querySelector('.logo-mundial-global').classList.add('oculto');
 
         setTimeout(() => {
@@ -119,25 +142,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 600);
     };
 
-    // Volumen
-    document.getElementById('btn-volumen').onclick = (e) => {
-        mute = !mute;
-        [audioMenu, audioEstadio, audioTiro, audioFallo, audioGol, audioSilbato].forEach(a => a.muted = mute);
-        e.target.src = mute 
-            ? "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/boton_mute.png"
-            : "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/boton_vol.png";
-    };
-
+    /* ===========================================================
+        5. FLUJO DEL JUEGO
+       =========================================================== */
     function iniciarJuego() {
         nivel = 1; goles = 0; vidas = 3;
         cargarNivel();
     }
 
     function cargarNivel() {
-        if (nivel > bancoPreguntas.length) {
-            mostrarFinJuego("🏆 ¡CAMPEÓN MUNDIAL!", true);
-            return;
-        }
+        if (nivel > bancoPreguntas.length) return mostrarFinJuego("🏆 ¡CAMPEÓN!", true);
         preguntasRestantes = [...bancoPreguntas[nivel - 1]].sort(() => Math.random() - 0.5);
         tirosRonda = 0;
         actualizarMarcador();
@@ -150,14 +164,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('question').textContent = preguntaActual.q;
         hintTextEl.style.display = 'none';
 
-        // --- LÓGICA DE PISTA (Restaurada) ---
         document.getElementById('btn-pista').onclick = () => {
             hintTextEl.style.display = 'block';
             hintTextEl.innerHTML = `
                 <p style="margin-bottom:10px;">${preguntaActual.hintText}</p>
                 <div style="display:flex; gap:10px; justify-content:center;">
-                    <button id="p-link" style="padding:5px 10px; background:#1c5d2b; color:white; border:none; border-radius:8px; cursor:pointer;">LEER</button>
-                    <button id="p-back" style="padding:5px 10px; background:#cc0000; color:white; border:none; border-radius:8px; cursor:pointer;">ATRÁS</button>
+                    <button id="p-link" style="padding:5px 10px; background:#1c5d2b; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:10px;">LEER MÁS</button>
+                    <button id="p-back" style="padding:5px 10px; background:#cc0000; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:10px;">ATRÁS</button>
                 </div>`;
             document.getElementById('p-link').onclick = () => window.open(preguntaActual.link, '_blank');
             document.getElementById('p-back').onclick = () => hintTextEl.style.display = 'none';
@@ -173,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
         bloqueado = false;
         tiroRealizado = false;
         qContainer.style.opacity = "1";
-        qContainer.style.pointerEvents = "auto";
     }
 
     function procesarTiro(esCorrecto, i) {
@@ -186,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audioSilbato.play();
 
         qContainer.style.opacity = "0";
-        qContainer.style.pointerEvents = "none";
 
         audioSilbato.onended = () => {
             if (!tiroRealizado) ejecutarAnimacionTiro(esCorrecto, i);
@@ -203,53 +214,110 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const offset = [-160, 0, 160];
         let destinoX = offset[i];
+        
+        // 1. Destino del balón (Mantiene tamaño real)
+        let finalBallX = destinoX;
+        let finalBallY = -310; 
 
+        if (!esCorrecto) {
+            // LÓGICA DE DESVÍO CLARO
+            if (destinoX === 0) {
+                finalBallY = -240; 
+                finalBallX = (Math.random() - 0.5) * 60; 
+            } else {
+                finalBallX = destinoX * 1.6; 
+                finalBallY = -360; 
+            }
+        }
+
+        // 2. Animación (scale 1 para mantener tamaño)
         ball.style.transition = "transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)";
-        ball.style.transform = `translate(calc(-50% + ${destinoX}px), -310px) rotate(720deg)`;
+        ball.style.transform = `translate(calc(-50% + ${finalBallX}px), ${finalBallY}px) rotate(720deg) scale(1)`;
 
-        let porteroX = esCorrecto ? (destinoX === 0 ? 120 : -destinoX) : destinoX;
-        let rot = esCorrecto ? (destinoX < 0 ? -25 : (destinoX > 0 ? 25 : 0)) : (destinoX < 0 ? -25 : (destinoX > 0 ? 25 : 0));
-        keeper.style.transition = "transform 0.4s ease-out";
-        keeper.style.transform = `translateX(calc(-50% + ${porteroX}px)) rotate(${rot}deg)`;
+        // 3. Lógica del Portero
+        let porteroX = esCorrecto ? (destinoX === 0 ? 140 : -destinoX * 0.5) : destinoX;
+        let rotacion = esCorrecto ? (destinoX === 0 ? 25 : -destinoX / 5) : (destinoX / 6);
 
-        if (!esCorrecto) setTimeout(() => ball.style.zIndex = "10", 300);
-        setTimeout(() => finalizarAccion(esCorrecto), 800);
+        keeper.style.transition = "transform 0.35s ease-out"; 
+        keeper.style.transform = `translateX(calc(-50% + ${porteroX}px)) rotate(${rotacion}deg)`;
+
+        // 4. Caída al césped si falla
+        if (!esCorrecto) {
+            setTimeout(() => {
+                ball.style.transition = "transform 0.5s ease-in";
+                ball.style.transform = `translate(calc(-50% + ${finalBallX * 1.1}px), -50px) scale(0.9) rotate(850deg)`;
+            }, 550);
+        }
+
+        setTimeout(() => finalizarAccion(esCorrecto), 1000);
     }
 
     function finalizarAccion(esCorrecto) {
         const modalExp = document.getElementById('explanation');
         const txtExp = document.getElementById('explanation-text');
+        const btnContinuarDefault = document.getElementById('continueBtn');
+        
+        if(btnContinuarDefault) btnContinuarDefault.style.display = "none";
         
         if (esCorrecto) {
             goles++; 
-            audioGol.currentTime = 0;
             audioGol.play();
-            if (window.confetti) confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            txtExp.innerHTML = `<h2 style="color:#1c5d2b">¡GOOOL!</h2><p>${preguntaActual.exp}</p>`;
+            txtExp.innerHTML = `<h2 style="color:#1c5d2b">¡GOOOL!</h2><p style="margin:10px 0;">${preguntaActual.exp}</p>`;
         } else {
             vidas--; 
-            audioFallo.currentTime = 0;
             audioFallo.play();
-            txtExp.innerHTML = `<h2 style="color:#d32f2f">¡ATAJADA!</h2><p>${preguntaActual.exp}</p>`;
+            txtExp.innerHTML = `<h2 style="color:#d32f2f">¡ATAJADA!</h2><p style="margin:10px 0;">${preguntaActual.exp}</p>`;
         }
 
-        actualizarMarcador();
-        modalExp.style.display = "flex";
-        modalExp.classList.add('active');
+        const btnContainer = document.createElement('div');
+        btnContainer.style.display = "flex";
+        btnContainer.style.gap = "10px";
+        btnContainer.style.justifyContent = "center";
+        btnContainer.style.marginTop = "15px";
+        
+        btnContainer.innerHTML = `
+            <button id="btn-exp-link" style="padding:10px 15px; background:#1c5d2b; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:11px;">LEER MÁS</button>
+            <button id="btn-exp-next" style="padding:10px 15px; background:#333; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:11px;">SIGUIENTE</button>
+        `;
+        txtExp.appendChild(btnContainer);
 
-        document.getElementById('continueBtn').onclick = () => {
-            modalExp.style.display = "none";
+        document.getElementById('btn-exp-link').onclick = () => window.open(preguntaActual.link, '_blank');
+        
+        document.getElementById('btn-exp-next').onclick = () => {
             modalExp.classList.remove('active');
-            
             if (vidas <= 0) {
                 mostrarFinJuego("GAME OVER", false);
             } else {
                 audioEstadio.play().catch(() => {});
                 resetEscena();
-                if (preguntasRestantes.length === 0) { nivel++; cargarNivel(); }
-                else nuevaPregunta();
+                
+                if (preguntasRestantes.length === 0) { 
+                    nivel++; 
+                    
+                    // --- ANUNCIO DE NUEVA RONDA ---
+                    let rondas = ["", "Fase de Grupos", "Octavos de Final", "Cuartos de Final", "Semifinal", "la Gran Final"];
+                    if(nivel <= 5) {
+                        txtExp.innerHTML = `
+                            <h2 style="color:#1c5d2b">¡AVANZAS DE RONDA!</h2>
+                            <p style="margin:20px 0; font-size: 1.1rem;">Felicidades, estás en <b>${rondas[nivel]}</b></p>
+                            <button id="btn-comenzar-ronda" style="padding:12px 25px; background:#1c5d2b; color:white; border:none; border-radius:10px; cursor:pointer; font-family:'Arial Black'; width:100%;">¡VAMOS!</button>
+                        `;
+                        modalExp.classList.add('active');
+                        document.getElementById('btn-comenzar-ronda').onclick = () => {
+                            modalExp.classList.remove('active');
+                            cargarNivel();
+                        };
+                    } else {
+                        cargarNivel();
+                    }
+                } else {
+                    nuevaPregunta();
+                }
             }
         };
+
+        actualizarMarcador();
+        modalExp.classList.add('active');
     }
 
     function actualizarMarcador() {
@@ -261,8 +329,8 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < 5; i++) {
             const img = document.createElement('img');
             img.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png";
-            img.className = "icon-mini-ball";
-            if (i < tirosRonda) img.style.opacity = "0.3";
+            img.style.width = "14px"; img.style.margin = "2px";
+            if (i < (5 - preguntasRestantes.length)) img.style.opacity = "0.3";
             tCont.appendChild(img);
         }
 
@@ -271,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < 3; i++) {
             const img = document.createElement('img');
             img.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/vida.png";
-            img.className = "icon-mini-vida";
+            img.style.width = "16px"; img.style.margin = "2px";
             if (i >= vidas) img.style.filter = "grayscale(1) opacity(0.3)";
             vCont.appendChild(img);
         }
@@ -279,19 +347,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function resetEscena() {
         ball.style.transition = "none";
-        ball.style.zIndex = "20";
         ball.style.transform = "translateX(-50%)";
         keeper.style.transition = "none";
         keeper.style.transform = "translateX(-50%) rotate(0deg)";
     }
 
     function mostrarFinJuego(msg, win) {
-        document.getElementById('explanation-text').innerHTML = `
-            <h2>${msg}</h2>
-            <p>Marcaste ${goles} goles.</p>
-            <button onclick="location.reload()" style="padding:10px 20px; background:#1c5d2b; color:white; border:none; border-radius:10px; cursor:pointer; margin-top:15px;">REINTENTAR</button>
+        const contenedorTexto = document.getElementById('explanation-text');
+        contenedorTexto.innerHTML = `
+            <h2 style="color: #1c5d2b; margin-bottom: 10px;">${msg}</h2>
+            <p style="margin-bottom: 20px;">Marcaste <strong>${goles}</strong> goles.</p>
+            <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                <button onclick="location.reload()" 
+                    style="padding: 12px 25px; background: #1c5d2b; color: white; border: none; border-radius: 10px; cursor: pointer; font-family: 'Arial Black'; width: 200px;">
+                    REINTENTAR
+                </button>
+                <button onclick="window.open('https://www.milenio.com/deportes', '_blank')" 
+                    style="padding: 12px 25px; background: #cc0000; color: white; border: none; border-radius: 10px; cursor: pointer; font-family: 'Arial Black'; width: 200px;">
+                    SALIR
+                </button>
+            </div>
         `;
-        document.getElementById('continueBtn').style.display = "none";
-        document.getElementById('explanation').style.display = "flex";
+        document.getElementById('explanation').classList.add('active');
     }
 });
