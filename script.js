@@ -77,12 +77,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Bypass Audio
-    document.body.addEventListener('click', () => {
-        if(audioMenu.paused && document.querySelector('.menu').style.display !== 'none') {
-            audioMenu.play().catch(() => {});
-        }
-    }, {once: true});
+   // --- LÓGICA DE AUDIO MEJORADA ---
+    const intentarReproducir = () => {
+    audioMenu.play().then(() => {
+        // Si el navegador permite sonar, limpiamos todos los escuchadores
+        window.removeEventListener('click', intentarReproducir);
+        window.removeEventListener('touchstart', intentarReproducir);
+        window.removeEventListener('mousemove', intentarReproducir);
+        window.removeEventListener('keydown', intentarReproducir);
+        console.log("Audio iniciado con éxito.");
+    }).catch(error => {
+        // Silenciamos el error: el navegador requiere un clic o toque
+        console.log("Auto-play bloqueado. Esperando interacción del usuario...");
+    });
+};
 
+// 1. Intento inmediato al cargar la pestaña
+intentarReproducir();
+
+// 2. Respaldo: se activa con cualquier interacción mínima
+window.addEventListener('click', intentarReproducir);
+window.addEventListener('touchstart', intentarReproducir);
+window.addEventListener('mousemove', intentarReproducir);
+window.addEventListener('keydown', intentarReproducir);
     // --- MANEJO DE MODALES ---
     const modInst = document.getElementById('modal-instrucciones');
     const modCred = document.getElementById('modal-creditos');
