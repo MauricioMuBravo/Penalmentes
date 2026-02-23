@@ -16,7 +16,7 @@
 }
 
 body {
-    background: url("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/gradayporteria.jpg") center/cover no-repeat fixed;
+    background: url("https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/CanchaAfi.jpeg") center/cover no-repeat fixed;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -221,7 +221,7 @@ body {
    ========================================================= */
 #ball {
     position: absolute;
-    bottom: 90px;
+    bottom: 70px;
     left: 50%;
     width: 60px;
     transform: translateX(-50%);
@@ -230,9 +230,9 @@ body {
 
 #keeper {
     position: absolute;
-    bottom: 250px;
+    bottom: 220px;
     left: 50%;
-    width: 150px;
+    width: 200px;
     transform: translateX(-50%);
     z-index: 15;
 }
@@ -339,7 +339,7 @@ body {
     
     .titulo-container { width: 80vw; }
     .btn-jugar { width: 180px; }
-    #keeper { width: 150px; bottom: 220px; }
+    #keeper { width: 200px; bottom: 200px; }
 }
 
 
