@@ -230,7 +230,7 @@ body {
 
 #keeper {
     position: absolute;
-    bottom: 220px;
+    bottom: 210px;
     left: 50%;
     width: 200px;
     transform: translateX(-50%);
@@ -339,7 +339,7 @@ body {
     
     .titulo-container { width: 80vw; }
     .btn-jugar { width: 180px; }
-    #keeper { width: 200px; bottom: 200px; }
+    #keeper { width: 200px; bottom: 190px; }
 }
 
 
