@@ -195,9 +195,9 @@ body {
 .fondo-verde-titulo { width: 100%; }
 .titulo-texto {
     position: absolute;
-    width: 80%;
-    left: 10%;
-    top: 22%;
+    width: 100%;
+    left: 5%;
+    top: 20%;
 }
 
 .main-buttons-container {
