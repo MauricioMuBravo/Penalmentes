@@ -40,6 +40,11 @@ const bancoPreguntas = [
     { q:"¿Cuál fue el máximo goleador de 2006?", a:"Miroslav Klose", options:["Ronaldo","Miroslav Klose","Thierry Henry"], hintText:"El inicio de la leyenda del máximo goleador histórico.", exp:"Klose marcó 5 goles en ese torneo.", link: "https://www.milenio.com/deportes/futbol/miroslav-klose-el-maximo-goleador-de-los-mundiales" }
   ]
 ];
+/* --- IMÁGENES DE MEMO OCHOA --- */
+const KEEPER_NORMAL = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoa.png";
+const KEEPER_ALEGRE = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoaalegre.png";
+const KEEPER_ENOJADO = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoaenojado.png";
+
 /* ===========================================================
    2. CONFIGURACIÓN DE AUDIOS
    =========================================================== */
@@ -56,11 +61,11 @@ audioMenu.loop = true; audioEstadio.loop = true;
 /* ===========================================================
    3. VARIABLES DE JUEGO
    =========================================================== */
-let nivel = 1, goles = 0, tirosRonda = 0, vidas = 3, bloqueado = false;
+let nivel = 1, goles = 0, vidas = 3, bloqueado = false;
 let preguntaActual = null, preguntasRestantes = [], tiroRealizado = false;
 
 /* ===========================================================
-   4. EFECTOS ESPECIALES (CONFÉTI Y FUEGOS)
+   4. EFECTOS ESPECIALES
    =========================================================== */
 function lanzarCelebracionGol() {
     const duration = 2 * 1000;
@@ -101,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modCred = document.getElementById('modal-creditos');
     document.getElementById('btn-info').onclick = () => modInst.classList.add('active');
     document.getElementById('btn-open-creditos').onclick = () => { modInst.classList.remove('active'); modCred.classList.add('active'); };
+    document.getElementById('btn-regresar-info').onclick = () => { modCred.classList.remove('active'); modInst.classList.add('active'); };
     document.querySelectorAll('.btn-back-main').forEach(btn => {
         btn.onclick = () => { modInst.classList.remove('active'); modCred.classList.remove('active'); };
     });
@@ -130,14 +136,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function cargarNivel() {
         if (nivel > 5) return mostrarFinJuego("🏆 ¡CAMPEÓN!", true);
         preguntasRestantes = [...bancoPreguntas[nivel - 1]].sort(() => Math.random() - 0.5);
-        tirosRonda = 0; actualizarMarcador(); nuevaPregunta();
+        actualizarMarcador(); nuevaPregunta();
     }
 
     function nuevaPregunta() {
         if (vidas <= 0) return;
+        
+        // Reset Visual
+        resetEscena();
+        
         preguntaActual = preguntasRestantes.pop();
         document.getElementById('question').textContent = preguntaActual.q;
         hintTextEl.style.display = 'none';
+        
         document.getElementById('btn-pista').onclick = () => {
             hintTextEl.style.display = 'block';
             hintTextEl.innerHTML = `<p style="margin-bottom:10px;">${preguntaActual.hintText}</p>
@@ -148,160 +159,130 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('p-link').onclick = () => window.open(preguntaActual.link, '_blank');
             document.getElementById('p-back').onclick = () => hintTextEl.style.display = 'none';
         };
+
         const botones = document.querySelectorAll('.option');
         const opciones = [...preguntaActual.options].sort(() => Math.random() - 0.5);
-        opciones.forEach((opt, i) => { botones[i].textContent = opt; botones[i].onclick = () => procesarTiro(opt === preguntaActual.a, i); });
-        bloqueado = false; tiroRealizado = false; qContainer.style.opacity = "1";
+        opciones.forEach((opt, i) => { 
+            botones[i].textContent = opt; 
+            botones[i].onclick = () => procesarTiro(opt === preguntaActual.a, i); 
+        });
+
+        bloqueado = false; 
+        tiroRealizado = false; 
+        qContainer.style.opacity = "1";
     }
 
+    /* ===========================================================
+       6. LÓGICA DE TIRO Y ANIMACIÓN (CON MEMO OCHOA)
+       =========================================================== */
     function procesarTiro(esCorrecto, i) {
         if (bloqueado) return;
         bloqueado = true;
         
-        // --- EFECTO DE TENSIÓN: EL PÚBLICO SE QUEDA MUDO ---
-        audioEstadio.pause(); 
-        audioEstadio.currentTime = 0; // Opcional: para que al volver empiece de cero
-        
+        // Silencio de tensión
+        audioEstadio.pause();
         audioSilbato.currentTime = 0; 
         audioSilbato.play();
         
-        // Ocultamos la pregunta
-        document.getElementById('question-container').style.opacity = "0";
-
-        // El pequeño delay del silbato antes de la animación
-        setTimeout(() => {
-            ejecutarAnimacionTiro(esCorrecto, i);
-        }, 600);
+        qContainer.style.opacity = "0";
+        setTimeout(() => ejecutarAnimacionTiro(esCorrecto, i), 600);
     }
 
     function ejecutarAnimacionTiro(esCorrecto, i) {
-        tiroRealizado = true;
+        tiroRealizado = true; 
         audioTiro.currentTime = 0; 
         audioTiro.play();
 
-        const offset = [-160, 0, 160]; // Izquierda, Centro, Derecha
-        let destinoX = offset[i];
-        let finalBallX = destinoX;
-        let finalBallY = -310;
+        const offset = [-160, 0, 160];
+        let destinoX = offset[i], finalBallX = destinoX, finalBallY = -310;
 
-        // Si falla, el balón hace una trayectoria distinta
         if (!esCorrecto) {
-            if (destinoX === 0) { 
-                finalBallY = -240; // Se estrella en el portero
-                finalBallX = (Math.random() - 0.5) * 40; 
-            } else { 
-                finalBallX = destinoX * 1.5; // Se va fuera
-                finalBallY = -360; 
-            }
+            if (destinoX === 0) { finalBallY = -240; finalBallX = (Math.random() - 0.5) * 60; }
+            else { finalBallX = destinoX * 1.6; finalBallY = -360; }
         }
 
-        // Animación del Balón
-        const ball = document.getElementById('ball');
         ball.style.transition = "transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)";
         ball.style.transform = `translate(calc(-50% + ${finalBallX}px), ${finalBallY}px) rotate(720deg) scale(1)`;
 
-        // Animación del Portero
-        const keeper = document.getElementById('keeper');
-        let porteroX = esCorrecto ? (destinoX === 0 ? 120 : -destinoX * 0.4) : destinoX;
-        let rotacion = esCorrecto ? (destinoX === 0 ? 20 : -destinoX / 5) : (destinoX / 6);
+        let porteroX = esCorrecto ? (destinoX === 0 ? 140 : -destinoX * 0.5) : destinoX;
+        let rotacion = esCorrecto ? (destinoX === 0 ? 25 : -destinoX / 5) : (destinoX / 6);
         
         keeper.style.transition = "transform 0.35s ease-out";
         keeper.style.transform = `translateX(calc(-50% + ${porteroX}px)) rotate(${rotacion}deg)`;
 
-        // Si falla, el balón rebota o sigue de largo
-        if (!esCorrecto) {
-            setTimeout(() => {
-                ball.style.transition = "transform 0.5s ease-in";
-                ball.style.transform = `translate(calc(-50% + ${finalBallX * 1.1}px), 0px) scale(0.8) rotate(850deg)`;
-            }, 600);
-        }
-
-        // Llamamos al resultado final tras la animación
+        // Efectos finales después de la animación
         setTimeout(() => {
-            audioEstadio.volume = 1;
+            if (esCorrecto) {
+                keeper.src = KEEPER_ENOJADO;
+            } else {
+                keeper.src = KEEPER_ALEGRE;
+                ball.style.display = 'none'; // Desaparece el balón atajado
+            }
             finalizarAccion(esCorrecto);
-        }, 1200);
+        }, 800);
     }
 
- function finalizarAccion(esCorrecto) {
-    const modalExp = document.getElementById('explanation');
-    const txtExp = document.getElementById('explanation-text');
-    
-    // Limpiamos el contenido previo para evitar duplicados
-    txtExp.innerHTML = "";
+    function finalizarAccion(esCorrecto) {
+        const modalExp = document.getElementById('explanation');
+        const txtExp = document.getElementById('explanation-text');
+        txtExp.innerHTML = "";
 
-    // 1. Título y Sonidos
-    if (esCorrecto) {
-        goles++; 
-        audioGol.play(); 
-        lanzarCelebracionGol();
-        txtExp.innerHTML = `<h2 style="color:#1c5d2b; font-size: 2rem; margin-bottom:10px;">¡GOOOL!</h2>`;
-    } else {
-        vidas--; 
-        audioFallo.play();
-        txtExp.innerHTML = `<h2 style="color:#d32f2f; font-size: 2rem; margin-bottom:10px;">¡ATAJADA!</h2>`;
-    }
-
-    // 2. Texto de la explicación (Lo que se tenía anteriormente)
-    txtExp.innerHTML += `<p style="margin:15px 0; font-family: sans-serif; line-height:1.4; color:#333;">${preguntaActual.exp}</p>`;
-
-    // 3. Crear el contenedor de botones dinámicos
-    const btnCont = document.createElement('div');
-    btnCont.style.cssText = "display:flex; gap:10px; justify-content:center; margin-top:20px;";
-    
-    // Botón Leer Más
-    const btnMilenio = document.createElement('button');
-    btnMilenio.textContent = "LEER MÁS";
-    btnMilenio.style.cssText = "padding:10px 20px; background:#1c5d2b; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:12px;";
-    btnMilenio.onclick = () => window.open(preguntaActual.link, '_blank');
-
-    // Botón Siguiente (El que reemplaza al de "Continuar")
-    const btnNext = document.createElement('button');
-    btnNext.textContent = "SIGUIENTE";
-    btnNext.style.cssText = "padding:10px 20px; background:#333; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:12px;";
-    
-    btnNext.onclick = () => {
-        modalExp.classList.remove('active');
-        resetEscena();
-        
-        if (vidas <= 0) {
-            return mostrarFinJuego("GAME OVER", false);
+        if (esCorrecto) {
+            goles++; audioGol.play(); lanzarCelebracionGol();
+            txtExp.innerHTML = `<h2 style="color:#1c5d2b">¡GOOOL!</h2>`;
+        } else {
+            vidas--; audioFallo.play();
+            txtExp.innerHTML = `<h2 style="color:#d32f2f">¡ATAJADA!</h2>`;
         }
 
         audioEstadio.play().catch(() => {});
 
-        if (preguntasRestantes.length === 0) {
-            nivel++;
-            let rondas = ["", "Fase de Grupos", "Octavos de Final", "Cuartos de Final", "Semifinal", "la Gran Final"];
+        txtExp.innerHTML += `<p style="margin:15px 0; line-height:1.4;">${preguntaActual.exp}</p>`;
+
+        const btnCont = document.createElement('div');
+        btnCont.style.cssText = "display:flex; gap:10px; justify-content:center; margin-top:15px;";
+        btnCont.innerHTML = `
+            <button id="btn-milenio-din" style="padding:10px 15px; background:#1c5d2b; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:11px;">LEER MÁS</button>
+            <button id="btn-next-din" style="padding:10px 15px; background:#333; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:11px;">SIGUIENTE</button>`;
+        txtExp.appendChild(btnCont);
+
+        document.getElementById('btn-milenio-din').onclick = () => window.open(preguntaActual.link, '_blank');
+        document.getElementById('btn-next-din').onclick = () => {
+            modalExp.classList.remove('active');
             
-            if (nivel <= 5) {
-                txtExp.innerHTML = `
-                    <h2 style="color:#1c5d2b">¡AVANZAS!</h2>
-                    <p style="margin:20px 0;">Felicidades, estás en <b>${rondas[nivel]}</b></p>
-                    <button id="btn-go" style="padding:12px 25px; background:#1c5d2b; color:white; border:none; border-radius:10px; cursor:pointer; font-family:'Arial Black'; width:100%;">¡VAMOS!</button>`;
-                modalExp.classList.add('active');
-                document.getElementById('btn-go').onclick = () => {
-                    modalExp.classList.remove('active');
-                    cargarNivel();
-                };
+            if (vidas <= 0) {
+                mostrarFinJuego("GAME OVER", false);
+            } else if (preguntasRestantes.length === 0) {
+                nivel++;
+                if (nivel <= 5) {
+                    mostrarAnuncioNivel();
+                } else {
+                    mostrarFinJuego("🏆 ¡CAMPEÓN DEL MUNDO!", true);
+                }
             } else {
-                mostrarFinJuego("🏆 ¡CAMPEÓN DEL MUNDO!", true);
+                nuevaPregunta();
             }
-        } else {
-            nuevaPregunta();
-            // Mostramos de nuevo el contenedor de preguntas
-            document.getElementById('question-container').style.opacity = "1";
-        }
-    };
+        };
 
-    btnCont.appendChild(btnMilenio);
-    btnCont.appendChild(btnNext);
-    txtExp.appendChild(btnCont);
+        actualizarMarcador();
+        modalExp.classList.add('active');
+    }
 
-    // 4. Actualizar marcador y mostrar modal
-    actualizarMarcador();
-    modalExp.classList.add('active');
-}
+    function mostrarAnuncioNivel() {
+        const modalExp = document.getElementById('explanation');
+        const txtExp = document.getElementById('explanation-text');
+        let rondas = ["", "Fase de Grupos", "Octavos de Final", "Cuartos de Final", "Semifinal", "la Gran Final"];
+        
+        txtExp.innerHTML = `
+            <h2 style="color:#1c5d2b">¡AVANZAS!</h2>
+            <p style="margin:20px 0;">Felicidades, estás en <b>${rondas[nivel]}</b></p>
+            <button id="btn-go-din" style="padding:12px 25px; background:#1c5d2b; color:white; border:none; border-radius:10px; cursor:pointer; font-family:'Arial Black'; width:100%;">¡VAMOS!</button>`;
+        modalExp.classList.add('active');
+        document.getElementById('btn-go-din').onclick = () => {
+            modalExp.classList.remove('active');
+            cargarNivel();
+        };
+    }
 
     function actualizarMarcador() {
         document.getElementById('nivel-val').textContent = nivel;
@@ -310,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < 5; i++) {
             const img = document.createElement('img'); img.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png";
             img.style.width = "14px"; img.style.margin = "2px";
-            if (i < (5 - (preguntasRestantes.length + (tiroRealizado ? 0 : 1)))) img.style.opacity = "0.3";
+            if (i < (5 - preguntasRestantes.length - (tiroRealizado?1:0))) img.style.opacity = "0.3";
             tCont.appendChild(img);
         }
         const vCont = document.getElementById('vidas-icons'); vCont.innerHTML = '';
@@ -323,13 +304,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetEscena() {
-        ball.style.transition = "none"; ball.style.transform = "translateX(-50%)";
-        keeper.style.transition = "none"; keeper.style.transform = "translateX(-50%) rotate(0deg)";
+        ball.style.display = 'block';
+        ball.style.transition = "none"; 
+        ball.style.transform = "translateX(-50%)";
+        keeper.src = KEEPER_NORMAL;
+        keeper.style.transition = "none"; 
+        keeper.style.transform = "translateX(-50%) rotate(0deg)";
     }
 
     function mostrarFinJuego(msg, win) {
         if (win) lanzarFuegosArtificiales();
-        document.getElementById('explanation-text').innerHTML = `<h2 style="color: #1c5d2b; margin-bottom: 10px;">${msg}</h2>
+        document.getElementById('explanation-text').innerHTML = `
+            <h2 style="color: #1c5d2b; margin-bottom: 10px;">${msg}</h2>
             <p style="margin-bottom: 20px;">Marcaste <strong>${goles}</strong> goles.</p>
             <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
                 <button onclick="location.reload()" style="padding: 12px 25px; background: #1c5d2b; color: white; border:none; border-radius:10px; cursor:pointer; font-family: 'Arial Black'; width: 200px;">REINTENTAR</button>
