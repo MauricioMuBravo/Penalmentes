@@ -40,11 +40,37 @@ const bancoPreguntas = [
     { q:"¿Cuál fue el máximo goleador de 2006?", a:"Miroslav Klose", options:["Ronaldo","Miroslav Klose","Thierry Henry"], hintText:"El inicio de la leyenda del máximo goleador histórico.", exp:"Klose marcó 5 goles en ese torneo.", link: "https://www.milenio.com/deportes/futbol/miroslav-klose-el-maximo-goleador-de-los-mundiales" }
   ]
 ];
-/* --- IMÁGENES DE MEMO OCHOA --- */
-const KEEPER_NORMAL = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoa.png";
-const KEEPER_ALEGRE = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoaalegre.png";
-const KEEPER_ENOJADO = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoaenojado.png";
+/* --- CONFIGURACIÓN DE PORTEROS POR NIVEL --- */
+const porterosPorNivel = {
+    1: { // Memo Ochoa
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoa.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoaalegre.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoaenojado.png"
+    },
+    2: { // Jorge Campos
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposalegre.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposenojado.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecampos.png"
+    },
+    3: { // Jorge Campos se queda el resto de niveles (o añade más aquí)
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposalegre.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecampos.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposenojado.png"
+    },
+    4: {
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposalegre.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecampos.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposenojado.png"
+    },
+    5: {
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposalegre.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecampos.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposenojado.png"
+    }
+};
 
+// Estas variables deben ir FUERA del objeto porterosPorNivel
+let KEEPER_NORMAL, KEEPER_ALEGRE, KEEPER_ENOJADO;
 /* ===========================================================
    2. CONFIGURACIÓN DE AUDIOS
    =========================================================== */
@@ -91,7 +117,7 @@ function lanzarFuegosArtificiales() {
 }
 
 /* ===========================================================
-   5. LÓGICA DE INICIO Y MODALES
+    5. LÓGICA DE INICIO Y MODALES
    =========================================================== */
 document.addEventListener('DOMContentLoaded', () => {
     const ball = document.getElementById('ball');
@@ -99,7 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const qContainer = document.getElementById('question-container');
     const hintTextEl = document.getElementById('hint-text');
 
-    window.addEventListener('click', () => audioMenu.play().catch(() => {}), { once: true });
+    // --- CORRECCIÓN AUDIO AUTOMÁTICO ---
+    const desbloquearAudio = () => {
+        audioMenu.play().catch(() => {});
+        document.removeEventListener('click', desbloquearAudio);
+    };
+    document.addEventListener('click', desbloquearAudio);
 
     // Modales Info/Créditos
     const modInst = document.getElementById('modal-instrucciones');
@@ -134,10 +165,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function iniciarJuego() { nivel = 1; goles = 0; vidas = 3; cargarNivel(); }
 
     function cargarNivel() {
-        if (nivel > 5) return mostrarFinJuego("🏆 ¡CAMPEÓN!", true);
-        preguntasRestantes = [...bancoPreguntas[nivel - 1]].sort(() => Math.random() - 0.5);
-        actualizarMarcador(); nuevaPregunta();
-    }
+    if (nivel > 5) return mostrarFinJuego("🏆 ¡CAMPEÓN!", true);
+    
+    // Asignamos el portero según el nivel actual
+    const p = porterosPorNivel[nivel];
+    KEEPER_NORMAL = p.normal;
+    KEEPER_ALEGRE = p.alegre;
+    KEEPER_ENOJADO = p.enojado;
+    
+    // Actualizamos la imagen del portero en pantalla de inmediato
+    const keeper = document.getElementById('keeper');
+    keeper.src = KEEPER_NORMAL;
+
+    preguntasRestantes = [...bancoPreguntas[nivel - 1]].sort(() => Math.random() - 0.5);
+    actualizarMarcador(); 
+    nuevaPregunta();
+}
 
     function nuevaPregunta() {
         if (vidas <= 0) return;
@@ -188,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => ejecutarAnimacionTiro(esCorrecto, i), 600);
     }
 
-    function ejecutarAnimacionTiro(esCorrecto, i) {
+   function ejecutarAnimacionTiro(esCorrecto, i) {
         tiroRealizado = true; 
         audioTiro.currentTime = 0; 
         audioTiro.play();
@@ -197,18 +240,31 @@ document.addEventListener('DOMContentLoaded', () => {
         let destinoX = offset[i], finalBallX = destinoX, finalBallY = -310;
 
         if (!esCorrecto) {
-            if (destinoX === 0) { finalBallY = -240; finalBallX = (Math.random() - 0.5) * 60; }
-            else { finalBallX = destinoX * 1.6; finalBallY = -360; }
+            if (destinoX === 0) { 
+                finalBallY = -240; 
+                finalBallX = (Math.random() - 0.5) * 60; 
+            } else { 
+                finalBallX = destinoX * 1.3; 
+                finalBallY = -310; 
+            }
         }
 
         ball.style.transition = "transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)";
         ball.style.transform = `translate(calc(-50% + ${finalBallX}px), ${finalBallY}px) rotate(720deg) scale(1)`;
 
-        let porteroX = esCorrecto ? (destinoX === 0 ? 140 : -destinoX * 0.5) : destinoX;
-        let rotacion = esCorrecto ? (destinoX === 0 ? 25 : -destinoX / 5) : (destinoX / 6);
-        
+        // --- LÓGICA DE POSICIÓN DE MEMO ---
         keeper.style.transition = "transform 0.35s ease-out";
-        keeper.style.transform = `translateX(calc(-50% + ${porteroX}px)) rotate(${rotacion}deg)`;
+        
+        if (esCorrecto) {
+            // SI ES GOL: Se lanza (se mueve y se inclina)
+            let porteroX = (destinoX === 0 ? 140 : -destinoX * 0.5);
+            let rotacion = (destinoX === 0 ? 25 : -destinoX / 5);
+            keeper.style.transform = `translateX(calc(-50% + ${porteroX}px)) rotate(${rotacion}deg)`;
+        } else {
+            // SI LA PARA: Se queda DERECHO (rotate 0deg)
+            // Se mueve al carril del tiro pero se mantiene recto
+            keeper.style.transform = `translateX(calc(-50% + ${destinoX}px)) rotate(0deg)`;
+        }
 
         // Efectos finales después de la animación
         setTimeout(() => {
@@ -216,7 +272,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 keeper.src = KEEPER_ENOJADO;
             } else {
                 keeper.src = KEEPER_ALEGRE;
-                ball.style.display = 'none'; // Desaparece el balón atajado
+                ball.style.display = 'none'; 
+                // Aseguramos que al cambiar la imagen se mantenga recto
+                keeper.style.transform = `translateX(calc(-50% + ${destinoX}px)) rotate(0deg)`;
             }
             finalizarAccion(esCorrecto);
         }, 800);
