@@ -304,7 +304,7 @@ body {
 
 #keeper {
     position: absolute;
-    bottom: 210px; /* Posición base en PC */
+    bottom: 200px; /* Posición base en PC */
     left: 50%;
     width: 240px;  /* Tamaño grande para web */
     transform: translateX(-50%);
