@@ -244,9 +244,8 @@ document.querySelector('.btn-jugar').onclick = () => {
 }
 
     function nuevaPregunta() {
-        if (vidas <= 0) return;
+       if (vidas <= 0) return;
         
-        // Reset Visual
         resetEscena();
         
         preguntaActual = preguntasRestantes.pop();
@@ -264,7 +263,7 @@ document.querySelector('.btn-jugar').onclick = () => {
             document.getElementById('p-back').onclick = () => hintTextEl.style.display = 'none';
         };
 
-        const botones = document.querySelectorAll('.option');
+      const botones = document.querySelectorAll('.option');
         const opciones = [...preguntaActual.options].sort(() => Math.random() - 0.5);
         opciones.forEach((opt, i) => { 
             botones[i].textContent = opt; 
@@ -272,31 +271,34 @@ document.querySelector('.btn-jugar').onclick = () => {
         });
 
         bloqueado = false; 
-        tiroRealizado = false; 
+        tiroRealizado = false; // Reset de variable
+        actualizarMarcador();  // <--- AGREGA ESTO AQUÍ para limpiar el gris al iniciar la pregunta
         qContainer.style.opacity = "1";
     }
 
     /* ===========================================================
        6. LÓGICA DE TIRO Y ANIMACIÓN (CON MEMO OCHOA)
        =========================================================== */
-    function procesarTiro(esCorrecto, i) {
+   function procesarTiro(esCorrecto, i) {
         if (bloqueado) return;
-        bloqueado = true;
-        
-        // Silencio de tensión
-        audioEstadio.pause();
-        audioSilbato.currentTime = 0; 
-        audioSilbato.play();
-        
-        qContainer.style.opacity = "0";
-        setTimeout(() => ejecutarAnimacionTiro(esCorrecto, i), 600);
-    }
+    bloqueado = true;
+    
+    // Aquí solo pausamos audio y lanzamos silbato
+    audioEstadio.pause();
+    audioSilbato.currentTime = 0; 
+    audioSilbato.play();
+    
+    qContainer.style.opacity = "0";
+    // El marcador se actualizará dentro de 600ms, cuando inicie la animación
+    setTimeout(() => ejecutarAnimacionTiro(esCorrecto, i), 600);
+}
 
   function ejecutarAnimacionTiro(esCorrecto, i) {
-        tiroRealizado = true; 
-        audioTiro.currentTime = 0; 
-        audioTiro.play();
-
+       tiroRealizado = true; 
+    actualizarMarcador(); // <--- AGREGAR AQUÍ: El balón se opaca justo al disparar
+    
+    audioTiro.currentTime = 0; 
+    audioTiro.play();
         const offset = [-160, 0, 160];
         let destinoX = offset[i], finalBallX = destinoX, finalBallY = -310;
 
@@ -415,24 +417,47 @@ document.querySelector('.btn-jugar').onclick = () => {
         };
     }
 
-    function actualizarMarcador() {
-        document.getElementById('nivel-val').textContent = nivel;
-        document.getElementById('goles-val').textContent = goles;
-        const tCont = document.getElementById('tiros-icons'); tCont.innerHTML = '';
-        for (let i = 0; i < 5; i++) {
-            const img = document.createElement('img'); img.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png";
-            img.style.width = "14px"; img.style.margin = "2px";
-            if (i < (5 - preguntasRestantes.length - (tiroRealizado?1:0))) img.style.opacity = "0.3";
-            tCont.appendChild(img);
+   function actualizarMarcador() {
+    document.getElementById('nivel-val').textContent = nivel;
+    document.getElementById('goles-val').textContent = goles;
+    
+    const tCont = document.getElementById('tiros-icons'); 
+    tCont.innerHTML = '';
+    
+    // IMPORTANTE: 
+    // Si quedan 4 preguntas en el banco y tiroRealizado es false, 
+    // significa que estamos en el primer tiro (índice 0).
+    let indiceBalonActual = 5 - (preguntasRestantes.length + 1);
+
+    for (let i = 0; i < 5; i++) {
+        const img = document.createElement('img'); 
+        img.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png";
+        img.style.width = "14px"; 
+        img.style.margin = "2px";
+        
+        // REGLA:
+        // Se pone gris si:
+        // 1. El índice es menor al que estamos jugando (tiros pasados)
+        // 2. Es el índice actual Y ya se realizó el tiro.
+        if (i < indiceBalonActual || (i === indiceBalonActual && tiroRealizado)) {
+            img.style.filter = "grayscale(1) opacity(0.3)"; 
         }
-        const vCont = document.getElementById('vidas-icons'); vCont.innerHTML = '';
-        for (let i = 0; i < 3; i++) {
-            const img = document.createElement('img'); img.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/vida.png";
-            img.style.width = "16px"; img.style.margin = "2px";
-            if (i >= vidas) img.style.filter = "grayscale(1) opacity(0.3)";
-            vCont.appendChild(img);
-        }
+        
+        tCont.appendChild(img);
     }
+
+    // --- SECCIÓN DE VIDAS ---
+    const vCont = document.getElementById('vidas-icons'); 
+    vCont.innerHTML = '';
+    for (let i = 0; i < 3; i++) {
+        const img = document.createElement('img'); 
+        img.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/vida.png";
+        img.style.width = "16px"; 
+        img.style.margin = "2px";
+        if (i >= vidas) img.style.filter = "grayscale(1) opacity(0.3)";
+        vCont.appendChild(img);
+    }
+}
 
     function resetEscena() {
         ball.style.display = 'block';
