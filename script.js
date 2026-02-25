@@ -329,112 +329,104 @@ document.querySelector('.btn-jugar').onclick = () => {
 }
 
   function ejecutarAnimacionTiro(esCorrecto, i) {
-       tiroRealizado = true; 
-    actualizarMarcador(); // <--- AGREGAR AQUÍ: El balón se opaca justo al disparar
+    tiroRealizado = true; 
+    actualizarMarcador();
     
     audioTiro.currentTime = 0; 
     audioTiro.play();
-        const offset = [-160, 0, 160];
-        let destinoX = offset[i], finalBallX = destinoX, finalBallY = -310;
 
-        if (!esCorrecto) {
-            if (destinoX === 0) { 
-                finalBallY = -240; 
-                finalBallX = (Math.random() - 0.5) * 60; 
-            } else { 
-                finalBallX = destinoX * 1.3; 
-                finalBallY = -310; 
-            }
+    const offset = [-160, 0, 160];
+    let destinoX = offset[i];
+    let finalBallX = destinoX;
+    let finalBallY = -310;
+
+    if (!esCorrecto) {
+        if (destinoX === 0) { 
+            finalBallY = -240;
+            finalBallX = (Math.random() - 0.5) * 40; 
+        } else { 
+            finalBallX = destinoX * 1.2; 
         }
+    }
 
-        ball.style.transition = "transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)";
-        ball.style.transform = `translate(calc(-50% + ${finalBallX}px), ${finalBallY}px) rotate(720deg) scale(1)`;
+    // EL TIRO: El balón sale
+    ball.style.transition = "transform 0.5s ease-in";
+    ball.style.transform = `translate(calc(-50% + ${finalBallX}px), ${finalBallY}px) rotate(720deg)`;
 
-        keeper.style.transition = "transform 0.35s ease-out";
+    // EL PORTERO SE LANZA Y SE QUEDA AHÍ
+    keeper.style.transition = "transform 0.4s ease-out";
+    if (esCorrecto) {
+        let porteroX = (destinoX === 0 ? 120 : -destinoX * 0.5);
+        keeper.style.transform = `translateX(calc(-50% + ${porteroX}px)) rotate(${destinoX === 0 ? 20 : -destinoX/5}deg)`;
+    } else {
+        // Se estira hacia el balón y ahí se mantiene
+        keeper.style.transform = `translateX(calc(-50% + ${destinoX}px)) rotate(${destinoX > 0 ? 30 : -30}deg)`;
+    }
+
+    // Esperamos un momento para que el usuario vea el resultado antes de mostrar el modal
+    setTimeout(() => {
+        finalizarAccion(esCorrecto);
+    }, 900); // 800ms permite ver el balón llegar y al portero estirado
+}
+
+function finalizarAccion(esCorrecto) {
+    const modalExp = document.getElementById('explanation');
+    const txtExp = document.getElementById('explanation-text');
+    txtExp.innerHTML = "";
+
+    // --- AQUÍ SUCEDE EL CAMBIO QUE BUSCAS ---
+    // Justo cuando aparece el modal, el portero vuelve al centro y cambia de cara
+    keeper.style.transition = "transform 0.7s ease-in-out";
+    keeper.style.transform = "translateX(-50%) rotate(0deg)"; // Regresa al centro
+    
+    if (esCorrecto) {
+        goles++; 
+        audioGol.play(); 
+        lanzarCelebracionGol();
+        keeper.src = KEEPER_ENOJADO; // Expresión de enojo en el centro
+        txtExp.innerHTML = `<h2 style="color:#1c5d2b">¡GOOOL!</h2>`;
+    } else {
+        vidas--; 
+        audioFallo.play();
+        keeper.src = KEEPER_ALEGRE; // Expresión de alegría en el centro
+        ball.style.display = 'none'; 
+        txtExp.innerHTML = `<h2 style="color:#d32f2f">¡ATAJADA!</h2>`;
+    }
+
+    // Resto de la lógica del modal...
+    audioEstadio.play().catch(() => {});
+    txtExp.innerHTML += `<p style="margin:15px 0; line-height:1.4;">${preguntaActual.exp}</p>`;
+
+    // (Botones LEER MÁS y SIGUIENTE se mantienen igual que tu código)
+    const btnCont = document.createElement('div');
+    btnCont.style.cssText = "display:flex; gap:10px; justify-content:center; margin-top:15px;";
+    btnCont.innerHTML = `
+        <button id="btn-milenio-din" style="padding:10px 15px; background:#1c5d2b; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:11px;">LEER MÁS</button>
+        <button id="btn-next-din" style="padding:10px 15px; background:#333; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:11px;">SIGUIENTE</button>`;
+    txtExp.appendChild(btnCont);
+
+    document.getElementById('btn-milenio-din').onclick = () => window.open(preguntaActual.link, '_blank');
+    document.getElementById('btn-next-din').onclick = () => {
+        modalExp.classList.remove('active');
+        // Reset para la siguiente pregunta
+        keeper.src = KEEPER_NORMAL;
+        ball.style.display = "block";
+        ball.style.transition = "none";
+        ball.style.transform = "translateX(-50%)";
         
-        if (esCorrecto) {
-            let porteroX = (destinoX === 0 ? 140 : -destinoX * 0.5);
-            let rotacion = (destinoX === 0 ? 25 : -destinoX / 5);
-            keeper.style.transform = `translateX(calc(-50% + ${porteroX}px)) rotate(${rotacion}deg)`;
+        if (vidas <= 0) {
+            mostrarFinJuego("GAME OVER", false);
+        } else if (preguntasRestantes.length === 0) {
+            nivel++;
+            nivel <= 5 ? mostrarAnuncioNivel() : mostrarFinJuego("🏆 ¡CAMPEÓN DEL MUNDO!", true);
         } else {
-            keeper.style.transform = `translateX(calc(-50% + ${destinoX}px)) rotate(0deg)`;
+            nuevaPregunta();
         }
+    };
 
-        // --- CAMBIO DE IMAGEN Y REACCIÓN ---
-       setTimeout(() => {
-            if (esCorrecto) {
-                keeper.src = KEEPER_ENOJADO;
-            } else {
-                keeper.src = KEEPER_ALEGRE;
-                ball.style.display = 'none'; 
-                keeper.style.transform = `translateX(calc(-50% + ${destinoX}px)) rotate(0deg)`;
-            }
-            
-            finalizarAccion(esCorrecto);
-
-            // --- ESTE ES EL AJUSTE PARA REGRESAR A BASE ---
-            setTimeout(() => {
-                // Le damos una transición suave de medio segundo
-                keeper.style.transition = "transform 0.6s ease-in-out";
-                // Regresa a la imagen normal (Memo o Jorge según el nivel)
-                keeper.src = KEEPER_NORMAL; 
-                // Regresa al centro exacto
-                keeper.style.transform = "translateX(-50%) rotate(0deg)";
-                
-                // También reseteamos el balón por si acaso para el siguiente tiro
-                ball.style.transition = "none";
-                ball.style.transform = "translateX(-50%)";
-                ball.style.display = "block"; 
-            }, 2000); // 2 segundos es tiempo suficiente para ver la reacción y luego volver
-
-        }, 800);
-    }
-
-    function finalizarAccion(esCorrecto) {
-        const modalExp = document.getElementById('explanation');
-        const txtExp = document.getElementById('explanation-text');
-        txtExp.innerHTML = "";
-
-        if (esCorrecto) {
-            goles++; audioGol.play(); lanzarCelebracionGol();
-            txtExp.innerHTML = `<h2 style="color:#1c5d2b">¡GOOOL!</h2>`;
-        } else {
-            vidas--; audioFallo.play();
-            txtExp.innerHTML = `<h2 style="color:#d32f2f">¡ATAJADA!</h2>`;
-        }
-
-        audioEstadio.play().catch(() => {});
-
-        txtExp.innerHTML += `<p style="margin:15px 0; line-height:1.4;">${preguntaActual.exp}</p>`;
-
-        const btnCont = document.createElement('div');
-        btnCont.style.cssText = "display:flex; gap:10px; justify-content:center; margin-top:15px;";
-        btnCont.innerHTML = `
-            <button id="btn-milenio-din" style="padding:10px 15px; background:#1c5d2b; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:11px;">LEER MÁS</button>
-            <button id="btn-next-din" style="padding:10px 15px; background:#333; color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Arial Black'; font-size:11px;">SIGUIENTE</button>`;
-        txtExp.appendChild(btnCont);
-
-        document.getElementById('btn-milenio-din').onclick = () => window.open(preguntaActual.link, '_blank');
-        document.getElementById('btn-next-din').onclick = () => {
-            modalExp.classList.remove('active');
-            
-            if (vidas <= 0) {
-                mostrarFinJuego("GAME OVER", false);
-            } else if (preguntasRestantes.length === 0) {
-                nivel++;
-                if (nivel <= 5) {
-                    mostrarAnuncioNivel();
-                } else {
-                    mostrarFinJuego("🏆 ¡CAMPEÓN DEL MUNDO!", true);
-                }
-            } else {
-                nuevaPregunta();
-            }
-        };
-
-        actualizarMarcador();
-        modalExp.classList.add('active');
-    }
+    actualizarMarcador();
+    modalExp.classList.add('active');
+}
 
     function mostrarAnuncioNivel() {
         const modalExp = document.getElementById('explanation');

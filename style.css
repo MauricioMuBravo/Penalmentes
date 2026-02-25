@@ -16,7 +16,7 @@
 }
 
 body {
-    background: url("https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/CanchaAfi.png") center/cover no-repeat fixed;
+    background: url("https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/mundialitofondo2.png") center/cover no-repeat fixed;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -304,11 +304,12 @@ body {
 
 #keeper {
     position: absolute;
-    bottom: 210px;
+    bottom: 210px; /* Posición base en PC */
     left: 50%;
-    width: 200px;
+    width: 240px;  /* Tamaño grande para web */
     transform: translateX(-50%);
     z-index: 15;
+    transition: transform 0.4s ease-out;
 }
 
 /* =========================================================
@@ -380,9 +381,10 @@ body {
    8. MODALES E INSTRUCCIONES
    ========================================================= */
 .modal {
-    position: fixed;
+   position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7); 
+    /* Cambiamos rgba(0, 0, 0, 0.7) por transparente */
+    background: rgba(0, 0, 0, 0.3); 
     display: none;
     justify-content: center;
     align-items: center;
@@ -487,5 +489,10 @@ body {
         bottom: 70px; /* Lo subimos un poquito para alejarlo del borde */
         left: 50%;
         transform: translateX(-50%);
+    }
+    @media (max-width: 768px) {
+    #keeper {
+        width: 200px;  /* Más pequeño para que no cubra toda la portería en el cel */
+        bottom: 190px; /* Bajamos un poco la posición para que coincida con la perspectiva */
     }
 }
