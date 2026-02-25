@@ -125,12 +125,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const qContainer = document.getElementById('question-container');
     const hintTextEl = document.getElementById('hint-text');
 
-    // --- CORRECCIÓN AUDIO AUTOMÁTICO ---
-    const desbloquearAudio = () => {
-        audioMenu.play().catch(() => {});
-        document.removeEventListener('click', desbloquearAudio);
+    const iniciarAudioMenu = () => {
+        if (audioMenu.paused && !mute) {
+            audioMenu.play().then(() => {
+                // Una vez que suena, quitamos los escuchas
+                ['click', 'touchstart', 'mousedown'].forEach(evt => 
+                    window.removeEventListener(evt, iniciarAudioMenu)
+                );
+            }).catch(e => console.log("Esperando interacción para audio..."));
+        }
     };
-    document.addEventListener('click', desbloquearAudio);
+
+    // Escuchamos cualquier interacción para activar el ambiente del menú
+    ['click', 'touchstart', 'mousedown'].forEach(evt => 
+        window.addEventListener(evt, iniciarAudioMenu)
+    );
 
     // Modales Info/Créditos
     const modInst = document.getElementById('modal-instrucciones');
@@ -231,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => ejecutarAnimacionTiro(esCorrecto, i), 600);
     }
 
-   function ejecutarAnimacionTiro(esCorrecto, i) {
+  function ejecutarAnimacionTiro(esCorrecto, i) {
         tiroRealizado = true; 
         audioTiro.currentTime = 0; 
         audioTiro.play();
@@ -252,31 +261,36 @@ document.addEventListener('DOMContentLoaded', () => {
         ball.style.transition = "transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)";
         ball.style.transform = `translate(calc(-50% + ${finalBallX}px), ${finalBallY}px) rotate(720deg) scale(1)`;
 
-        // --- LÓGICA DE POSICIÓN DE MEMO ---
         keeper.style.transition = "transform 0.35s ease-out";
         
         if (esCorrecto) {
-            // SI ES GOL: Se lanza (se mueve y se inclina)
             let porteroX = (destinoX === 0 ? 140 : -destinoX * 0.5);
             let rotacion = (destinoX === 0 ? 25 : -destinoX / 5);
             keeper.style.transform = `translateX(calc(-50% + ${porteroX}px)) rotate(${rotacion}deg)`;
         } else {
-            // SI LA PARA: Se queda DERECHO (rotate 0deg)
-            // Se mueve al carril del tiro pero se mantiene recto
             keeper.style.transform = `translateX(calc(-50% + ${destinoX}px)) rotate(0deg)`;
         }
 
-        // Efectos finales después de la animación
+        // --- CAMBIO DE IMAGEN Y REACCIÓN ---
         setTimeout(() => {
             if (esCorrecto) {
                 keeper.src = KEEPER_ENOJADO;
             } else {
                 keeper.src = KEEPER_ALEGRE;
                 ball.style.display = 'none'; 
-                // Aseguramos que al cambiar la imagen se mantenga recto
                 keeper.style.transform = `translateX(calc(-50% + ${destinoX}px)) rotate(0deg)`;
             }
+            
+            // Llamamos al modal de explicación
             finalizarAccion(esCorrecto);
+
+            // --- NUEVO AJUSTE: Regresar a imagen base tras 1.5 segundos ---
+            setTimeout(() => {
+                keeper.style.transition = "transform 0.5s ease-in-out";
+                keeper.src = KEEPER_NORMAL; // Regresa a la imagen base
+                keeper.style.transform = "translateX(-50%) rotate(0deg)"; // Regresa al centro
+            }, 1500); 
+
         }, 800);
     }
 
