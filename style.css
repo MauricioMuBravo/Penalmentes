@@ -244,23 +244,81 @@ body {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    width: 250px;
+    /* Usamos un ancho base para escritorio */
+    width: 220px; 
     z-index: 70;
+    transition: all 0.3s ease;
 }
 
-.bg-marcador-img { width: 100%; }
+.bg-marcador-img { 
+    width: 100%; 
+    display: block; 
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+}
+
 .stats-overlay {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    padding: 10% 15%;
+    /* El padding es la clave: 15% arriba, 15% lados, 10% abajo */
+    padding: 10% 10% 12% 12%; 
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    /* Distribuye los 4 bloques (Nivel, Goles, Tiros, Vidas) con espacio igual */
+    justify-content: space-around; 
+    align-items: flex-end; 
     color: white;
-    font-size: 0.85rem;
+    font-family: 'Arial Black', sans-serif;
+    text-align: right;
+    text-transform: uppercase;
 }
 
+/* Estilo para las etiquetas (NIVEL, GOLES, etc) */
+.stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    margin-bottom: -2px; /* Pegamos un poco la etiqueta al valor */
+}
+
+/* Estilo para los valores numéricos */
+.stat-value {
+    font-size: 1.3rem;
+    color: #ffffff;
+    line-height: 1;
+    text-shadow: 2px 2px 0px var(--verde-milenio);
+}
+
+/* Contenedores de iconos */
+#tiros-icons, #vidas-icons {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+#tiros-icons img, #vidas-icons img {
+    width: 14px;
+    height: auto;
+}
+
+/* =========================================================
+   AJUSTE ESPECÍFICO PARA MOBILE (Sobreescribe lo anterior)
+   ========================================================= */
+@media (max-width: 768px) {
+    .scoreboard-container {
+        width: 150px; /* Más pequeño en celular */
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .stat-label { font-size: 0.5rem; }
+    .stat-value { font-size: 1rem; }
+    
+    #tiros-icons img, #vidas-icons img {
+        width: 10px; /* Iconos más chiquitos en mobile */
+    }
+}
 /* =========================================================
    8. MODALES Y CRÉDITOS (CORREGIDO)
    ========================================================= */

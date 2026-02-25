@@ -125,20 +125,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const qContainer = document.getElementById('question-container');
     const hintTextEl = document.getElementById('hint-text');
 
-    const iniciarAudioMenu = () => {
+   const activarAudiosGlobal = () => {
+        // 1. Intentamos arrancar el audio del menú
         if (audioMenu.paused && !mute) {
-            audioMenu.play().then(() => {
-                // Una vez que suena, quitamos los escuchas
-                ['click', 'touchstart', 'mousedown'].forEach(evt => 
-                    window.removeEventListener(evt, iniciarAudioMenu)
-                );
-            }).catch(e => console.log("Esperando interacción para audio..."));
+            audioMenu.play()
+                .then(() => console.log("Audio Menú: ON"))
+                .catch(e => console.log("Audio esperando interacción clara..."));
         }
+
+        // 2. "DESBLOQUEO": Reproducimos y pausamos rápidamente todos los audios.
+        // Esto le dice al navegador que el usuario autoriza estos sonidos.
+        [audioEstadio, audioTiro, audioFallo, audioGol, audioSilbato].forEach(aud => {
+            aud.play().then(() => {
+                aud.pause();
+                aud.currentTime = 0;
+            }).catch(() => {});
+        });
+
+        // 3. Limpiamos los eventos para que solo ocurra una vez
+        ['click', 'touchstart', 'mousedown'].forEach(evt => 
+            window.removeEventListener(evt, activarAudiosGlobal)
+        );
     };
 
-    // Escuchamos cualquier interacción para activar el ambiente del menú
+    // Escuchamos en toda la ventana el primer toque del usuario
     ['click', 'touchstart', 'mousedown'].forEach(evt => 
-        window.addEventListener(evt, iniciarAudioMenu)
+        window.addEventListener(evt, activarAudiosGlobal)
     );
 
     // Modales Info/Créditos
