@@ -154,14 +154,42 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     // Modales Info/Créditos
-    const modInst = document.getElementById('modal-instrucciones');
-    const modCred = document.getElementById('modal-creditos');
-    document.getElementById('btn-info').onclick = () => modInst.classList.add('active');
-    document.getElementById('btn-open-creditos').onclick = () => { modInst.classList.remove('active'); modCred.classList.add('active'); };
-    document.getElementById('btn-regresar-info').onclick = () => { modCred.classList.remove('active'); modInst.classList.add('active'); };
-    document.querySelectorAll('.btn-back-main').forEach(btn => {
-        btn.onclick = () => { modInst.classList.remove('active'); modCred.classList.remove('active'); };
-    });
+   const modInst = document.getElementById('modal-instrucciones');
+const modCred = document.getElementById('modal-creditos');
+const btnJugarPrincipal = document.querySelector('.btn-jugar');
+const btnInfoPrincipal = document.getElementById('btn-info');
+
+// 1. Al picar el botón de Información (el de la "i")
+btnInfoPrincipal.onclick = () => { 
+    modInst.classList.add('active'); 
+    // DESAPARECEN los botones principales
+    btnJugarPrincipal.classList.add('ocultar-temporal');
+    btnInfoPrincipal.classList.add('ocultar-temporal');
+};
+
+// 2. Al picar el botón de Créditos dentro de info
+document.getElementById('btn-open-creditos').onclick = () => { 
+    modInst.classList.remove('active'); 
+    modCred.classList.add('active'); 
+};
+
+// 3. Al picar Regresar a Info desde Créditos
+document.getElementById('btn-regresar-info').onclick = () => { 
+    modCred.classList.remove('active'); 
+    modInst.classList.add('active'); 
+};
+
+// 4. AL DAR CLIC A LA FLECHA "ATRÁS" (IMPORTANTE)
+document.querySelectorAll('.btn-back-main').forEach(btn => {
+    btn.onclick = () => { 
+        modInst.classList.remove('active'); 
+        modCred.classList.remove('active'); 
+        
+        // REAPARECEN los botones principales al volver al menú raíz
+        btnJugarPrincipal.classList.remove('ocultar-temporal');
+        btnInfoPrincipal.classList.remove('ocultar-temporal');
+    };
+});
 
     document.getElementById('btn-volumen').onclick = (e) => {
         mute = !mute;
@@ -169,17 +197,29 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.src = mute ? "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/boton_mute.png" : "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/boton_vol.png";
     };
 
-    document.querySelector('.btn-jugar').onclick = () => {
+document.querySelector('.btn-jugar').onclick = () => {
+        // --- NUEVO: Ocultamos el recuadro verde y sus botones de inmediato ---
+        modInst.classList.remove('active'); 
+        
         const startBall = document.createElement("div");
-        startBall.id = "start-ball"; document.body.appendChild(startBall);
+        startBall.id = "start-ball"; 
+        document.body.appendChild(startBall);
+        
         setTimeout(() => startBall.classList.add("shoot"), 50);
-        audioMenu.pause(); audioEstadio.play().catch(() => {});
+        
+        audioMenu.pause(); 
+        if (!mute) audioEstadio.play().catch(() => {});
+        
         document.querySelector('.logo-mundial-global').classList.add('oculto');
+        
         setTimeout(() => {
             document.querySelector('.menu').style.display = 'none';
             document.getElementById('game-ui').style.display = 'block';
-            qContainer.style.display = 'block'; ball.style.display = 'block'; keeper.style.display = 'block';
-            iniciarJuego(); startBall.remove();
+            qContainer.style.display = 'block'; 
+            ball.style.display = 'block'; 
+            keeper.style.display = 'block';
+            iniciarJuego(); 
+            startBall.remove();
         }, 600);
     };
 
@@ -284,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // --- CAMBIO DE IMAGEN Y REACCIÓN ---
-        setTimeout(() => {
+       setTimeout(() => {
             if (esCorrecto) {
                 keeper.src = KEEPER_ENOJADO;
             } else {
@@ -293,15 +333,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 keeper.style.transform = `translateX(calc(-50% + ${destinoX}px)) rotate(0deg)`;
             }
             
-            // Llamamos al modal de explicación
             finalizarAccion(esCorrecto);
 
-            // --- NUEVO AJUSTE: Regresar a imagen base tras 1.5 segundos ---
+            // --- ESTE ES EL AJUSTE PARA REGRESAR A BASE ---
             setTimeout(() => {
-                keeper.style.transition = "transform 0.5s ease-in-out";
-                keeper.src = KEEPER_NORMAL; // Regresa a la imagen base
-                keeper.style.transform = "translateX(-50%) rotate(0deg)"; // Regresa al centro
-            }, 1500); 
+                // Le damos una transición suave de medio segundo
+                keeper.style.transition = "transform 0.6s ease-in-out";
+                // Regresa a la imagen normal (Memo o Jorge según el nivel)
+                keeper.src = KEEPER_NORMAL; 
+                // Regresa al centro exacto
+                keeper.style.transform = "translateX(-50%) rotate(0deg)";
+                
+                // También reseteamos el balón por si acaso para el siguiente tiro
+                ball.style.transition = "none";
+                ball.style.transform = "translateX(-50%)";
+                ball.style.display = "block"; 
+            }, 2000); // 2 segundos es tiempo suficiente para ver la reacción y luego volver
 
         }, 800);
     }

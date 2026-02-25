@@ -346,8 +346,8 @@ body {
 /* Modal Créditos */
 .modal-wrapper-creditos {
     position: relative;
-    width: 75vw;
-    max-width: 500px;
+    width: 85vw;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -381,7 +381,9 @@ body {
 .modal-copa-creditos { position: absolute; bottom: -10px; left: -20px; width: 70px; }
 .modal-balon-creditos { position: absolute; top: -10px; right: -20px; width: 50px; }
 .modal-aficion-creditos { position: absolute; top: 10px; left: 10px; width: 90px; }
-
+.ocultar-temporal {
+    display: none !important;
+}
 /* =========================================================
    9. RESPONSIVE MÓVIL
    ========================================================= */
@@ -472,4 +474,22 @@ body {
         left: 50%;
         transform: translateX(-50%);
     }
+    @media (max-width: 768px) {
+    .global-controls {
+        top: auto;        /* Cancela la posición de arriba */
+        bottom: 105px;    /* Lo bajamos más (estaba en 180px) */
+        right: 15px;      /* Un poco más a la derecha para alinearse con el marcador */
+        z-index: 2000;
+    }
+
+    #btn-volumen {
+        width: 32px;      /* Lo hacemos ligeramente más discreto */
+    }
+
+    /* Ocultamos el logo superior en mobile para limpiar la pantalla */
+    .logo-mundial-global {
+        display: none;
+    }
+}
+}
 }
