@@ -40,6 +40,8 @@ const bancoPreguntas = [
     { q:"¿Cuál fue el máximo goleador de 2006?", a:"Miroslav Klose", options:["Ronaldo","Miroslav Klose","Thierry Henry"], hintText:"El inicio de la leyenda del máximo goleador histórico.", exp:"Klose marcó 5 goles en ese torneo.", link: "https://www.milenio.com/deportes/futbol/miroslav-klose-el-maximo-goleador-de-los-mundiales" }
   ]
 ];
+let countdown; // Aquí guardaremos el intervalo
+let tiempoRestante = 15;
 /* --- CONFIGURACIÓN DE PORTEROS POR NIVEL --- */
 const porterosPorNivel = {
     1: { // Memo Ochoa
@@ -48,24 +50,24 @@ const porterosPorNivel = {
         enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoaenojado.png"
     },
     2: { // Jorge Campos
-        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposalegre.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposenojado.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecampos.png"
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/campos.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/camposalegre.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/camposenojado.png"
     },
-    3: { // Jorge Campos se queda el resto de niveles (o añade más aquí)
-        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposalegre.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecampos.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposenojado.png"
+    3: { // Buffon
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/buffon.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/buffonalegre.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/buffonenojado.png"
     },
-    4: {
-        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposalegre.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecampos.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposenojado.png"
+    4: { // Oliver
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/oliver.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/oliveralegre.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/oliverenojado.png"
     },
-    5: {
-        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposalegre.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecampos.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/jorgecamposenojado.png"
+    5: {  // Yashin
+        normal: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Yashin.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Yashin.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Yashinenojado.png"
     }
 };
 
@@ -198,31 +200,32 @@ document.querySelectorAll('.btn-back-main').forEach(btn => {
     };
 
 document.querySelector('.btn-jugar').onclick = () => {
-        // --- NUEVO: Ocultamos el recuadro verde y sus botones de inmediato ---
-        modInst.classList.remove('active'); 
+    // 1. Buscamos el balón que ya está en el menú
+    const elBalon = document.querySelector('.balon');
+    
+    // 2. Le agregamos la clase de la animación
+    elBalon.classList.add('disparo-inicial');
+    
+    // 3. Ocultamos el resto del menú suavemente
+    document.querySelector('.overlay').style.opacity = '0';
+    document.querySelector('.titulo-container').style.opacity = '0';
+    document.querySelector('.main-buttons-container').style.opacity = '0';
+    
+    // 4. Sonidos
+    audioMenu.pause(); 
+    if (!mute) audioEstadio.play().catch(() => {});
+    
+    // 5. Esperamos a que el balón termine de volar para cambiar de pantalla
+    setTimeout(() => {
+        document.querySelector('.menu').style.display = 'none';
+        document.getElementById('game-ui').style.display = 'block';
+        document.getElementById('question-container').style.display = 'block'; 
+        document.getElementById('ball').style.display = 'block'; 
+        document.getElementById('keeper').style.display = 'block';
         
-        const startBall = document.createElement("div");
-        startBall.id = "start-ball"; 
-        document.body.appendChild(startBall);
-        
-        setTimeout(() => startBall.classList.add("shoot"), 50);
-        
-        audioMenu.pause(); 
-        if (!mute) audioEstadio.play().catch(() => {});
-        
-        document.querySelector('.logo-mundial-global').classList.add('oculto');
-        
-        setTimeout(() => {
-            document.querySelector('.menu').style.display = 'none';
-            document.getElementById('game-ui').style.display = 'block';
-            qContainer.style.display = 'block'; 
-            ball.style.display = 'block'; 
-            keeper.style.display = 'block';
-            iniciarJuego(); 
-            startBall.remove();
-        }, 600);
-    };
-
+        iniciarJuego(); 
+    }, 700); // Duración de la animación
+};
     function iniciarJuego() { nivel = 1; goles = 0; vidas = 3; cargarNivel(); }
 
     function cargarNivel() {
@@ -274,22 +277,54 @@ document.querySelector('.btn-jugar').onclick = () => {
         tiroRealizado = false; // Reset de variable
         actualizarMarcador();  // <--- AGREGA ESTO AQUÍ para limpiar el gris al iniciar la pregunta
         qContainer.style.opacity = "1";
+    iniciarCronometro(); // <--- AGREGAR AQUÍ
     }
+    
+    
+    /* ===========================================================
+      CRONOMETRO
+       =========================================================== */
+    function iniciarCronometro() {
+    tiempoRestante = 15;
+    const timerDisplay = document.getElementById('timer-val');
+    const timerBox = document.getElementById('timer-box');
+    
+    timerDisplay.textContent = tiempoRestante;
+    timerDisplay.style.color = "#ffeb3b"; // Reset a amarillo
+    
+    clearInterval(countdown);
+
+    countdown = setInterval(() => {
+        tiempoRestante--;
+        timerDisplay.textContent = tiempoRestante;
+
+        // Efecto visual de urgencia
+        if (tiempoRestante <= 5) {
+            timerDisplay.style.color = "#ff4444"; // Cambia a rojo
+        }
+
+        if (tiempoRestante <= 0) {
+            clearInterval(countdown);
+            // Si se acaba el tiempo, forzamos el tiro fallido
+            procesarTiro(false, 1); 
+        }
+    }, 1000);
+}
 
     /* ===========================================================
        6. LÓGICA DE TIRO Y ANIMACIÓN (CON MEMO OCHOA)
        =========================================================== */
-   function procesarTiro(esCorrecto, i) {
-        if (bloqueado) return;
+ function procesarTiro(esCorrecto, i) {
+    if (bloqueado) return;
     bloqueado = true;
-    
-    // Aquí solo pausamos audio y lanzamos silbato
+
+    clearInterval(countdown); // <--- AGREGAR AQUÍ: Detiene el reloj al responder
+
     audioEstadio.pause();
     audioSilbato.currentTime = 0; 
     audioSilbato.play();
     
     qContainer.style.opacity = "0";
-    // El marcador se actualizará dentro de 600ms, cuando inicie la animación
     setTimeout(() => ejecutarAnimacionTiro(esCorrecto, i), 600);
 }
 

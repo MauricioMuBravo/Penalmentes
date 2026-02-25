@@ -22,6 +22,27 @@ body {
     overflow: hidden;
     font-family: 'Arial Black', sans-serif;
 }
+#start-ball {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translateX(-50%);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+#start-ball.shoot {
+    animation: kickBall 0.6s ease-in forwards;
+}
+@keyframes kickBall {
+    0% { bottom: -100px; transform: translateX(-50%) scale(1) rotate(0deg); }
+    100% { bottom: 120%; transform: translateX(-50%) scale(0.2) rotate(720deg); }
+}
 
 /* =========================================================
    2. CONTROLES GLOBALES Y LOGOS
@@ -92,7 +113,7 @@ body {
 }
 
 /* =========================================================
-   4. INTERFAZ SUPERIOR (PREGUNTAS Y EXPLICACIÓN)
+   4. INTERFAZ DE PREGUNTAS (PREGUNTA, LUPA, TIMER)
    ========================================================= */
 #question-container, 
 .explanation-content {
@@ -111,50 +132,50 @@ body {
     border: 4px solid var(--verde-milenio);
 }
 
-/* Ajuste de botones para que todos midan lo mismo */
-.options-grid { 
-    display: grid;
-    /* Forzamos 3 columnas iguales siempre, sin importar el dispositivo */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 8px; /* Espacio reducido para mobile */
-    margin-top: 15px;
-    width: 100%;
+#question {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #333;
 }
 
-.option { 
-    width: 100%;
-    height: 45px; /* Altura fija para mantener la forma */
-    padding: 2px 5px; 
-    background: #1c5d2b; 
-    color: white; 
-    border: 2px solid #0e3318; 
-    border-radius: 12px; 
-    cursor: pointer; 
-    /* Fuente ajustada para que quepan nombres largos en mobile */
-    font-size: 0.7rem; 
-    font-weight: bold;
-    font-family: 'Arial Black', sans-serif;
-    transition: all 0.2s;
-    box-shadow: 0 4px 0 #0e3318; 
-    
+/* Fila de Ayuda: Lupa y Cronómetro */
+.pista-timer-row {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    gap: 15px; /* Espacio entre la lupa y el reloj */
+    margin-bottom: 10px;
+}
+
+#btn-lupa {
+    width: 45px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#btn-lupa:hover { transform: scale(1.1); }
+
+#timer-box {
+    background: #1c5d2b; /* Verde Milenio */
+    color: white;
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 14px;
+    border: 2px solid white;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    min-width: 100px;
     text-align: center;
-    line-height: 1;
-    overflow: hidden; /* Evita que el texto rompa el botón */
 }
 
-/* Forzamos que el tercer botón ocupe solo su celda */
-.option:last-child {
-    grid-column: span 1 !important; 
+#timer-val {
+    color: #ffeb3b; /* Amarillo para el número */
 }
 
-.option:active { 
-    transform: translateY(2px); 
-    box-shadow: 0 1px 0 #0e3318; 
-}
+/* Sección de Pista */
 #btn-pista { width: 35px; cursor: pointer; margin-top: 5px; }
+
 #hint-text {
     background: #eeeeee;
     padding: 8px;
@@ -163,6 +184,39 @@ body {
     margin-top: 8px;
     display: none;
     color: #333;
+}
+
+/* Opciones de Respuesta */
+.options-grid { 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 8px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.option { 
+    width: 100%;
+    height: 45px;
+    background: #1c5d2b; 
+    color: white; 
+    border: 2px solid #0e3318; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    font-size: 0.7rem; 
+    font-weight: bold;
+    font-family: 'Arial Black', sans-serif;
+    transition: all 0.2s;
+    box-shadow: 0 4px 0 #0e3318; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.option:active { 
+    transform: translateY(2px); 
+    box-shadow: 0 1px 0 #0e3318; 
 }
 
 /* =========================================================
@@ -215,9 +269,29 @@ body {
 .logo-aficion-main { position: absolute; top: 15px; left: 15px; width: 150px; z-index: 2; }
 .copa { position: absolute; bottom: 0; left: 0; width: 15vw; z-index: 2; }
 .balon { position: absolute; bottom: 20px; right: 20px; width: 18vw; z-index: 2; }
+/* Animación de disparo para el balón del menú */
+.balon.disparo-inicial {
+    animation: kickBallMenu 0.7s ease-in forwards;
+    z-index: 5000;
+}
+
+@keyframes kickBallMenu {
+    0% {
+        bottom: 20px;
+        right: 20px;
+        transform: scale(1) rotate(0deg);
+    }
+    100% {
+        bottom: 120%; /* Sale por arriba */
+        right: 50%;   /* Se centra mientras sube */
+        transform: scale(0.2) rotate(720deg);
+        filter: blur(2px);
+        opacity: 0;
+    }
+}
 
 /* =========================================================
-   6. CAMPO DE JUEGO
+   6. CAMPO DE JUEGO (BALÓN Y PORTERO)
    ========================================================= */
 #ball {
     position: absolute;
@@ -303,29 +377,12 @@ body {
 }
 
 /* =========================================================
-   AJUSTE ESPECÍFICO PARA MOBILE (Sobreescribe lo anterior)
-   ========================================================= */
-@media (max-width: 768px) {
-    .scoreboard-container {
-        width: 150px; /* Más pequeño en celular */
-        bottom: 10px;
-        right: 10px;
-    }
-    
-    .stat-label { font-size: 0.5rem; }
-    .stat-value { font-size: 1rem; }
-    
-    #tiros-icons img, #vidas-icons img {
-        width: 10px; /* Iconos más chiquitos en mobile */
-    }
-}
-/* =========================================================
-   8. MODALES Y CRÉDITOS (CORREGIDO)
+   8. MODALES E INSTRUCCIONES
    ========================================================= */
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.1); 
+    background: rgba(0, 0, 0, 0.7); 
     display: none;
     justify-content: center;
     align-items: center;
@@ -334,33 +391,14 @@ body {
 
 .modal.active { display: flex; }
 
-/* Modal Instrucciones */
-.modal-wrapper {
+.modal-wrapper, .modal-wrapper-creditos {
     position: relative;
     width: 85vw;
     max-width: 600px;
 }
 
-.bg-instrucciones { width: 100%; height: auto; display: block; }
+.bg-instrucciones, .bg-panel-creditos { width: 100%; display: block; }
 
-/* Modal Créditos */
-.modal-wrapper-creditos {
-    position: relative;
-    width: 85vw;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.bg-panel-creditos { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
-    border-radius: 15px;
-}
-
-/* Botones laterales */
 .modal-buttons, .modal-buttons-creditos {
     position: absolute;
     top: 5%;
@@ -370,24 +408,50 @@ body {
     gap: 12px;
 }
 
-.btn-side { 
-    width: 50px; 
-    cursor: pointer; 
-    transition: transform 0.2s; 
-}
+.btn-side { width: 50px; cursor: pointer; transition: 0.2s; }
 .btn-side:hover { transform: scale(1.1); }
 
-/* Decorativos créditos */
-.modal-copa-creditos { position: absolute; bottom: -10px; left: -20px; width: 70px; }
-.modal-balon-creditos { position: absolute; top: -10px; right: -20px; width: 50px; }
-.modal-aficion-creditos { position: absolute; top: 10px; left: 10px; width: 90px; }
-.ocultar-temporal {
-    display: none !important;
-}
 /* =========================================================
-   9. RESPONSIVE MÓVIL
+   9. RESPONSIVE MÓVIL (TABLETS Y CELULARES)
    ========================================================= */
 @media (max-width: 768px) {
+    #question-container {
+        width: 95%;
+        padding: 12px;
+        top: 15px;
+    }
+
+    .options-grid {
+        grid-template-columns: repeat(3, 1fr) !important; 
+        gap: 5px;
+    }
+
+    .option {
+        height: 40px; 
+        font-size: 0.6rem; 
+    }
+
+    .scoreboard-container {
+        width: 140px;
+        bottom: 10px;
+        right: 5px;
+    }
+
+    .stat-value { font-size: 1rem; }
+    #tiros-icons img, #vidas-icons img { width: 10px; }
+
+    .global-controls {
+        top: auto;
+        bottom: 105px;
+        right: 15px;
+    }
+
+    #btn-volumen { width: 32px; }
+    .logo-mundial-global { display: none; }
+
+    .titulo-container { width: 80vw; }
+    .btn-jugar { width: 180px; }
+    
     .modal-buttons, .modal-buttons-creditos {
         right: 0;
         top: auto;
@@ -396,66 +460,16 @@ body {
         width: 100%;
         justify-content: center;
     }
-    
-    .titulo-container { width: 80vw; }
-    .btn-jugar { width: 180px; }
-    #keeper { width: 200px; bottom: 190px; }
-}
-
-
-/* Animación Start Ball */
-#start-ball {
-    position: fixed;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    width: 100px;
-    height: 100px;
-    background: url('https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png') no-repeat center/contain;
-    z-index: 3000;
-    transition: 0.8s ease-in;
-}
-
-#start-ball.shoot {
-    transform: translate(-50%, 50%) scale(20);
-    opacity: 0;
-}
-@media (max-width: 768px) {
-    .options-grid {
-        /* Mantenemos las 3 columnas en lugar de pasar a 1 */
-        grid-template-columns: repeat(3, 1fr) !important; 
-        gap: 5px;
+    @media (max-width: 768px) {
+    .pista-timer-row {
+        gap: 8px;
     }
-
-    .option {
-        height: 40px; 
-        /* Tamaño de fuente mínimo para asegurar que no se desborde */
-        font-size: 0.65rem; 
-        border-radius: 10px;
-    }
-
-    #question-container {
-        width: 95%;
-        padding: 12px;
-        top: 15px;
+    #timer-box {
+        font-size: 12px;
+        padding: 4px 10px;
+        min-width: 85px;
     }
 }
-@media (max-width: 768px) {
-    .scoreboard-container {
-        /* Lo bajamos de nuevo pero con dimensiones reducidas */
-        top: auto; 
-        bottom: 10px; /* Pegado abajo */
-        right: 5px;   /* Pegado a la derecha */
-        width: 140px; /* Mucho más pequeño para no llegar al centro */
-        z-index: 70;
-    }
-
-    .bg-marcador-img {
-        width: 100%;
-        /* Opcional: puedes darle un poco de transparencia para ver el campo detrás */
-        opacity: 0.9;
-    }
-
     .stats-overlay {
         padding: 5% 10%; /* Menos espacio interno */
         font-size: 0.6rem; /* Texto pequeño y elegante */
@@ -474,22 +488,4 @@ body {
         left: 50%;
         transform: translateX(-50%);
     }
-    @media (max-width: 768px) {
-    .global-controls {
-        top: auto;        /* Cancela la posición de arriba */
-        bottom: 105px;    /* Lo bajamos más (estaba en 180px) */
-        right: 15px;      /* Un poco más a la derecha para alinearse con el marcador */
-        z-index: 2000;
-    }
-
-    #btn-volumen {
-        width: 32px;      /* Lo hacemos ligeramente más discreto */
-    }
-
-    /* Ocultamos el logo superior en mobile para limpiar la pantalla */
-    .logo-mundial-global {
-        display: none;
-    }
-}
-}
 }
