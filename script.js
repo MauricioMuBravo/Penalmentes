@@ -374,30 +374,31 @@ function finalizarAccion(esCorrecto) {
     const txtExp = document.getElementById('explanation-text');
     txtExp.innerHTML = "";
 
-    // --- AQUÍ SUCEDE EL CAMBIO QUE BUSCAS ---
-    // Justo cuando aparece el modal, el portero vuelve al centro y cambia de cara
+    // 1. ELIMINAMOS EL BALÓN DE LA VISTA
+    // Esto evita que se vea el balón "encimado" cuando el portero vuelve al centro
+    ball.style.display = 'none'; 
+
+    // 2. El portero vuelve al centro suavemente
     keeper.style.transition = "transform 0.7s ease-in-out";
-    keeper.style.transform = "translateX(-50%) rotate(0deg)"; // Regresa al centro
+    keeper.style.transform = "translateX(-50%) rotate(0deg)"; 
     
     if (esCorrecto) {
         goles++; 
         audioGol.play(); 
         lanzarCelebracionGol();
-        keeper.src = KEEPER_ENOJADO; // Expresión de enojo en el centro
+        keeper.src = KEEPER_ENOJADO; // El portero se enoja en el centro
         txtExp.innerHTML = `<h2 style="color:#1c5d2b">¡GOOOL!</h2>`;
     } else {
         vidas--; 
         audioFallo.play();
-        keeper.src = KEEPER_ALEGRE; // Expresión de alegría en el centro
-        ball.style.display = 'none'; 
+        keeper.src = KEEPER_ALEGRE; // El portero celebra la atajada
         txtExp.innerHTML = `<h2 style="color:#d32f2f">¡ATAJADA!</h2>`;
     }
 
-    // Resto de la lógica del modal...
+    // --- Lógica de contenido del modal ---
     audioEstadio.play().catch(() => {});
     txtExp.innerHTML += `<p style="margin:15px 0; line-height:1.4;">${preguntaActual.exp}</p>`;
 
-    // (Botones LEER MÁS y SIGUIENTE se mantienen igual que tu código)
     const btnCont = document.createElement('div');
     btnCont.style.cssText = "display:flex; gap:10px; justify-content:center; margin-top:15px;";
     btnCont.innerHTML = `
@@ -406,13 +407,16 @@ function finalizarAccion(esCorrecto) {
     txtExp.appendChild(btnCont);
 
     document.getElementById('btn-milenio-din').onclick = () => window.open(preguntaActual.link, '_blank');
+    
     document.getElementById('btn-next-din').onclick = () => {
         modalExp.classList.remove('active');
-        // Reset para la siguiente pregunta
-        keeper.src = KEEPER_NORMAL;
-        ball.style.display = "block";
+        
+        // IMPORTANTE: Aquí restauramos el balón para la siguiente ronda
+        ball.style.display = "block"; 
         ball.style.transition = "none";
         ball.style.transform = "translateX(-50%)";
+        
+        keeper.src = KEEPER_NORMAL;
         
         if (vidas <= 0) {
             mostrarFinJuego("GAME OVER", false);
@@ -506,4 +510,5 @@ function finalizarAccion(esCorrecto) {
             </div>`;
         document.getElementById('explanation').classList.add('active');
     }
+
 });
