@@ -506,7 +506,7 @@ function finalizarAccion(esCorrecto) {
             <p style="margin-bottom: 20px;">Marcaste <strong>${goles}</strong> goles.</p>
             <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
                 <button onclick="location.reload()" style="padding: 12px 25px; background: #1c5d2b; color: white; border:none; border-radius:10px; cursor:pointer; font-family: 'Arial Black'; width: 200px;">REINTENTAR</button>
-                <button onclick="window.open('https://www.milenio.com/deportes', '_blank')" style="padding: 12px 25px; background: #cc0000; color: white; border:none; border-radius:10px; cursor:pointer; font-family: 'Arial Black'; width: 200px;">SALIR</button>
+                <button onclick="window.open('https://www.milenio.com/deportes', '_blank')" style="padding: 12px 25px; background: #cc0000; color: white; border:none; border-radius:10px; cursor:pointer; font-family: 'Arial Black'; width: 200px;">IR A SITIO WEB</button>
             </div>`;
         document.getElementById('explanation').classList.add('active');
     }
