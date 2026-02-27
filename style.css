@@ -16,11 +16,15 @@
 }
 
 body {
-    background: url("https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/mundialitofondo4.png") center/cover no-repeat fixed;
-    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-image: url("https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100vh;
-    overflow: hidden;
-    font-family: 'Arial Black', sans-serif;
+    width: 100%;
 }
 #start-ball {
     position: fixed;
@@ -84,7 +88,7 @@ body {
    ========================================================= */
 .valla-publicitaria {
     position: absolute;
-    top: 55.5%;
+    top: 44.5%;
     left: 0;
     width: 100vw;
     height: 75px;
@@ -295,18 +299,18 @@ body {
    ========================================================= */
 #ball {
     position: absolute;
-    bottom: 70px;
+    bottom: 30px;
     left: 50%;
-    width: 60px;
+    width: 30px;
     transform: translateX(-50%);
     z-index: 20;
 }
 
 #keeper {
     position: absolute;
-    bottom: 200px; /* Posición base en PC */
+    bottom: 280px; /* Posición base en PC */
     left: 50%;
-    width: 240px;  /* Tamaño grande para web */
+    width: 150px;  /* Tamaño grande para web */
     transform: translateX(-50%);
     z-index: 15;
     transition: transform 0.4s ease-out;
@@ -492,7 +496,24 @@ body {
     }
     @media (max-width: 768px) {
     #keeper {
-        width: 200px;  /* Más pequeño para que no cubra toda la portería en el cel */
-        bottom: 190px; /* Bajamos un poco la posición para que coincida con la perspectiva */
+        width: 170px;  /* Más pequeño para que no cubra toda la portería en el cel */
+        bottom: 300px; /* Bajamos un poco la posición para que coincida con la perspectiva */
     }
+        @media (max-width: 767px) {
+    body {
+        background-image: url("https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoMobile.png");
+        /* En mobile a veces es mejor 'contain' o ajustar la posición si el diseño es vertical */
+        background-size: cover; 
+        background-position: center bottom;
+    }
+            .valla-publicitaria {
+        top: 35.5%; /* Este valor hace que la valla "pise" el pasto en el fondo vertical */
+        height: 45px; /* Reducimos la altura para que no se vea gigante en el cel */
+    }
+
+    .logo-valla {
+        height: 17px; /* Logos más sutiles */
+        margin: 0 40px; /* Menos espacio entre logos para que se vean más en pantalla chica */
+    }
+}
 }
