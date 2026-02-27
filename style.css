@@ -299,9 +299,9 @@ body {
    ========================================================= */
 #ball {
     position: absolute;
-    bottom: 30px;
+    bottom: 50px;
     left: 50%;
-    width: 30px;
+    width: 50px;
     transform: translateX(-50%);
     z-index: 20;
 }
