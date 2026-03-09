@@ -16,35 +16,35 @@
             </div>
         </header>
 
-      <main id="menu-inicio">
-    <div class="center-content">
-        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGOMUNDIALITOM.png" class="main-logo" alt="Mundialito Milenio">
-        <div class="container-btn-jugar">
-            <button id="btn-jugar">
-                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/JUGAR.png" alt="Jugar">
-            </button>
-        </div>
-    </div>
-</main>
+        <main id="menu-inicio">
+            <div class="center-content">
+                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGOMUNDIALITOM.png" class="main-logo" alt="Mundialito Milenio">
+                <div class="container-btn-jugar">
+                    <button id="btn-jugar">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/JUGAR.png" alt="Jugar">
+                    </button>
+                </div>
+            </div>
+        </main>
 
         <section id="campo-juego" style="display: none;">
             <div class="escena-penal">
                 <div id="trivia-container">
-                  <div class="trivia-header-row">
-    <div class="pregunta-card">
-        <p id="pregunta-texto">¿Cuál fue la primera selección en ganar dos Copas del Mundo consecutivas?</p>
-    </div>
-    <div class="timer-pista-container">
-        <div class="timer-badge">
-            <span class="timer-label">T: <span id="cronometro">12</span> s</span>
-        </div>
-        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PISTA.png" id="btn-pista" class="pista-icon" alt="Pista">
-    </div>
-</div>
+                    <div class="trivia-header-row">
+                        <div class="pregunta-card">
+                            <p id="pregunta-texto">¿Cargando pregunta...?</p>
+                        </div>
+                        <div class="timer-pista-container">
+                            <div class="timer-badge">
+                                <span class="timer-label">T: <span id="cronometro">12</span> s</span>
+                            </div>
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PISTA.png" id="btn-pista" class="pista-icon" alt="Pista">
+                        </div>
+                    </div>
                     <div class="opciones-grid">
-                        <button class="btn-respuesta">Alemania</button>
-                        <button class="btn-respuesta">Costa de Marfil</button>
-                        <button class="btn-respuesta">Italia</button>
+                        <button class="btn-respuesta">Opcion 1</button>
+                        <button class="btn-respuesta">Opcion 2</button>
+                        <button class="btn-respuesta">Opcion 3</button>
                     </div>
                 </div>
 
@@ -53,17 +53,11 @@
 
                 <div id="hud-inferior">
                     <div class="balones-tracker">
-                      <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
+                        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
                     </div>
                     <div class="stats-box">
-                        <p>Fase 1</p>
+                        <p id="label-fase">Fase 1</p>
                         <p>Vidas: <span class="heart-icon">❤❤❤</span></p>
                         <p>Goles: <span id="goles-count">0</span></p>
                     </div>
@@ -100,28 +94,78 @@
                 </div>
             </div>
         </div>
- <div id="modal-pista" class="modal-pista-overlay" style="display: none;">
-    <div class="pista-content">
-        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/MODALPISTA.png" class="pista-bg">
-        <div class="pista-info-container">
-            <p id="pista-texto-contenido">Cargando...</p>
-            
-            <div class="pista-botones-overlay">
-                <a href="#" id="btn-ver-nota" target="_blank" class="area-click-pista">
-                    <span class="btn-pista-label">VER MÁS</span>
-                </a>
-                <button id="btn-volver-juego" class="area-click-pista">
-                    <span class="btn-pista-label">VOLVER</span>
-                </button>
+
+        <div id="modal-pista" class="modal-pista-overlay" style="display: none;">
+            <div class="pista-content">
+                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/MODALPISTA.png" class="pista-bg">
+                <div class="pista-info-container">
+                    <p id="pista-texto-contenido">Cargando...</p>
+                    <div class="pista-botones-overlay">
+                        <a href="#" id="btn-ver-nota" target="_blank" class="area-click-pista">
+                            <span class="btn-pista-label">VER MÁS</span>
+                        </a>
+                        <button id="btn-volver-juego" class="area-click-pista">
+                            <span class="btn-pista-label">VOLVER</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div id="modal-feedback" class="modal-juego" style="display: none;">
+            <img id="portero-reaccion" src="" alt="Portero Reacción">
+            <div class="feedback-container">
+                <div id="feedback-titulo-wrapper">
+                     <img id="feedback-titulo" src="" alt="Resultado">
+                </div>
+                <div class="globo-explicacion">
+                    <p id="feedback-texto">Aquí va la respuesta detallada.</p>
+                </div>
+                <div class="feedback-actions">
+                    <button id="btn-saber-mas" class="btn-oval btn-verde">Saber más</button>
+                    <button id="btn-siguiente" class="btn-oval btn-gris">Siguiente</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-fase" class="modal-pista-overlay" style="display: none;">
+            <div class="pista-content">
+                <img id="fase-bg" src="" class="pista-bg">
+                <div id="fase-texto-contenido">¡EXCELENTE JUGADA!</div>
+                <div class="fase-botones-overlay">
+                    <button id="btn-continuar-fase" class="area-click-fase">
+                        <span class="btn-pista-label">CONTINUAR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+<div id="modal-puntos" class="modal-pista-overlay" style="display: none;">
+    <div class="pista-content final-screen-content">
+        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png" class="pista-bg" alt="Fondo Final">
+        
+        <h1 id="puntos-titulo-final" class="titulo-final-rojo">ELIMINADO</h1>
+
+        <div class="bocadillo-puntuacion">
+            <p>Marcaste: <span id="final-goles-count">0</span> goles</p>
+            <p>Ganaste: <span id="final-puntos-count">0</span> puntos</p>
+        </div>
+
+        <div class="final-botones-container">
+            <button id="btn-puntos-copa" class="btn-final btn-final-verde">Copa del<br>Mundo</button>
+            <button id="btn-puntos-compartir" class="btn-final btn-final-verde">Compartir</button>
+            <button id="btn-puntos-reintentar" class="btn-final btn-final-verde">Reintentar</button>
+        </div>
+
+        <img id="portero-final-img" src="" alt="Resultado Final" class="portero-final-pos">
     </div>
 </div>
 
         <audio id="bg-music" loop>
             <source src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3" type="audio/mpeg">
         </audio>
-    </div>
+    </div> 
+
     <script src="script.js"></script>
 </body>
 </html>
