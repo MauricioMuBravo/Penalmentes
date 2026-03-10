@@ -69,7 +69,7 @@
             <div class="modal-wrapper">
                 <div class="modal-content-img">
                     <span class="close-modal">&times;</span>
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/COMOJUGAR.png" class="img-instrucciones">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/COMOJUGAR.png" class="img-instrucciones" alt="Cómo jugar">
                 </div>
                 <div class="side-menu-modal">
                     <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" class="side-icon btn-audio-sync">
@@ -84,7 +84,7 @@
             <div class="modal-wrapper">
                 <div class="modal-content-img">
                     <span class="close-modal">&times;</span>
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CREDITOS.png" class="img-instrucciones">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CREDITOS.png" class="img-instrucciones" alt="Créditos">
                 </div>
                 <div class="side-menu-modal">
                     <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" class="side-icon btn-audio-sync">
@@ -97,7 +97,7 @@
 
         <div id="modal-pista" class="modal-pista-overlay" style="display: none;">
             <div class="pista-content">
-                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/MODALPISTA.png" class="pista-bg">
+                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/MODALPISTA.png" class="pista-bg" alt="Fondo Pista">
                 <div class="pista-info-container">
                     <p id="pista-texto-contenido">Cargando...</p>
                     <div class="pista-botones-overlay">
@@ -130,7 +130,7 @@
 
         <div id="modal-fase" class="modal-pista-overlay" style="display: none;">
             <div class="pista-content">
-                <img id="fase-bg" src="" class="pista-bg">
+                <img id="fase-bg" src="" class="pista-bg" alt="Fondo Fase">
                 <div id="fase-texto-contenido">¡EXCELENTE JUGADA!</div>
                 <div class="fase-botones-overlay">
                     <button id="btn-continuar-fase" class="area-click-fase">
@@ -140,32 +140,50 @@
             </div>
         </div>
         
-<div id="modal-puntos" class="modal-pista-overlay" style="display: none;">
-    <div class="pista-content final-screen-content">
-        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png" class="pista-bg" alt="Fondo Final">
-        
-        <h1 id="puntos-titulo-final" class="titulo-final-rojo">ELIMINADO</h1>
-
-        <div class="bocadillo-puntuacion">
-            <p>Marcaste: <span id="final-goles-count">0</span> goles</p>
-            <p>Ganaste: <span id="final-puntos-count">0</span> puntos</p>
+        <div id="modal-puntos" class="modal-pista-overlay" style="display: none;">
+            <div class="final-screen-content">
+                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png" class="pista-bg" alt="Fondo Final">
+                <img id="puntos-titulo-img" src="" class="titulo-final-asset" alt="Resultado">
+                <div class="bocadillo-puntuacion">
+                    <p>Marcaste: <span id="final-goles-count">0</span> goles</p>
+                    <p>Ganaste: <span id="final-puntos-count">0</span> puntos</p>
+                </div>
+                <div class="final-botones-container">
+                    <button id="btn-puntos-copa" class="btn-final-verde">Copa del<br>Mundo</button>
+                    <button id="btn-puntos-compartir" class="btn-final-verde">Compartir</button>
+                    <button id="btn-puntos-reintentar" class="btn-final-verde">Reintentar</button>
+                </div>
+                <img id="portero-final-img" src="" class="portero-final-pos" alt="Portero Final">
+            </div>
         </div>
 
-        <div class="final-botones-container">
-            <button id="btn-puntos-copa" class="btn-final btn-final-verde">Copa del<br>Mundo</button>
-            <button id="btn-puntos-compartir" class="btn-final btn-final-verde">Compartir</button>
-            <button id="btn-puntos-reintentar" class="btn-final btn-final-verde">Reintentar</button>
+ <div id="modal-pasaste" class="modal-pista-overlay" style="display: none;">
+    <div class="final-screen-content es-ganador">
+        <img id="asset-titulo-ronda" src="" class="titulo-fase-superior" alt="Ronda">
+
+        <div class="contenedor-puntos-verde">
+            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png" class="puntos-bg-img">
+            
+            <div class="textos-encima-puntos">
+                <p id="texto-marcastes-ganador">MARCASTE: 0 GOLES</p>
+                <p id="texto-ganaste-ganador">GANASTE: 0 PUNTOS</p>
+            </div>
+
+            <div class="final-botones-container-ganador">
+                <button class="btn-invisible" onclick="irACopa()">Copa del Mundo</button>
+                <button class="btn-invisible" onclick="compartir()">Compartir</button>
+                <button id="btn-avanzar-ronda" class="btn-invisible">Avanza</button>
+            </div>
         </div>
 
-        <img id="portero-final-img" src="" alt="Resultado Final" class="portero-final-pos">
+        <img id="portero-pasaste-fase" src="" class="portero-final-pos-ganador" alt="Portero">
     </div>
 </div>
 
         <audio id="bg-music" loop>
             <source src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3" type="audio/mpeg">
         </audio>
-    </div> 
-
-    <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    </div> <script src="script.js"></script>
 </body>
 </html>
