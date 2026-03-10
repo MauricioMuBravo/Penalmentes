@@ -440,7 +440,7 @@ position: absolute;
     50% { transform: translateY(-10px); }
 }
 /* --- 9. RESPONSIVE --- */
-@media (max-width: 480px) {
+@media (max-width: 380px) {
     .main-logo { width: 310px; }
     .logo-26 { height: 65px; }
     
