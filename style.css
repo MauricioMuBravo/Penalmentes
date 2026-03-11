@@ -64,6 +64,14 @@ header {
 #btn-jugar:active img {
     transform: scale(0.95);
 }
+.btn-puntos-milenio {
+    margin-top: 10px; /* Separa un poco el botón de la flecha de atrás */
+    transition: transform 0.3s ease;
+}
+
+.btn-puntos-milenio:hover {
+    transform: scale(1.15); /* Crece un poco más al pasar el mouse para resaltar */
+}
 
 /* --- 3. CAMPO DE JUEGO Y TRIVIA --- */
 #campo-juego { 
