@@ -1,5 +1,6 @@
 // --- 1. CONFIGURACIÓN Y ASSETS ---
 const audioIntro = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3");
+audioIntro.loop = true;
 const audioEstadio = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/gente1.mp3");
 const audioTiro = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/tiro.mp3");
 const audioFallo = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/fallo.mp3");
@@ -8,6 +9,12 @@ const audioSilbato = new Audio("https://cdnpublicidad.milenio.com/2025/Publicida
 
 audioIntro.loop = true;
 audioEstadio.loop = true;
+document.addEventListener('click', () => {
+    // Si el audio está pausado Y el menú de inicio está visible
+    if (audioIntro.paused && document.getElementById('menu-inicio').style.display !== 'none') {
+        audioIntro.play().catch(e => console.log("Audio en espera de interacción"));
+    }
+}, { once: true });
 
 const iconInfoNormal = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png";
 const iconInfoActivo = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFONEG.png";
@@ -160,8 +167,10 @@ document.getElementById('btn-audio-main').onclick = function() {
 
 // --- 5. LÓGICA DEL JUEGO ---
 document.getElementById('btn-jugar').onclick = () => {
-    audioIntro.pause();
-    audioEstadio.play();
+    audioIntro.pause(); // <--- DETIENE LA INTRO
+    audioIntro.currentTime = 0; // Reinicia el tiempo para la próxima vez
+    
+    audioEstadio.play(); // Inicia el ambiente de estadio
     document.getElementById('game-container').classList.add('game-on');
     document.getElementById('menu-inicio').style.display = 'none';
     document.getElementById('campo-juego').style.display = 'flex';
@@ -229,7 +238,11 @@ function ejecutarPenal(esCorrecto) {
     const balon = document.getElementById('balon');
     const portero = document.getElementById('portero');
     
+    // 1. BAJAMOS EL VOLUMEN DEL ESTADIO PARA EL DRAMA
+    audioEstadio.volume = 0.1; // Casi silencio (puedes usar 0 si quieres silencio total)
+    
     audioSilbato.play();
+    
     setTimeout(() => {
         audioTiro.play();
         const ladoX = Math.random() > 0.5 ? "15vh" : "-15vh";
@@ -238,11 +251,23 @@ function ejecutarPenal(esCorrecto) {
         if(esCorrecto) {
             balon.style.transform = `translate(calc(-50% + ${ladoX}), -28vh)`;
             portero.classList.add(ladoX === "15vh" ? "portero-izq" : "portero-der");
-            setTimeout(() => { audioGol.play(); actualizarMarcador(true); mostrarModalResultado("GOL"); }, 500);
+            setTimeout(() => { 
+                audioGol.play(); 
+                // 2. SUBIMOS EL VOLUMEN DE GOLPE POR EL FESTEJO
+                audioEstadio.volume = 1.0; 
+                actualizarMarcador(true); 
+                mostrarModalResultado("GOL"); 
+            }, 500);
         } else {
             balon.style.transform = `translate(calc(-50% + ${ladoX}), -22vh)`;
             portero.classList.add(ladoX === "15vh" ? "portero-der" : "portero-izq");
-            setTimeout(() => { audioFallo.play(); actualizarMarcador(false); mostrarModalResultado("ATAJADA"); }, 500);
+            setTimeout(() => { 
+                audioFallo.play(); 
+                // 3. SUBIMOS EL VOLUMEN (EL PÚBLICO REACCIONA)
+                audioEstadio.volume = 1.0; 
+                actualizarMarcador(false); 
+                mostrarModalResultado("ATAJADA"); 
+            }, 500);
         }
     }, 600);
 }
@@ -316,18 +341,20 @@ document.getElementById('btn-siguiente').onclick = () => {
     }
 };
 
+// --- 5. LÓGICA DE FASES Y FINAL ---
+
 function mostrarModalPasaste() {
-    console.log("Entrando a mostrarModalPasaste...");
-    
-    if (faseActual >= 4) { // Si ya pasó la Fase 5 (índice 4)
-    mostrarPantallaCampeon();
-    return;
+    // Si acabamos de terminar la última fase (Fase 5 es índice 4)
+    if (faseActual >= 4) { 
+        mostrarPantallaCampeon();
+        return;
     }
 
     const modalPasaste = document.getElementById('modal-pasaste');
     const assetTitulo = document.getElementById('asset-titulo-ronda');
     const porteroPasaste = document.getElementById('portero-pasaste-fase');
     
+    // Assets para los títulos de transición
     const assetsRonda = [
         "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PASASAOCTAVOS.png",
         "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PASASACUARTOS.png",
@@ -342,42 +369,31 @@ function mostrarModalPasaste() {
     const pData = porterosPorFase[faseActual];
     if(porteroPasaste) porteroPasaste.src = pData.finalPierde;
     
-    // Mostramos el modal
     modalPasaste.style.display = 'flex';
 
-    // ASIGNACIÓN AL NUEVO ID QUE PUSISTE EN EL HTML
+    // Importante: Usar onclick directo para evitar acumular eventos
     const btnAvanza = document.getElementById('btn-avanzar-ronda'); 
-    
     if (btnAvanza) {
         btnAvanza.onclick = function() {
             modalPasaste.style.display = 'none';
-            
-            // 1. Avanzamos de fase y reseteamos índice de pregunta
             faseActual++;
             preguntaIndice = 0;
             
-            // 2. Limpiamos las clases 'green' y 'red' de las bolitas del HUD
+            // Limpiar los indicadores visuales (dots) para la nueva fase
             document.querySelectorAll('.dot').forEach(dot => {
                 dot.classList.remove('green', 'red');
             });
-
-            // 3. Resetear el texto de vidas (opcional, por si quieres dar 3 vidas nuevas por fase)
-            // vidas = 3; 
-            // document.querySelector('.heart-icon').innerText = "❤❤❤";
-
-            console.log("Iniciando Fase: " + (faseActual + 1));
+            
             cargarPregunta();
         };
-    } else {
-        console.error("No se encontró el botón con ID: btn-avanzar-ronda");
     }
-    function mostrarPantallaCampeon() {
+}
+
+function mostrarPantallaCampeon() {
     const modalPuntos = document.getElementById('modal-puntos');
     const imgTitulo = document.getElementById('puntos-titulo-img');
     const imgCopa = document.getElementById('portero-final-img');
-    const audioVictoria = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Gool.mp3");
 
-    // Cambiamos los assets a modo "Campeón"
     imgTitulo.src = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GANASTELMUNDIALITO.png";
     imgCopa.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/copa.png";
     
@@ -385,8 +401,8 @@ function mostrarModalPasaste() {
     document.getElementById('final-puntos-count').innerText = goles * 10;
     document.getElementById('btn-puntos-reintentar').innerText = "¡JUGAR OTRA VEZ!";
 
-    // Disparamos el audio y el confeti
-    audioVictoria.play();
+    audioEstadio.pause();
+    audioGol.play(); 
     dispararConfeti();
 
     modalPuntos.style.display = 'flex';
@@ -403,20 +419,18 @@ function dispararConfeti() {
 
     var interval = setInterval(function() {
       var timeLeft = animationEnd - Date.now();
-
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
+      if (timeLeft <= 0) return clearInterval(interval);
 
       var particleCount = 50 * (timeLeft / duration);
-      // Confeti desde los lados
       confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
       confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
     }, 250);
 }
-}
 
 function mostrarPantallaFinal(ganoMundial) {
+    audioEstadio.pause();
+    audioIntro.play();    
+    
     modalPasaste.style.display = 'none';
     modalFeedback.style.display = 'none';
 
@@ -428,21 +442,40 @@ function mostrarPantallaFinal(ganoMundial) {
     document.getElementById('final-puntos-count').innerText = goles * 10;
 
     if(ganoMundial) {
-        imgTitulo.src = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png"; 
+        // Esta parte ahora la maneja mostrarPantallaCampeon, 
+        // pero lo dejamos por si acaso hay un flujo alterno
+        imgTitulo.src = imgFinalPuntos; 
         imgPortero.src = pData.finalPierde;
         document.getElementById('btn-puntos-reintentar').innerText = "¡OTRA VEZ!";
     } else {
-        imgTitulo.src = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ELIMINADO.png";
+        imgTitulo.src = imgEliminado;
         imgPortero.src = pData.finalGana;
         document.getElementById('btn-puntos-reintentar').innerText = "REINTENTAR";
     }
     modalPuntos.style.display = 'flex';
 }
 
+// --- 6. EVENTOS DE BOTONES FINALES ---
+
 document.getElementById('btn-puntos-reintentar').onclick = () => location.reload();
 
-window.irACopa = () => { window.location.href = "https://www.milenio.com/especiales/mundial-2026"; };
-window.compartir = () => {
-    const texto = `¡Metí ${goles} goles en el Mundialito Milenio! ⚽ ¿Puedes superarme?`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(texto)}`, '_blank');
-};
+// Ir a la Copa (Ajustado al ID del HTML)
+const btnCopaFinal = document.getElementById('btn-puntos-copa'); 
+if (btnCopaFinal) {
+    btnCopaFinal.onclick = () => { 
+        window.open("https://www.milenio.com/especiales/mundial-2026", "_blank"); 
+    };
+}
+
+// Compartir (Ajustado al ID del HTML)
+const btnCompartirFinal = document.getElementById('btn-puntos-compartir');
+if (btnCompartirFinal) {
+    btnCompartirFinal.onclick = () => {
+        const texto = `¡Metí ${goles} goles en el Mundialito Milenio! ⚽ ¿Puedes superarme?`;
+        if (navigator.share) {
+            navigator.share({ title: 'Mundialito Milenio', text: texto, url: window.location.href }).catch(console.error);
+        } else {
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(texto)}`, '_blank');
+        }
+    };
+}
