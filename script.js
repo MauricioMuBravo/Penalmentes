@@ -140,6 +140,36 @@ const modalFeedback = document.getElementById('modal-feedback');
 const modalPasaste = document.getElementById('modal-pasaste');
 const modalPuntos = document.getElementById('modal-puntos');
 
+// --- LÓGICA DE AUDIO REFORZADA ---
+let isMuted = false;
+const todosLosAudios = [audioIntro, audioEstadio, audioTiro, audioFallo, audioGol, audioSilbato];
+
+function toggleMute() {
+    isMuted = !isMuted;
+    
+    // 1. Aplicamos el estado a todos los sonidos
+    todosLosAudios.forEach(a => {
+        a.muted = isMuted;
+    });
+
+    // 2. Actualizamos TODOS los iconos que tengan la clase sync o el ID principal
+    const iconosVolumen = document.querySelectorAll('#btn-audio-main, .btn-audio-sync');
+    iconosVolumen.forEach(img => {
+        img.src = isMuted ? imgSinVol : imgConVol;
+    });
+}
+
+// ESCUCHADOR GLOBAL: Detecta clics en cualquier botón de audio del juego
+document.addEventListener('click', (e) => {
+    // Si el clic fue en el ID principal O en cualquier elemento con la clase de sincronización
+    if (e.target.id === 'btn-audio-main' || e.target.classList.contains('btn-audio-sync')) {
+        toggleMute();
+    }
+});
+
+
+
+// --- GESTIÓN DE MODALES ---
 function actualizarIconosMenu(estado) {
     const btnsInfo = document.querySelectorAll('.btn-info-trigger');
     const btnsCred = document.querySelectorAll('.btn-cred-trigger');
@@ -148,22 +178,29 @@ function actualizarIconosMenu(estado) {
 }
 
 document.querySelectorAll('.btn-info-trigger').forEach(btn => {
-    btn.onclick = () => { modalCreditos.style.display = 'none'; modalInfo.style.display = 'flex'; actualizarIconosMenu('info'); };
+    btn.onclick = () => { 
+        modalCreditos.style.display = 'none'; 
+        modalInfo.style.display = 'flex'; 
+        actualizarIconosMenu('info'); 
+    };
 });
 
 document.querySelectorAll('.btn-cred-trigger').forEach(btn => {
-    btn.onclick = () => { modalInfo.style.display = 'none'; modalCreditos.style.display = 'flex'; actualizarIconosMenu('creditos'); };
+    btn.onclick = () => { 
+        modalInfo.style.display = 'none'; 
+        modalCreditos.style.display = 'flex'; 
+        actualizarIconosMenu('creditos'); 
+    };
 });
 
 document.querySelectorAll('.btn-close-trigger, .close-modal, #btn-volver-juego').forEach(btn => {
-    btn.onclick = () => { modalInfo.style.display = 'none'; modalCreditos.style.display = 'none'; modalPista.style.display = 'none'; actualizarIconosMenu('reset'); };
+    btn.onclick = () => { 
+        modalInfo.style.display = 'none'; 
+        modalCreditos.style.display = 'none'; 
+        modalPista.style.display = 'none'; 
+        actualizarIconosMenu('reset'); 
+    };
 });
-
-document.getElementById('btn-audio-main').onclick = function() {
-    const estaMuteado = !audioIntro.muted;
-    [audioIntro, audioEstadio, audioTiro, audioFallo, audioGol, audioSilbato].forEach(a => a.muted = estaMuteado);
-    this.src = estaMuteado ? imgSinVol : imgConVol;
-};
 
 // --- 5. LÓGICA DEL JUEGO ---
 document.getElementById('btn-jugar').onclick = () => {
