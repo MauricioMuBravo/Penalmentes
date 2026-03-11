@@ -147,22 +147,21 @@ const todosLosAudios = [audioIntro, audioEstadio, audioTiro, audioFallo, audioGo
 function toggleMute() {
     isMuted = !isMuted;
     
-    // 1. Aplicamos el estado a todos los sonidos
+    // Muteamos/desmuteamos todos los sonidos
     todosLosAudios.forEach(a => {
         a.muted = isMuted;
     });
 
-    // 2. Actualizamos TODOS los iconos que tengan la clase sync o el ID principal
+    // Actualizamos TODOS los iconos con la clase btn-audio-sync y el id principal
     const iconosVolumen = document.querySelectorAll('#btn-audio-main, .btn-audio-sync');
     iconosVolumen.forEach(img => {
         img.src = isMuted ? imgSinVol : imgConVol;
     });
 }
 
-// ESCUCHADOR GLOBAL: Detecta clics en cualquier botón de audio del juego
+// Delegación de eventos para que funcione dentro de modales sin "congelarse"
 document.addEventListener('click', (e) => {
-    // Si el clic fue en el ID principal O en cualquier elemento con la clase de sincronización
-    if (e.target.id === 'btn-audio-main' || e.target.classList.contains('btn-audio-sync')) {
+    if (e.target.classList.contains('btn-audio-sync') || e.target.id === 'btn-audio-main') {
         toggleMute();
     }
 });
@@ -394,9 +393,9 @@ function mostrarModalPasaste() {
     // Assets para los títulos de transición
     const assetsRonda = [
         "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PASASAOCTAVOS.png",
-        "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PASASACUARTOS.png",
-        "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PASASASEMI.png",
-        "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PASASAFINAL.png"
+        "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CUARTOS.png",
+        "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/SEMIFINALES.png",
+        "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GFINAL.png"
     ];
     
     assetTitulo.src = assetsRonda[faseActual];
