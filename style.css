@@ -74,12 +74,14 @@ header {
 }
 
 /* --- 3. CAMPO DE JUEGO Y TRIVIA --- */
-#campo-juego { 
-    flex: 1; 
-    display: none; 
-    position: relative; 
-    width: 100%; 
+/* Esto asegura que el campo de juego no se desplace cuando se abren los resultados */
+#campo-juego {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    display: none; /* Se activa con JS */
 }
 
 #trivia-container { 
@@ -123,15 +125,24 @@ header {
     display: flex; justify-content: center; align-items: flex-end; z-index: 10; pointer-events: none;    
 }
 
+#balon { 
+    position: absolute; 
+    left: 50%;
+    /* Ajuste para que se quede sobre el punto penal */
+    bottom: 11.5vh; 
+    width: clamp(50px, 8vh, 75px); 
+    transform: translateX(-50%); 
+    z-index: 20; 
+}
 #portero { 
     position: absolute; 
     left: 50%;
     /* Ajuste maestro: se mantiene a la misma distancia visual del suelo siempre */
-    bottom: clamp(150px, 32vh, 370px); 
+    bottom: 33%;
     width: clamp(160px, 22vh, 280px); 
     transform: translateX(-50%); 
     z-index: 15; 
-    transition: all 0.3s ease-out; 
+    transition: all 0.2s ease-out; 
 }
 
 /* Evitamos que el portero desaparezca o se vea mal en el feedback */
@@ -141,16 +152,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 .portero-izq { transform: translate(calc(-50% - 80px), -20px) rotate(-30deg) !important; }
 .portero-der { transform: translate(calc(-50% + 80px), -20px) rotate(30deg) !important; }
 .portero-centro { transform: translateX(-50%) translateY(-30px) scale(1.1) !important; }
-
-#balon { 
-    position: absolute; 
-    left: 50%;
-    /* El balón siempre sale desde el manchón penal visual */
-    bottom: clamp(80px, 15vh, 140px); 
-    width: clamp(50px, 8vh, 75px); 
-    transform: translateX(-50%); 
-    z-index: 20; 
-}
 
 /* --- 5. HUD INFERIOR --- */
 #hud-inferior {
