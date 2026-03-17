@@ -59,7 +59,7 @@ header {
 #menu-inicio { flex: 1; display: flex; justify-content: center; align-items: center; }
 .center-content { display: flex; flex-direction: column; align-items: center; }
 .main-logo { width: 600px; max-width: 85vw; height: auto; }
-#btn-jugar { background: none; border: none; cursor: pointer; margin-top: -30px; z-index: 10; }
+#btn-jugar { background: none; border: none; cursor: pointer; margin-top: -10px; z-index: 10; }
 #btn-jugar img { width: 180px; transition: transform 0.2s ease; }
 #btn-jugar:active img {
     transform: scale(0.95);
