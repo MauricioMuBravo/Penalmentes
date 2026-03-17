@@ -570,6 +570,29 @@ position: absolute;
 }
 /* --- 9. RESPONSIVE (MÓVIL) --- */
 @media (max-width: 380px) {
+/* --- AJUSTE DE LOGO Y BOTÓN EN MÓVIL --- */
+    
+    /* 1. Aseguramos que el contenedor tenga espacio */
+    .center-content {
+        gap: 20px !important; /* Añade espacio automático entre logo y botón */
+    }
+
+    /* 2. Quitamos el margen negativo que lo encimaba */
+    #btn-jugar {
+        margin-top: 10px !important; /* Cambiamos -30px por 10px positivos */
+    }
+
+    /* 3. Ajustamos el tamaño del logo si es necesario para que no empuje todo abajo */
+    .main-logo {
+        width: 280px !important; 
+        margin-bottom: 0 !important;
+    }
+
+    /* 4. Tamaño del botón jugar */
+    #btn-jugar img {
+        width: 150px !important;
+    }
+}
     /* Ajustes generales de UI */
     .main-logo { width: 310px; }
     .logo-26 { height: 65px; }
