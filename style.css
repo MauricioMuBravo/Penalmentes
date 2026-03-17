@@ -125,14 +125,13 @@ header {
     display: flex; justify-content: center; align-items: flex-end; z-index: 10; pointer-events: none;    
 }
 
-#balon { 
-    position: absolute; 
+#balon {
+    position: absolute;
     left: 50%;
-    /* Ajuste para que se quede sobre el punto penal */
-    bottom: 11.5vh; 
-    width: clamp(50px, 8vh, 75px); 
-    transform: translateX(-50%); 
-    z-index: 20; 
+    top: 84%; /* En lugar de bottom, usamos top para "empujarlo" desde arriba */
+    width: 70px;
+    transform: translate(-50%, -50%);
+    z-index: 20;
 }
 #portero { 
     position: absolute; 
