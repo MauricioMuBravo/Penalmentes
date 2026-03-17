@@ -117,28 +117,39 @@ header {
 }
 .btn-respuesta:active { transform: translateY(3px); box-shadow: 0 2px 0px #2a471b; }
 
-/* --- 4. PERSONAJES Y BALÓN --- */
+/* --- 4. PERSONAJES Y BALÓN (FIJOS Y PROPORCIONALES) --- */
 .escena-penal {  
     width: 100%; height: 100%; position: absolute; bottom: 0; left: 0;
-    display: flex; justify-content: center; align-items: flex-end; z-index: 10; pointer-events: none;   
+    display: flex; justify-content: center; align-items: flex-end; z-index: 10; pointer-events: none;    
 }
 
 #portero { 
-    position: absolute; bottom: 35%; left: 50%;
-    width: 18vh; min-width: 120px; max-width: 180px;
-    transform: translateX(-50%); z-index: 15; transition: all 0.3s ease-out; 
+    position: absolute; 
+    left: 50%;
+    /* Ajuste maestro: se mantiene a la misma distancia visual del suelo siempre */
+    bottom: clamp(150px, 32vh, 370px); 
+    width: clamp(160px, 22vh, 280px); 
+    transform: translateX(-50%); 
+    z-index: 15; 
+    transition: all 0.3s ease-out; 
 }
 
+/* Evitamos que el portero desaparezca o se vea mal en el feedback */
 body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
-.portero-izq { transform: translate(calc(-50% - 70px), -20px) rotate(-30deg) !important; }
-.portero-der { transform: translate(calc(-50% + 70px), -20px) rotate(30deg) !important; }
-.portero-centro { transform: translateX(-50%) translateY(-20px) scale(1.1) !important; }
+/* Animaciones de tiro (ajustadas para no romper la posición fija) */
+.portero-izq { transform: translate(calc(-50% - 80px), -20px) rotate(-30deg) !important; }
+.portero-der { transform: translate(calc(-50% + 80px), -20px) rotate(30deg) !important; }
+.portero-centro { transform: translateX(-50%) translateY(-30px) scale(1.1) !important; }
 
 #balon { 
-    position: absolute; bottom: 15%; left: 50%;
-    width: 6vh; min-width: 45px; max-width: 60px;
-    transform: translateX(-50%); z-index: 20; 
+    position: absolute; 
+    left: 50%;
+    /* El balón siempre sale desde el manchón penal visual */
+    bottom: clamp(80px, 15vh, 140px); 
+    width: clamp(50px, 8vh, 75px); 
+    transform: translateX(-50%); 
+    z-index: 20; 
 }
 
 /* --- 5. HUD INFERIOR --- */
@@ -535,15 +546,27 @@ position: absolute;
 }
 /* Ajuste para que la copa se vea centrada y elegante en la pantalla final */
 #modal-puntos .portero-final-img[src*="copa.png"] {
-    width: 60%; /* Ajusta según prefieras el tamaño */
-    max-width: 80px;
-    margin: 20px auto;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6)); /* Brillo dorado */
+    /* Tamaño: lo subimos para que luzca imponente */
+    width: clamp(40px, 40vw, 220px) !important; 
+    max-width: 220px;
+    
+    /* Posición: la centramos y ajustamos la altura */
+    position: absolute;
+    bottom: 5% !important; /* Ajusta este número para subirla o bajarla del borde inferior */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Estética: Brillo y animación */
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.7)); 
+    margin: 0 auto;
+    z-index: 10;
     animation: flotarCopa 3s ease-in-out infinite;
 }
+
+/* Animación de flotado suave */
 @keyframes flotarCopa {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -15px); }
 }
 /* --- 9. RESPONSIVE (MÓVIL) --- */
 @media (max-width: 380px) {
