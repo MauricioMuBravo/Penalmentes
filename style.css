@@ -619,5 +619,61 @@ position: absolute;
     #modal-pista .btn-pista-label {
         font-size: 0.6rem;
     }
+/* HUD MÓVIL: CORRECCIÓN DE POSICIÓN EXTREMA */
+    #hud-inferior {
+        display: flex !important;
+        flex-direction: column !important; /* Fuerza vertical */
+        align-items: flex-end !important;   /* Todo pegado a la orilla derecha de su propia caja */
+        justify-content: flex-end !important;
+        
+        bottom: 20px !important; 
+        
+        /* --- AJUSTE CLAVE --- */
+        right: 10px !important;  /* ¡Más cerca de la orilla! (Cambiado de 15px o 20px a 10px) */
+        left: auto !important;   /* Elimina cualquier centrado previo */
+        /* -------------------- */
+
+        width: fit-content !important;     /* IMPORTANTE: La caja no ocupa el 100% del ancho */
+        height: auto !important;
+        
+        gap: 12px !important;              /* Espacio entre las dos cajas (4y4 y stats) */
+        transform: none !important;        /* Elimina el centrado con translateX(-50%) */
+        padding: 0 !important;
+    }
+
+    /* BARRA DE BALONES DIVIDIDA (4 y 4) */
+    .balones-tracker {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important; /* Fuerza 4 columnas */
+        gap: 6px !important;
+        padding: 10px !important;
+        height: auto !important;           /* Crece según las dos filas */
+        width: fit-content !important;     /* Se ajusta al ancho de los balones */
+        border-radius: 15px !important;    /* Menos redondeado para el grid */
+        background: rgba(0, 0, 0, 0.8) !important;
+        order: 1 !important;               /* Asegura que vaya arriba */
+        justify-items: center !important;  /* Centra balones dentro de su celda grid */
+        margin: 0 !important;              /* Elimina márgenes fantasma */
+    }
+
+    /* CAJA DE STATS */
+    .stats-box {
+        order: 2 !important;               /* Asegura que vaya abajo */
+        background: rgba(0, 0, 0, 0.8) !important;
+        border: 1px solid #333 !important;
+        border-radius: 12px !important;
+        padding: 8px 12px !important;
+        min-width: 110px !important;       /* Un poco más ancha para simular el "escalón" */
+        text-align: right !important;      /* Texto alineado a la derecha */
+        font-size: 0.8rem !important;
+        margin: 0 !important;              /* Elimina márgenes fantasma */
+    }
+
+    /* Ajuste de escala de iconos y textos */
+    .dot {
+        width: 18px !important;
+        height: 18px !important;
+        margin: 0 auto !important;
+    }
     
 }
