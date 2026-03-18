@@ -147,26 +147,28 @@ const todosLosAudios = [audioIntro, audioEstadio, audioTiro, audioFallo, audioGo
 function toggleMute() {
     isMuted = !isMuted;
     
-    // Muteamos/desmuteamos todos los sonidos
+    // Aplicamos el estado a cada audio del array
     todosLosAudios.forEach(a => {
-        a.muted = isMuted;
+        if(a) a.muted = isMuted;
     });
 
-    // Actualizamos TODOS los iconos con la clase btn-audio-sync y el id principal
+    // Actualizamos TODOS los iconos: el principal del header y los de los modales
     const iconosVolumen = document.querySelectorAll('#btn-audio-main, .btn-audio-sync');
     iconosVolumen.forEach(img => {
         img.src = isMuted ? imgSinVol : imgConVol;
+        
+        // Si usas la clase CSS de gris para el mute
+        if(isMuted) img.classList.add('audio-muted');
+        else img.classList.remove('audio-muted');
     });
 }
 
-// Delegación de eventos para que funcione dentro de modales sin "congelarse"
+// Escuchador global: detecta clics en cualquier icono de volumen
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-audio-sync') || e.target.id === 'btn-audio-main') {
         toggleMute();
     }
 });
-
-
 
 // --- GESTIÓN DE MODALES ---
 function actualizarIconosMenu(estado) {
