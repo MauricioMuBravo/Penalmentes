@@ -73,6 +73,7 @@ header {
     transform: scale(1.15); /* Crece un poco más al pasar el mouse para resaltar */
 }
 
+
 /* --- 3. CAMPO DE JUEGO Y TRIVIA --- */
 /* Esto asegura que el campo de juego no se desplace cuando se abren los resultados */
 #campo-juego {
@@ -628,7 +629,7 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     /* MODAL PISTA (LIBRETA) - Ajuste fino para móvil */
     #modal-pista #pista-texto-contenido {
         font-size: 0.85rem;
-        top: 16%;
+        top: 25%;
         width: 75%;
     }
     #modal-pista .pista-acciones {
