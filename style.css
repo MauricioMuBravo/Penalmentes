@@ -54,7 +54,28 @@ header {
 .logo-26 { height: 100px; }
 .top-controls { display: flex; gap: 15px; }
 .top-icon { height: 45px; cursor: pointer; transition: 0.2s; }
-#game-container.game-on header { opacity: 0; pointer-events: none; }
+#game-container.game-on header { 
+    opacity: 1 !important; 
+    pointer-events: auto !important; 
+    visibility: visible !important;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    z-index: 100;
+}
+
+/* 2. Oculta el logo y el botón de info SOLO cuando el juego corre */
+#game-container.game-on .logo-26,
+#game-container.game-on .btn-info-trigger {
+    display: none !important;
+}
+
+/* 3. Asegura que el contenedor de controles se alinee a la derecha si queda solo el volumen */
+#game-container.game-on .top-controls {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
 
 #menu-inicio { flex: 1; display: flex; justify-content: center; align-items: center; }
 .center-content { display: flex; flex-direction: column; align-items: center; }
