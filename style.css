@@ -373,26 +373,22 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 /* PUNTUACIÓN: Ajustada para que quede centrada en el blanco */
 .bocadillo-puntuacion {
-position: absolute;
-    top: 41%;          /* Bajamos un poco para centrarlo verticalmente en el hueco */
+    position: absolute;
+    top: 40%;          /* Bajamos un poco más para que entre bien en el hueco blanco */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    width: 80%;        /* Reducimos el ancho para que no toque los bordes del dibujo */
+    width: 80%;
     z-index: 40;
 }
+
 .bocadillo-puntuacion p { 
-  color: #000 !important; 
-
-    font-size: 0.7rem; 
-
-    font-weight: 700; 
-
-    margin: 1px 0; 
-
+    color: #000 !important; 
+    font-size: 0.85rem;    /* Aumentamos un poco el tamaño en web */
+    font-weight: 800;      /* Más grosor para que resalte */
+    margin: 2px 0;         /* Un poco más de aire entre líneas */
     line-height: 1.1;
-
-    letter-spacing: -0.5px;
+    letter-spacing: -0.2px;
 }
 
 /* BOTONES: Ajustados a la franja verde */
@@ -605,13 +601,13 @@ position: absolute;
     }
     
     /* Forzamos tus valores para que los textos caigan en el PNG */
-    .bocadillo-puntuacion { top: 34.5% !important; }
+    .bocadillo-puntuacion { top: 42% !important; }
     .bocadillo-puntuacion p { font-size: 0.5rem; }
     
-    .final-botones-container { top: 49.5% !important; }
+    .final-botones-container { top: 51.5% !important; }
     .btn-final-verde { font-size: 0.55rem; }
     
-    .portero-final-pos { bottom: -30% !important; }
+    .portero-final-pos { bottom: -50% !important; }
 
     /* MODAL PASASTE DE FASE (GANADOR) */
     .es-ganador .titulo-fase-superior { width: 75%; }
