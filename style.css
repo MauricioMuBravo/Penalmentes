@@ -272,12 +272,12 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 .pista-botones-overlay {
     position: absolute;
     bottom: 28%; /* Ajustado para caer sobre los botones dibujados */
-    left: 50%;
-    transform: translateX(-50%);
+    left: 53%;
+    transform: translateX(-54%);
     width: 78%;
     display: flex;
     justify-content: space-between;
-    gap: 5px;
+    gap: 6px;
 }
 
 .area-click-pista {
