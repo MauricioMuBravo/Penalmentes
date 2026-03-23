@@ -287,7 +287,7 @@ function ejecutarPenal(esCorrecto) {
         balon.style.transition = "transform 0.5s ease-out";
 
         if(esCorrecto) {
-            balon.style.transform = `translate(calc(-50% + ${ladoX}), -28vh)`;
+            balon.style.transform = `translate(calc(-50% + ${ladoX}), -36vh)`;
             portero.classList.add(ladoX === "15vh" ? "portero-izq" : "portero-der");
             setTimeout(() => { 
                 audioGol.play(); 
@@ -297,7 +297,7 @@ function ejecutarPenal(esCorrecto) {
                 mostrarModalResultado("GOL"); 
             }, 500);
         } else {
-            balon.style.transform = `translate(calc(-50% + ${ladoX}), -22vh)`;
+            balon.style.transform = `translate(calc(-50% + ${ladoX}), -30vh)`;
             portero.classList.add(ladoX === "15vh" ? "portero-der" : "portero-izq");
             setTimeout(() => { 
                 audioFallo.play(); 
@@ -363,7 +363,8 @@ document.getElementById('btn-siguiente').onclick = () => {
     const portero = document.getElementById('portero');
 
     balon.style.transition = "none";
-    balon.style.transform = "translateX(-50%)";
+    balon.style.transform = "translate(-50%, -50%)";
+    void balon.offsetHeight;
     portero.className = "";
     
     preguntaIndice++;
@@ -501,7 +502,7 @@ document.getElementById('btn-puntos-reintentar').onclick = () => location.reload
 const btnCopaFinal = document.getElementById('btn-puntos-copa'); 
 if (btnCopaFinal) {
     btnCopaFinal.onclick = () => { 
-        window.open("https://www.milenio.com/especiales/mundial-2026", "_blank"); 
+        window.open("https://www.milenio.com/deportes/futbol-internacional/mundial", "_blank"); 
     };
 }
 
