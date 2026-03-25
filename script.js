@@ -434,7 +434,7 @@ function mostrarPantallaCampeon() {
     const imgCopa = document.getElementById('portero-final-img');
 
     imgTitulo.src = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GANASTELMUNDIALITO.png";
-    imgCopa.src = "https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/copa.png";
+    imgCopa.src = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/copa2.png";
     
     document.getElementById('final-goles-count').innerText = goles;
     document.getElementById('final-puntos-count').innerText = goles * 10;
