@@ -8,190 +8,236 @@
     <link rel="icon" type="image/png" href="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png">
 </head>
 <body>
-    <div id="game-container">
-        <header>
-            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGO26.png" class="logo-26" alt="2026">
-            <div class="top-controls">
-                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" 
-     id="btn-audio-main" 
-     class="top-icon btn-audio-sync" 
-     alt="Audio">
-                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png" class="btn-info-trigger top-icon" alt="Info">
-            </div>
-        </header>
 
-        <main id="menu-inicio">
-            <div class="center-content">
-                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGOMUNDIALITOM.png" class="main-logo" alt="Mundialito Milenio">
-                <div class="container-btn-jugar">
-                    <button id="btn-jugar">
-                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/JUGAR.png" alt="Jugar">
-                    </button>
+    <div class="main-wrapper">
+        <div id="game-container">
+            <div id="header-game-mundialito">
+                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGO26.png" class="logo-26" alt="2026">
+                <div class="top-controls">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" id="btn-audio-main" class="top-icon btn-audio-sync" alt="Audio">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png" class="btn-info-trigger top-icon" alt="Info">
                 </div>
             </div>
-        </main>
 
-        <section id="campo-juego" style="display: none;">
-            <div class="escena-penal">
-                <div id="trivia-container">
-                    <div class="trivia-header-row">
-                        <div class="pregunta-card">
-                            <p id="pregunta-texto">¿Cargando pregunta...?</p>
-                        </div>
-                        <div class="timer-pista-container">
-                            <div class="timer-badge">
-                                <span class="timer-label">T: <span id="cronometro">12</span> s</span>
-                            </div>
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PISTA.png" id="btn-pista" class="pista-icon" alt="Pista">
-                        </div>
-                    </div>
-                    <div class="opciones-grid">
-                        <button class="btn-respuesta">Opcion 1</button>
-                        <button class="btn-respuesta">Opcion 2</button>
-                        <button class="btn-respuesta">Opcion 3</button>
-                    </div>
-                </div>
-
-                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoa.png" id="portero" alt="Portero">
-                <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png" id="balon" alt="Balón">
-
-                <div id="hud-inferior">
-                    <div class="balones-tracker">
-                        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-                        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-                    </div>
-                    <div class="stats-box">
-                        <p id="label-fase">Fase 1</p>
-                        <p>Vidas: <span class="heart-icon">❤❤❤</span></p>
-                        <p>Goles: <span id="goles-count">0</span></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div id="modal-info" class="modal">
-            <div class="modal-wrapper">
-                <div class="modal-content-img">
-                    <span class="close-modal">&times;</span>
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/MCOMOJUGAR.png" class="img-instrucciones" alt="Cómo jugar">
-                </div>
-                <div class="side-menu-modal">
-    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" class="side-icon btn-audio-sync">
-    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png" class="side-icon btn-info-trigger">
-    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CRED.png" class="side-icon btn-cred-trigger">
-    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ATRAS.png" class="side-icon btn-close-trigger">
-    
-    <a href="https://www.milenio.com/suscripciones/puntos-milenio" target="_blank">
-        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/botonpuntosmil.png" class="side-icon btn-puntos-milenio" alt="Puntos Milenio">
-    </a>
-</div>
-            </div>
-        </div>
-
-        <div id="modal-creditos" class="modal">
-            <div class="modal-wrapper">
-                <div class="modal-content-img">
-                    <span class="close-modal">&times;</span>
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/creditos2.png" class="img-instrucciones" alt="Créditos">
-                </div>
-                <div class="side-menu-modal">
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" class="side-icon btn-audio-sync">
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png" class="side-icon btn-info-trigger">
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CRED.png" class="side-icon btn-cred-trigger">
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ATRAS.png" class="side-icon btn-close-trigger">
-                </div>
-            </div>
-        </div>
-
-        <div id="modal-pista" class="modal-pista-overlay" style="display: none;">
-            <div class="pista-content">
-                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/MODALPISTA.png" class="pista-bg" alt="Fondo Pista">
-                <div class="pista-info-container">
-                    <p id="pista-texto-contenido">Cargando...</p>
-                    <div class="pista-botones-overlay">
-                        <a href="#" id="btn-ver-nota" target="_blank" class="area-click-pista">
-                            <span class="btn-pista-label">VER MÁS</span>
-                        </a>
-                        <button id="btn-volver-juego" class="area-click-pista">
-                            <span class="btn-pista-label">VOLVER</span>
+            <main id="menu-inicio">
+                <div class="center-content">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGOMUNDIALITOM.png" class="main-logo" alt="Mundialito Milenio">
+                    <div class="container-btn-jugar">
+                        <button id="btn-jugar">
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/JUGAR.png" alt="Jugar">
                         </button>
                     </div>
+                    <!--PUBLICIDAD NIKE - DEBAJO DEL BOTÓN JUGAR -->
+                    <div class="sponsor-inicio">
+                        <p class="patrocinado-label">PATROCINADO POR</p>
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/Logo_NIKE.svg.png" class="nike-logo-inicio" alt="Nike">
+                        <p class="nike-slogan-inicio">Just Do It.</p>
+                    </div>
+                </div>
+            </main>
+
+            <section id="campo-juego" style="display: none;">
+                <div class="escena-penal">
+
+                    <!--PUBLICIDAD NIKE - BANNER SUPERIOR SLIDER HORIZONTAL -->
+                    <div class="ad-bar-top">
+                        <div class="ad-top-track">
+                            <!-- Bloque 1 — imágenes SVG -->
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Just Do It">
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Patrocinador">
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Juega sin límites">
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Colección Mundial 2026">
+                            <!-- Duplicado para loop infinito -->
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Just Do It">
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Patrocinador">
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Juega sin límites">
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Colección Mundial 2026">
+                        </div>
+                    </div>
+                    <!-- FIN BANNER SUPERIOR SLIDER -->
+
+                    <!-- PUBLICIDAD NIKE - FRANJA INFERIOR (izq + der, centro libre) -->
+                    <div class="ad-bar-bottom">
+
+                        <div class="ad-bottom-strip ad-bottom-left">
+                            <div class="bottom-strip-track">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Just Do It">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Colección">
+                                <!-- duplicado -->
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Just Do It">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Colección">
+                            </div>
+                        </div>
+
+                        <!-- Hueco central — portería visible -->
+                        <div class="ad-bottom-gap"></div>
+
+                        <div class="ad-bottom-strip ad-bottom-right">
+                            <div class="bottom-strip-track bottom-strip-rtl">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Patrocinador">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Juega sin límites">
+                                <!-- duplicado -->
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Patrocinador">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Juega sin límites">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- FIN FRANJA INFERIOR -->
+
+                    <!-- BANNER ESQUINA: Nike -->
+                                <div class="ad-corner-izq">
+                        <div class="corner-inner">
+                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="nike-logo-corner" alt="Nike">
+                            <p class="corner-texto">Just Do It.</p>
+                            <a href="https://www.nike.com/mx/futbol" target="_blank" class="corner-cta">Ver colección</a>
+                        </div>
+                    </div>
+                    <!-- FIN BANNER ESQUINA -->
+
+                    <div id="trivia-container">
+                        <div class="trivia-header-row">
+                            <div class="pregunta-card">
+                                <p id="pregunta-texto">¿Cargando pregunta...?</p>
+                            </div>
+                            <div class="timer-pista-container">
+                                <div class="timer-badge">
+                                    <span class="timer-label">T: <span id="cronometro">12</span> s</span>
+                                </div>
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PISTA.png" id="btn-pista" class="pista-icon" alt="Pista">
+                            </div>
+                        </div>
+                        <div class="opciones-grid">
+                            <button class="btn-respuesta">Opcion 1</button>
+                            <button class="btn-respuesta">Opcion 2</button>
+                            <button class="btn-respuesta">Opcion 3</button>
+                        </div>
+                    </div>
+
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/memoochoa.png" id="portero" alt="Portero">
+                    <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png" id="balon" alt="Balón">
+
+                    <div id="hud-inferior">
+                        <div class="balones-tracker">
+                            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                        </div>
+                        <div class="stats-box">
+                            <p id="label-fase">Fase 1</p>
+                            <p>Vidas: <span class="heart-icon">❤❤❤❤❤</span></p>
+                            <p>Goles: <span id="goles-count">0</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div id="modal-info" class="modal">
+                <div class="modal-wrapper">
+                    <div class="modal-content-img">
+                        <span class="close-modal">&times;</span>
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Instrucciones_III.png" class="img-instrucciones" alt="Cómo jugar">
+                    </div>
+                    <div class="side-menu-modal">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" class="side-icon btn-audio-sync">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png" class="side-icon btn-info-trigger">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CRED.png" class="side-icon btn-cred-trigger">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ATRAS.png" class="side-icon btn-close-trigger">
+                    </div>
                 </div>
             </div>
+
+            <div id="modal-creditos" class="modal">
+                <div class="modal-wrapper">
+                    <div class="modal-content-img">
+                        <span class="close-modal">&times;</span>
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/creditos2.png" class="img-instrucciones" alt="Créditos">
+                    </div>
+                    <div class="side-menu-modal">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" class="side-icon btn-audio-sync">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png" class="side-icon btn-info-trigger">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CRED.png" class="side-icon btn-cred-trigger">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ATRAS.png" class="side-icon btn-close-trigger">
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-pista" class="modal-pista-overlay" style="display: none;">
+                <div class="pista-content">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/MODALPISTA.png" class="pista-bg" alt="Fondo Pista">
+                    <div class="pista-info-container">
+                        <p id="pista-texto-contenido">Cargando...</p>
+                        <div class="pista-botones-overlay">
+                            <a href="#" id="btn-ver-nota" target="_blank" class="area-click-pista">
+                                <span class="btn-pista-label">VER MÁS</span>
+                            </a>
+                            <button id="btn-volver-juego" class="area-click-pista">
+                                <span class="btn-pista-label">VOLVER</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-feedback" class="modal-juego" style="display: none;">
+                <img id="portero-reaccion" src="" alt="Portero Reacción">
+                <div class="feedback-container">
+                    <div id="feedback-titulo-wrapper">
+                         <img id="feedback-titulo" src="" alt="Resultado">
+                    </div>
+                    <div class="globo-explicacion">
+                        <p id="feedback-texto">Aquí va la respuesta detallada.</p>
+                    </div>
+                    <div class="feedback-actions">
+                        <button id="btn-saber-mas" class="btn-oval btn-verde">Saber más</button>
+                        <button id="btn-siguiente" class="btn-oval btn-gris">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-puntos" class="modal-pista-overlay" style="display: none;">
+                <div class="final-screen-content">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png" class="pista-bg" alt="Fondo Final">
+                    <img id="puntos-titulo-img" src="" class="titulo-final-asset" alt="Resultado">
+                    <div class="bocadillo-puntuacion">
+                        <p>Marcaste: <span id="final-goles-count">0</span> goles</p>
+                        <p id="mensaje-final-resultado"></p>
+                    </div>
+                    <div class="final-botones-container">
+                        <button id="btn-puntos-copa" class="btn-final-verde" onclick="irACopa()">Copa del Mundo</button>
+                        <button id="btn-puntos-compartir" class="btn-final-verde" onclick="compartir()">Compartir</button>
+                        <button id="btn-puntos-reintentar" class="btn-final-verde">Reintentar</button>
+                    </div>
+                    <img id="portero-final-img" src="" class="portero-final-pos" alt="Portero Final">
+                </div>
+            </div>
+
+            <div id="modal-pasaste" class="modal-pista-overlay" style="display: none;">
+                <div class="final-screen-content es-ganador">
+                    <img id="asset-titulo-ronda" src="" class="titulo-fase-superior" alt="Ronda">
+                    <div class="contenedor-puntos-verde">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png" class="puntos-bg-img">
+                        <div class="textos-encima-puntos">
+                           <p id="texto-marcastes-ganador">MARCASTE: 0 GOLES </p>
+                           <p id="texto-ganaste-ganador"></p>
+                        </div>
+                        <div class="final-botones-container-ganador">
+                            <button class="btn-invisible" onclick="irACopa()">Copa del Mundo</button>
+                            <button class="btn-invisible" onclick="compartir()">Compartir</button>
+                            <button id="btn-avanzar-ronda" class="btn-invisible">Avanza</button>
+                        </div>
+                    </div>
+                    <img id="portero-pasaste-fase" src="" class="portero-final-pos-ganador" alt="Portero">
+                </div>
+            </div>
+
+            <audio id="bg-music" loop>
+                <source src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3" type="audio/mpeg">
+            </audio>
+
         </div>
-
-        <div id="modal-feedback" class="modal-juego" style="display: none;">
-            <img id="portero-reaccion" src="" alt="Portero Reacción">
-            <div class="feedback-container">
-                <div id="feedback-titulo-wrapper">
-                     <img id="feedback-titulo" src="" alt="Resultado">
-                </div>
-                <div class="globo-explicacion">
-                    <p id="feedback-texto">Aquí va la respuesta detallada.</p>
-                </div>
-                <div class="feedback-actions">
-                    <button id="btn-saber-mas" class="btn-oval btn-verde">Saber más</button>
-                    <button id="btn-siguiente" class="btn-oval btn-gris">Siguiente</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="modal-fase" class="modal-pista-overlay" style="display: none;">
-            <div class="pista-content">
-                <img id="fase-bg" src="" class="pista-bg" alt="Fondo Fase">
-                <div id="fase-texto-contenido">¡EXCELENTE JUGADA!</div>
-                <div class="fase-botones-overlay">
-                    <button id="btn-continuar-fase" class="area-click-fase">
-                        <span class="btn-pista-label">CONTINUAR</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <div id="modal-puntos" class="modal-pista-overlay" style="display: none;">
-            <div class="final-screen-content">
-                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png" class="pista-bg" alt="Fondo Final">
-                <img id="puntos-titulo-img" src="" class="titulo-final-asset" alt="Resultado">
-                <div class="bocadillo-puntuacion">
-                    <p>Marcaste: <span id="final-goles-count">0</span> goles</p>
-                    <p>Ganaste: <span id="final-puntos-count">0</span> puntos</p>
-                </div>
-                <div class="final-botones-container">
-                    <button id="btn-puntos-copa" class="btn-final-verde">Copa del<br>Mundo</button>
-                    <button id="btn-puntos-compartir" class="btn-final-verde">Compartir</button>
-                    <button id="btn-puntos-reintentar" class="btn-final-verde">Reintentar</button>
-                </div>
-                <img id="portero-final-img" src="" class="portero-final-pos" alt="Portero Final">
-            </div>
-        </div>
-
- <div id="modal-pasaste" class="modal-pista-overlay" style="display: none;">
-    <div class="final-screen-content es-ganador">
-        <img id="asset-titulo-ronda" src="" class="titulo-fase-superior" alt="Ronda">
-
-        <div class="contenedor-puntos-verde">
-            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png" class="puntos-bg-img">
-            
-            <div class="textos-encima-puntos">
-                <p id="texto-marcastes-ganador">MARCASTE: 0 GOLES</p>
-                <p id="texto-ganaste-ganador">GANASTE: 0 PUNTOS</p>
-            </div>
-
-            <div class="final-botones-container-ganador">
-                <button class="btn-invisible" onclick="irACopa()">Copa del Mundo</button>
-                <button class="btn-invisible" onclick="compartir()">Compartir</button>
-                <button id="btn-avanzar-ronda" class="btn-invisible">Avanza</button>
-            </div>
-        </div>
-
-        <img id="portero-pasaste-fase" src="" class="portero-final-pos-ganador" alt="Portero">
     </div>
-</div>
 
-        <audio id="bg-music" loop>
-            <source src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3" type="audio/mpeg">
-        </audio>
-        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    </div> <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
