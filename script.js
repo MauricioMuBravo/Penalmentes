@@ -13,9 +13,10 @@ audioEstadio.loop = true;
 
 document.addEventListener('click', function() {
     if (audioIntro.paused && document.getElementById('menu-inicio').style.display !== 'none') {
-        audioIntro.play().catch(function(e) { console.log("Audio en espera de interacción"); });
+        audioIntro.play().catch(function(e) {});
     }
 }, { once: true });
+
 
 const iconInfoNormal = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png";
 const iconInfoActivo = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFONEG.png";
@@ -70,7 +71,6 @@ const porterosPorFase = {
     }
 };
 
-// --- 2. BANCO DE PREGUNTAS ---
 const bancoPreguntas = [
     [ // Fase 1: Grupos
         { q:"\u00bfEn qu\u00e9 pa\u00eds se celebr\u00f3 el Mundial de 2014?", a:"Brasil", options:["Sud\u00e1frica","Brasil","Alemania"], hintText:"All\u00ed ocurri\u00f3 el famoso 7-1 en semifinales.", exp:"El Mundial 2014 se jug\u00f3 en Brasil, donde Alemania derrot\u00f3 7-1 a Brasil en semifinales.", link:"https://www.milenio.com/deportes/futbol-internacional/a-8-anos-brasil-1-7-alemania-copa-del-mundo-de-2014" },
@@ -78,7 +78,7 @@ const bancoPreguntas = [
         { q:"\u00bfQu\u00e9 jugador marc\u00f3 el famoso 'Gol del Siglo' en 1986?", a:"Diego Maradona", options:["Ronaldo Naz\u00e1rio","Pel\u00e9","Diego Maradona"], hintText:"Tambi\u00e9n anot\u00f3 'La Mano de Dios' en ese partido.", exp:"Maradona marc\u00f3 el 'Gol del Siglo' ante Inglaterra en el Mundial de M\u00e9xico 1986.", link:"https://www.milenio.com/deportes/futbol-internacional/diego-armando-maradona-36-anos-mano-dios-gol-siglo" },
         { q:"\u00bfQu\u00e9 selecci\u00f3n africana fue la primera en llegar a semifinales de un Mundial?", a:"Marruecos", options:["Nigeria","Camer\u00fan","Marruecos"], hintText:"Lo logr\u00f3 en Qatar 2022.", exp:"Marruecos hizo historia en 2022 al convertirse en la primera selecci\u00f3n africana en alcanzar semifinales.", link:"https://www.milenio.com/deportes/africa-orgullosa-avance-marruecos-qatar-2022" },
         { q:"\u00bfQu\u00e9 jugador portugu\u00e9s es el m\u00e1ximo goleador hist\u00f3rico de su selecci\u00f3n?", a:"Cristiano Ronaldo", options:["Lu\u00eds Figo","Eus\u00e9bio","Cristiano Ronaldo"], hintText:"Ha jugado cinco Mundiales y gan\u00f3 la Eurocopa 2016.", exp:"Cristiano Ronaldo es el m\u00e1ximo goleador hist\u00f3rico de Portugal.", link:"https://www.milenio.com/deportes/futbol/mundial-1930-historia-primer-campeonato-mundo" },
-        { q:"\u00bfQu\u00e9 selecci\u00f3n elimin\u00f3 a Espa\u00f1a en fase de grupos del Mundial 2014?", a:"Pa\u00edses Bajos", options:["Pa\u00edses Bajos","Chile","Croacia"], hintText:"La derrot\u00f3 5-1 en su debut.", exp:"Pa\u00edses Bajos gole\u00f3 5-1 a Espa\u00f1a en Brasil 2014, en una revancha de la final de 2010.", link:"https://www.milenio.com/deportes/extra-cancha/humillacion-prensa-espanola-sobre-goleada-de-holanda" },
+        { q:"\u00bfQu\u00e9 selecci\u00f3n goleó a Espa\u00f1a en fase de grupos del Mundial 2014?", a:"Pa\u00edses Bajos", options:["Pa\u00edses Bajos","Chile","Croacia"], hintText:"La derrot\u00f3 5-1 en su debut.", exp:"Pa\u00edses Bajos gole\u00f3 5-1 a Espa\u00f1a en Brasil 2014, en una revancha de la final de 2010.", link:"https://www.milenio.com/deportes/extra-cancha/humillacion-prensa-espanola-sobre-goleada-de-holanda" },
         { q:"\u00bfQu\u00e9 jugador colombiano gan\u00f3 la Bota de Oro en el Mundial 2014?", a:"James Rodr\u00edguez", options:["Radamel Falcao","Juan Cuadrado","James Rodr\u00edguez"], hintText:"Su gol a Uruguay fue uno de los mejores del torneo.", exp:"James Rodr\u00edguez fue el m\u00e1ximo goleador de Brasil 2014 con seis goles.", link:"https://www.milenio.com/deportes/extra-cancha/james-recibio-la-bota-de-oro" },
         { q:"\u00bfQu\u00e9 selecci\u00f3n fue anfitri\u00f3na del primer Mundial en 1930?", a:"Uruguay", options:["Argentina","Uruguay","Brasil"], hintText:"Tambi\u00e9n fue el primer campe\u00f3n.", exp:"Uruguay organiz\u00f3 y gan\u00f3 el primer Mundial de la historia en 1930.", link:"https://www.milenio.com/deportes/futbol-internacional/uruguay-primer-campeon-mundial-1930" }
     ],
@@ -94,7 +94,7 @@ const bancoPreguntas = [
     ],
     [ // Fase 3: Cuartos
         { q:"\u00bfQui\u00e9n marc\u00f3 el gol de la victoria en la final del Mundial 2010?", a:"Andr\u00e9s Iniesta", options:["David Villa","Andr\u00e9s Iniesta","Xavi Hern\u00e1ndez"], hintText:"El tanto lleg\u00f3 en el minuto 116.", exp:"Iniesta marc\u00f3 el gol del t\u00edtulo ante Pa\u00edses Bajos en tiempo extra.", link:"https://www.milenio.com/deportes/futbol-internacional/andres-iniesta-el-discreto-autor-del-gol-mas-importante-de-espana" },
-        { q:"\u00bfQu\u00e9 jugador fue expulsado en el minuto 0 en un Mundial?", a:"Jos\u00e9 Batista", options:["Jos\u00e9 Batista","Diego Maradona","Hugo S\u00e1nchez"], hintText:"Fue en 1986.", exp:"Batista fue expulsado a los pocos segundos en M\u00e9xico 1986.", link:"https://www.milenio.com/deportes/extra-cancha/expulsion-mas-rapida-mundial" },
+        { q:"\u00bfQu\u00e9 jugador fue expulsado en el minuto 0 en un Mundial?", a:"Jos\u00e9 Batista", options:["Jos\u00e9 Batista","Diego Maradona","Hugo S\u00e1nchez"], hintText:"Fue en 1986.", exp:"Batista fue expulsado a los pocos segundos en M\u00e9xico 1986.", link:"https://www.milenio.com/futbol-internacional/mundial/batista-y-la-expulsion-mas-rapida-en-la-historia-del-mundial" },
         { q:"\u00bfQu\u00e9 jugador fue expulsado por un cabezazo en la final del Mundial 2006?", a:"Zinedine Zidane", options:["Zinedine Zidane","Thierry Henry","Fabio Cannavaro"], hintText:"Fue su \u00faltimo partido profesional.", exp:"Zidane fue expulsado por el cabezazo a Materazzi en la pr\u00f3rroga de la final de 2006.", link:"https://www.milenio.com/futbol-internacional/mundial/mundial-de-alemania-2006-la-triste-final-de-zinedine-zidane" },
         { q:"\u00bfQu\u00e9 jugador anot\u00f3 un hat-trick en una final de Mundial en 2022?", a:"Kylian Mbapp\u00e9", options:["Lionel Messi","Kylian Mbapp\u00e9","\u00c1ngel Di Mar\u00eda"], hintText:"A pesar de eso, no gan\u00f3 el t\u00edtulo.", exp:"Mbapp\u00e9 marc\u00f3 tres goles en la final, pero Francia perdi\u00f3 en penales ante Argentina.", link:"https://www.milenio.com/deportes/futbol-internacional/mbappe-hat-trick-final-mundial-2022" },
         { q:"\u00bfQu\u00e9 selecci\u00f3n elimin\u00f3 a M\u00e9xico en 1994 en penales?", a:"Bulgaria", options:["Bulgaria","Alemania","Argentina"], hintText:"El partido fue 1-1.", exp:"Bulgaria elimin\u00f3 a M\u00e9xico en penales en Estados Unidos 1994.", link:"https://www.milenio.com/futbol/seleccion-mexicana/jorge-campos-culpa-luis-garcia-eliminacion-tri-mundial-eu" },
@@ -124,10 +124,28 @@ const bancoPreguntas = [
     ]
 ];
 
+
+// ─── AJUSTE 1: FUNCIÓN PARA BARAJAR ──────────────────────────────────────────
+function shuffleArray(arr) {
+    const shuffled = arr.slice(); // copia para no mutar el original
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = temp;
+    }
+    return shuffled;
+}
+
+// Guarda las preguntas barajadas de la fase actual
+let preguntasActuales = [];
+// ─────────────────────────────────────────────────────────────────────────────
+
+
 // --- 3. ESTADO DEL JUEGO ---
 let faseActual = 0;
 let preguntaIndice = 0;
-let vidas = 3;
+let vidas = 5;
 let goles = 0;
 let tiempo = 12;
 let crono;
@@ -206,9 +224,14 @@ document.getElementById('btn-jugar').onclick = function() {
 };
 
 function cargarPregunta() {
-    const faseData = bancoPreguntas[faseActual];
-    if (!faseData) return;
-    const data = faseData[preguntaIndice];
+    // ─── AJUSTE 1: barajar al iniciar cada fase ───────────────────────────────
+    if (preguntaIndice === 0) {
+        preguntasActuales = shuffleArray(bancoPreguntas[faseActual]);
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    if (!preguntasActuales.length) return;
+    const data = preguntasActuales[preguntaIndice]; // ← usa preguntas barajadas
     const portero = document.getElementById('portero');
 
     portero.src = porterosPorFase[faseActual].base;
@@ -238,7 +261,7 @@ function cargarPregunta() {
         btnPista.style.pointerEvents = 'none';
     };
 
-    tiempo = 12 - faseActual;
+    tiempo = 12;
     document.getElementById('cronometro').innerText = tiempo;
     iniciarCronometro();
 }
@@ -255,7 +278,7 @@ function iniciarCronometro() {
 function manejarSeleccion(opcion) {
     if (vidas <= 0) return;
     clearInterval(crono);
-    const data = bancoPreguntas[faseActual][preguntaIndice];
+    const data = preguntasActuales[preguntaIndice]; // ← usa preguntas barajadas
     const esCorrecto = (opcion === data.a);
     document.querySelectorAll('.btn-respuesta').forEach(function(b) { b.style.pointerEvents = 'none'; });
     ejecutarPenal(esCorrecto);
@@ -303,7 +326,7 @@ function actualizarMarcador(fueGol) {
         vidas--;
         const heartContainer = document.querySelector('.heart-icon');
         if (heartContainer) {
-            heartContainer.innerText = '\u2764'.repeat(Math.max(0, vidas)) + '\ud83d\udda4'.repeat(Math.max(0, 3 - vidas));
+            heartContainer.innerText = '\u2764'.repeat(Math.max(0, vidas)) + '\ud83d\udda4'.repeat(Math.max(0, 5 - vidas));
         }
     }
 
@@ -320,7 +343,7 @@ function actualizarMarcador(fueGol) {
 }
 
 function mostrarModalResultado(tipo) {
-    const data = bancoPreguntas[faseActual][preguntaIndice];
+    const data = preguntasActuales[preguntaIndice]; // ← usa preguntas barajadas
     const pData = porterosPorFase[faseActual];
 
     document.getElementById('feedback-texto').innerText = data.exp;
@@ -374,8 +397,11 @@ function mostrarModalPasaste() {
     ];
 
     document.getElementById('asset-titulo-ronda').src = assetsRonda[faseActual];
-    document.getElementById('texto-marcastes-ganador').innerText = 'MARCASTE: ' + goles + ' GOLES';
-    document.getElementById('texto-ganaste-ganador').innerText = 'GANASTE: ' + (goles * 10) + ' PUNTOS';
+
+    // ─── AJUSTE 2: solo mostrar goles, sin puntos ─────────────────────────────
+    document.getElementById('texto-marcastes-ganador').innerText = 'HAZ ANOTADO: ' + goles + ' GOLES';
+    document.getElementById('texto-ganaste-ganador').innerText = '';
+    // ─────────────────────────────────────────────────────────────────────────
 
     const pData = porterosPorFase[faseActual];
     const porteroPasaste = document.getElementById('portero-pasaste-fase');
@@ -401,7 +427,6 @@ function mostrarPantallaCampeon() {
     document.getElementById('puntos-titulo-img').src = 'https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GANASTELMUNDIALITO.png';
     document.getElementById('portero-final-img').src = 'https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/copa2.png';
     document.getElementById('final-goles-count').innerText = goles;
-    document.getElementById('final-puntos-count').innerText = goles * 10;
     document.getElementById('btn-puntos-reintentar').innerText = '\u00a1JUGAR OTRA VEZ!';
 
     audioEstadio.pause();
@@ -432,8 +457,8 @@ function mostrarPantallaFinal(ganoMundial) {
 
     const pData = porterosPorFase[faseActual] || porterosPorFase[0];
     document.getElementById('final-goles-count').innerText = goles;
-    document.getElementById('final-puntos-count').innerText = goles * 10;
 
+    // ─── AJUSTE 2: eliminadas las referencias a puntos ────────────────────────
     if (ganoMundial) {
         document.getElementById('puntos-titulo-img').src = imgFinalPuntos;
         document.getElementById('portero-final-img').src = pData.finalPierde;
@@ -443,6 +468,7 @@ function mostrarPantallaFinal(ganoMundial) {
         document.getElementById('portero-final-img').src = pData.finalGana;
         document.getElementById('btn-puntos-reintentar').innerText = 'REINTENTAR';
     }
+    // ─────────────────────────────────────────────────────────────────────────
     modalPuntos.style.display = 'flex';
 }
 
@@ -469,7 +495,6 @@ if (btnCompartirFinal) {
 }
 
 // --- 10. FUNCIONES GLOBALES para onclick="" en el HTML ---
-// Deben asignarse a window para ser accesibles fuera del DOMContentLoaded
 window.irACopa = function() {
     window.open('https://www.milenio.com/deportes/futbol-internacional/mundial', '_blank');
 };
@@ -482,4 +507,5 @@ window.compartir = function() {
         window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(texto), '_blank');
     }
 };
+
 }); // ← cierre del DOMContentLoaded
