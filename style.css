@@ -13,47 +13,63 @@ body, html {
 
 #game-container { 
     width: 100vw; 
-    height: 100vh; 
+    height: 93vh; 
     position: relative; 
     display: flex; 
     flex-direction: column; 
     z-index: 1; 
 }
 
-/* FONDO DINÁMICO */
+/* FONDO DINÁMICO REPARADO */
 #game-container::before {
-    content: ""; 
-    position: absolute; 
-    top: 0; left: 0; 
-    width: 100%; height: 100%;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                     url('https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png');
-    background-size: cover; 
-    background-position: center;
-    filter: blur(5px); 
-    transition: all 0.8s ease; 
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+        url(https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png),
+        url(https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png);
+    background-size: 100% 100%, auto 100%, 100% 100%; 
+    background-position: center, bottom center, center;
+    background-repeat: no-repeat;
+    filter: blur(6px); 
+    transform: scale(1.1);
     z-index: -1;
 }
 
 #game-container.game-on::before { 
     filter: blur(0px); 
-    background-image: url('https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png'); 
+    transform: scale(1);
+    background-image: 
+        url(https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png), 
+        url(https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png);
+    background-size: auto 100%, 100% 100%;
+    background-position: bottom center, center;
+}
+
+.main-wrapper {
+    padding-top: 70px;
+    background-color: #000;
 }
 
 /* --- 2. HEADER Y MENÚ --- */
-header { 
-    width: 100%; 
-    display: flex; 
-    justify-content: space-between; 
-    padding: 20px 40px; 
-    position: absolute; 
-    top: 0; 
-    z-index: 100; 
-    transition: opacity 0.5s ease; 
+#header-game-mundialito {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    transition: opacity 0.5s ease;
 }
 .logo-26 { height: 100px; }
 .top-controls { display: flex; gap: 15px; }
 .top-icon { height: 45px; cursor: pointer; transition: 0.2s; }
+
 #game-container.game-on header { 
     opacity: 1 !important; 
     pointer-events: auto !important; 
@@ -64,13 +80,11 @@ header {
     z-index: 100;
 }
 
-/* 2. Oculta el logo y el botón de info SOLO cuando el juego corre */
 #game-container.game-on .logo-26,
 #game-container.game-on .btn-info-trigger {
     display: none !important;
 }
 
-/* 3. Asegura que el contenedor de controles se alinee a la derecha si queda solo el volumen */
 #game-container.game-on .top-controls {
     width: 100%;
     display: flex;
@@ -82,36 +96,340 @@ header {
 .main-logo { width: 600px; max-width: 85vw; height: auto; }
 #btn-jugar { background: none; border: none; cursor: pointer; margin-top: -10px; z-index: 10; }
 #btn-jugar img { width: 180px; transition: transform 0.2s ease; }
-#btn-jugar:active img {
-    transform: scale(0.95);
-}
-.btn-puntos-milenio {
-    margin-top: 10px; /* Separa un poco el botón de la flecha de atrás */
-    transition: transform 0.3s ease;
+#btn-jugar:active img { transform: scale(0.95); }
+
+.btn-puntos-milenio { margin-top: 10px; transition: transform 0.3s ease; }
+.btn-puntos-milenio:hover { transform: scale(1.15); }
+
+
+/* ============================================================
+   ✅ PUBLICIDAD NIKE — PANTALLA DE INICIO
+   ============================================================ */
+.sponsor-inicio {
+    text-align: center;
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
-.btn-puntos-milenio:hover {
-    transform: scale(1.15); /* Crece un poco más al pasar el mouse para resaltar */
+.patrocinado-label {
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.75;
 }
+
+.nike-logo-inicio {
+    height: 60px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    drop-shadow: 0 2px 14px rgba(0,0,0,0.5);
+}
+
+.nike-slogan-inicio {
+    color: rgba(255,255,255,0.8);
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* ============================================================
+   ✅ PUBLICIDAD NIKE — BANNER SUPERIOR SLIDER HORIZONTAL
+   ============================================================ */
+.ad-bar-top {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    overflow: hidden;
+    z-index: 200;
+    pointer-events: auto;
+    background: #111;
+     border-top: 3px solid #FF2D20;
+    border-bottom: 3px solid #FF2D20;
+    display: flex;
+    align-items: center;
+}
+
+/* Track con scroll continuo */
+.ad-top-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    white-space: nowrap;
+    width: max-content;
+    animation: nike-scroll-top 22s linear infinite;
+}
+
+/* ✅ Imagen SVG en el ticker superior */
+.ad-top-img {
+    height: 70px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* ✅ Imagen SVG en franjas inferiores */
+.ad-bottom-img {
+    height: 44px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* ✅ Imagen SVG banner esquina */
+.nike-corner-img {
+    width: 140px;
+    height: auto;
+    display: block;
+}
+
+@keyframes nike-scroll-top {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.ad-top-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+/* Separador rojo entre items */
+.ad-top-sep {
+    color: #FF2D20;
+    font-size: 1.2rem;
+    font-weight: 900;
+    flex-shrink: 0;
+    line-height: 1;
+    padding: 0 4px;
+}
+
+/* Logo Nike en el ticker */
+.nike-logo-banner {
+    height: 36px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Item con texto */
+.ad-top-item-tag {
+    padding: 0 20px;
+}
+
+.nike-ticker-tag {
+    color: rgba(255,255,255,0.88);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-style: italic;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   ✅ PUBLICIDAD NIKE — FRANJA INFERIOR (izq + der, centro abierto)
+   ============================================================ */
+.ad-bar-bottom {
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: stretch;
+    z-index: 50;
+    pointer-events: auto;
+}
+
+.ad-bottom-strip {
+    background: #111;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 45%;
+    border-top: 2px solid #FF2D20;
+    border-bottom: 2px solid #FF2D20;
+}
+
+/* ✅ ÚNICO CAMBIO: gap fijo con position absolute en los strips */
+.ad-bottom-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: calc(50% - 222px);  /* termina exactamente en el poste izquierdo */
+}
+
+.ad-bottom-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: calc(50% - 222px);  /* empieza exactamente en el poste derecho */
+}
+
+.ad-bottom-gap {
+    flex: 0 0 445px;
+    background: transparent;
+    pointer-events: none;
+}
+
+.bottom-strip-track {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    white-space: nowrap;
+    animation: scroll-ltr 12s linear infinite;
+    padding: 0 8px;
+}
+
+.bottom-strip-rtl {
+    animation: scroll-rtl 12s linear infinite;
+}
+
+@keyframes scroll-ltr {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-rtl {
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+/* Logo pequeño en franja inferior */
+.nike-logo-bottom {
+    height: 20px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nike-bottom-word {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.nike-bottom-swoosh {
+    color: #FF2D20;
+    font-size: 1rem;
+    font-weight: 900;
+    transform: rotate(-10deg) scaleX(1.4);
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.nike-bottom-tag {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-style: italic;
+    flex-shrink: 0;
+}
+
+.nike-bottom-sep {
+    color: #FF2D20;
+    font-size: 0.6rem;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   ✅ PUBLICIDAD NIKE — BANNER ESQUINA
+   ============================================================ */
+.ad-corner-izq {
+    position: absolute;
+    left: 0;
+    bottom: 34%;
+    width: 140px;
+    background: #111;
+    border-radius: 0 10px 10px 0;
+    border-right: 3px solid #FF2D20;
+    z-index: 150;
+    pointer-events: auto;
+    box-shadow: 3px 3px 14px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.corner-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 12px;
+    gap: 5px;
+}
+
+/* Logo Nike en la esquina */
+.nike-logo-corner {
+    height: 28px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    display: block;
+}
+
+.corner-texto {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.65rem;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.corner-cta {
+    display: inline-block;
+    background: #FF2D20;
+    color: #fff;
+    font-size: 0.55rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    white-space: nowrap;
+    margin-top: 2px;
+    transition: opacity 0.2s;
+}
+.corner-cta:hover { opacity: 0.85; }
+
+/* ============================================================ */
 
 
 /* --- 3. CAMPO DE JUEGO Y TRIVIA --- */
-/* Esto asegura que el campo de juego no se desplace cuando se abren los resultados */
 #campo-juego {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: none; /* Se activa con JS */
+    display: none;
 }
 
 #trivia-container { 
     position: absolute; 
-    top: 15%; 
+    top: 18%;   /* ← ajustado de 15% a 18% para dejar espacio al banner superior */
     left: 50%;
     transform: translateX(-50%);
-    width: 90%; 
+    width: 70%;    /* ← reducido de 90% para dejar espacio al banner lateral */
     max-width: 580px; 
     display: flex; 
     flex-direction: column; 
@@ -141,7 +459,7 @@ header {
 }
 .btn-respuesta:active { transform: translateY(3px); box-shadow: 0 2px 0px #2a471b; }
 
-/* --- 4. PERSONAJES Y BALÓN (FIJOS Y PROPORCIONALES) --- */
+/* --- 4. PERSONAJES Y BALÓN --- */
 .escena-penal {  
     width: 100%; height: 100%; position: absolute; bottom: 0; left: 0;
     display: flex; justify-content: center; align-items: flex-end; z-index: 10; pointer-events: none;    
@@ -150,13 +468,12 @@ header {
 #balon {
     position: absolute;
     left: 50%;
-    top: 84%;
-    width: 70px;
+    bottom: 12%;
+    height: 6.5vh;
     transform: translate(-50%, -50%);
     z-index: 20;
 }
 
-/* Giro del balón al disparar */
 @keyframes girar-balon {
     from { transform: translate(var(--bx), var(--by)) rotate(0deg) scale(var(--bs, 1)); }
     to   { transform: translate(var(--bx), var(--by)) rotate(720deg) scale(var(--bs, 1)); }
@@ -164,21 +481,19 @@ header {
 .balon-volando {
     animation: girar-balon 0.45s linear forwards !important;
 }
+
 #portero { 
-    position: absolute; 
+    position: absolute;
     left: 50%;
-    /* Ajuste maestro: se mantiene a la misma distancia visual del suelo siempre */
-    bottom: 33%;
-    width: clamp(160px, 22vh, 280px); 
-    transform: translateX(-50%); 
-    z-index: 15; 
-    transition: all 0.2s ease-out; 
+    bottom: 35%;
+    height: 22vh;
+    transform: translateX(-50%);
+    z-index: 15;
+    transition: all 0.2s ease-out;
 }
 
-/* Evitamos que el portero desaparezca o se vea mal en el feedback */
 body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
-/* Animaciones de tiro (ajustadas para no romper la posición fija) */
 .portero-izq { transform: translate(calc(-50% - 80px), -20px) rotate(-30deg) !important; }
 .portero-der { transform: translate(calc(-50% + 80px), -20px) rotate(30deg) !important; }
 .portero-centro { transform: translateX(-50%) translateY(-30px) scale(1.1) !important; }
@@ -226,7 +541,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     display: flex; 
     align-items: center; 
     justify-content: center;
-    /* AGREGAMOS ESTO: Deja espacio interno para que los botones no se salgan */
     padding-right: 60px; 
     box-sizing: border-box;
 }
@@ -242,10 +556,8 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 .img-instrucciones { width: 100%; height: auto; display: block; border-radius: 15px; }
 
-/* MENÚ LATERAL AJUSTADO */
 .side-menu-modal { 
     position: absolute; 
-    /* Lo pegamos al borde derecho del padding del wrapper */
     right: 5px; 
     top: 50%; 
     transform: translateY(-50%); 
@@ -255,85 +567,121 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 }
 
 .side-icon { 
-    width: 42px; /* Un poquito más pequeños para que quepan mejor en mobile */
+    width: 42px;
     height: 42px; 
     cursor: pointer; 
 }
-/* --- 6. MODAL PISTA (LIBRETA FINAL) --- */
+
+/* --- 6. MODAL PISTA --- */
 .modal-pista-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); display: none; justify-content: center; 
+    background: rgba(0,0,0,0.96); display: none; justify-content: center; 
     align-items: center; z-index: 5000;
 }
 
-.pista-content { 
-    position: relative; 
-    width: 90%; 
-    max-width: 450px; /* Tamaño ideal para la libreta */
-    aspect-ratio: 450 / 300; /* Mantiene la proporción del PNG */
+.pista-content {
+    width: 90%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
-/* La imagen de la libreta ahora es el fondo real */
-.pista-bg { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+.pista-content > .pista-bg {
+    display: none;
+}
+
+.pista-info-container {
+    background: white;
+    border-radius: 30px;
+    padding: 30px 25px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 #pista-texto-contenido {
-    position: absolute;
-    top: 22%; /* Centrado en la parte blanca de la libreta */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 30%;
+    position: static;
+    transform: none;
+    width: 100%;
+    height: auto;
     color: #000 !important;
     font-size: 1rem;
     font-weight: 700;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.0;
+    line-height: 1.3;
     text-transform: uppercase;
+    display: block;
 }
 
 .pista-botones-overlay {
-    position: absolute;
-    bottom: 28%; /* Ajustado para caer sobre los botones dibujados */
-    left: 53%;
-    transform: translateX(-54%);
-    width: 78%;
+    position: static;
+    transform: none;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    gap: 6px;
+    gap: 15px;
 }
 
 .area-click-pista {
     flex: 1;
-    background: transparent;
+    padding: 15px;
+    border-radius: 50px;
     border: none;
-    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
     cursor: pointer;
+    color: white !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px; /* Altura del área clickeable */
+    text-align: center;
+    text-decoration: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-size: 1rem;
+    transition: 0.1s;
+}
+
+#btn-ver-nota {
+    background: #46752d;
+    box-shadow: 0 4px 0px #2a471b;
+}
+
+#btn-volver-juego {
+    background: #444;
+    box-shadow: 0 4px 0px #222;
+}
+
+.area-click-pista:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0px rgba(0,0,0,0.2);
 }
 
 .btn-pista-label {
     color: white !important;
-    font-weight: 900;
-    font-size: 0.75rem;
+    font-weight: bold;
+    font-size: inherit;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    line-height: 1;
+    display: inline;
 }
+
 /* --- 7. MODAL FEEDBACK (GOOOL/ATAJADA) --- */
 .modal-juego {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); display: flex; flex-direction: column; 
-    justify-content: flex-start; align-items: center; padding-top: 5vh; z-index: 6000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    padding-top: 5vh;
+    z-index: 6000;
 }
 .feedback-container {
     display: flex; flex-direction: column; align-items: center;
@@ -341,16 +689,30 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 }
 #feedback-titulo-wrapper { width: 80%; margin-bottom: -20px; z-index: 20; }
 #feedback-titulo { width: 100%; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3)); }
+
 .globo-explicacion {
     background: white; border-radius: 30px; padding: 40px 25px 25px 25px;
     width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); min-height: 120px;
     display: flex; align-items: center; justify-content: center;
 }
 #feedback-texto { color: #000; font-weight: bold; text-align: center; font-size: 1.1rem; line-height: 1.3; }
+
 .feedback-actions { display: flex; gap: 15px; margin-top: 20px; width: 100%; }
+
 .btn-oval {
-    flex: 1; padding: 15px; border-radius: 50px; border: none; font-weight: bold;
-    text-transform: uppercase; cursor: pointer; color: white; transition: 0.1s;
+    flex: 1;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    transition: 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 .btn-verde { background: #46752d; box-shadow: 0 4px 0px #2a471b; }
 .btn-gris { background: #444; box-shadow: 0 4px 0px #222; }
@@ -360,12 +722,13 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%);
     height: 35vh; z-index: 5; pointer-events: none;
 }
+
 /* --- 8. MODAL PUNTOS (FINAL) --- */
 #modal-puntos {
     display: none; 
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.96);
     align-items: center; 
     justify-content: center;
     z-index: 9999;
@@ -380,7 +743,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    /* 1. SUBIMOS MÁS LA TARJETA BLANCA */
     margin-top: -100px; 
 }
 
@@ -392,20 +754,20 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     top: 0; left: 0;
 }
 
-/* Título ELIMINADO: Lo bajamos para que toque la tarjeta blanca */
 .titulo-final-asset { 
-   width: 100%;
+    width: 100%;
     max-width: 300px;
     z-index: 10;
+    margin-top: 70px;
+    position: relative;
 }
 #asset-titulo-ronda {
-    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3)); /* Le da un poco de profundidad */
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
 }
 
-/* PUNTUACIÓN: Ajustada para que quede centrada en el blanco */
 .bocadillo-puntuacion {
     position: absolute;
-    top: 40%;          /* Bajamos un poco más para que entre bien en el hueco blanco */
+    top: 40%;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -415,60 +777,92 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 .bocadillo-puntuacion p { 
     color: #000 !important; 
-    font-size: 0.85rem;    /* Aumentamos un poco el tamaño en web */
-    font-weight: 800;      /* Más grosor para que resalte */
-    margin: 2px 0;         /* Un poco más de aire entre líneas */
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin: 2px 0;
     line-height: 1.1;
     letter-spacing: -0.2px;
 }
 
-/* BOTONES: Ajustados a la franja verde */
 .final-botones-container {
-   position: absolute;
+    position: absolute;
     top: 52%; 
     left: 50%;
     transform: translateX(-50%);
-    width: 95%; /* Aumentamos de 82% a 92% para que los botones se estiren */
+    width: 95%;
     height: 10%; 
     display: flex;
     justify-content: space-between;
+    align-items: center;
     z-index: 100;
 }
 
-/* --- ESTILO CORRECTO PARA LOS BOTONES VERDES --- */
+.es-ganador .puntos-bg-img {
+    clip-path: inset(0 0 47% 0);
+}
+
+.final-screen-content .pista-bg {
+    clip-path: inset(0 0 47% 0);
+}
+
 .btn-final-verde {
-    /* 1. Mantenemos el tamaño equitativo */
     flex: 1;
-
-    /* 2. LIMPIEZA TOTAL DE ESTILOS ANTERIORES */
-    background: transparent !important; /* Quita el fondo blanco */
-    border: none !important;            /* Quita cualquier borde */
-    box-shadow: none !important;        /* Quita sombras si hay */
-
-    /* 3. ESTILO DE TEXTO */
-    color: white !important; /* Texto blanco como el original */
-    font-size: 0.6rem;      /* O el tamaño que prefieras */
+    background: #46752d !important;
+    border: none !important;
+    box-shadow: 0 4px 0px #2a471b !important;
+    outline: none !important;
+    color: white !important;
+    font-size: 0.6rem;
     font-weight: 900;
     text-transform: uppercase;
-    
-    /* 4. CENTRADO MAESTRO SIN MÁRGENES */
     display: flex;
-    align-items: center;    /* Centra verticalmente */
-    justify-content: center; /* Centra horizontalmente */
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    
-    /* 5. QUITAR MÁRGENES FANTASMA */
     margin: 0 !important;
-    padding: 0 5px !important; /* Solo un pequeño padding a los lados para respirar */
-    
+    padding: 12px 8px !important;
+    border-radius: 50px;
+    line-height: 1;
     cursor: pointer;
+    white-space: nowrap;
+    transition: 0.1s;
 }
-/* Ajuste para que la copa se vea centrada y elegante en la pantalla final */
+.btn-final-verde:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0px #2a471b !important;
+}
+
+.es-ganador .btn-invisible {
+    flex: 1;
+    background: #46752d !important;
+    border: none !important;
+    box-shadow: 0 4px 0px #2a471b !important;
+    outline: none !important;
+    color: white !important;
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 8px !important;
+    margin: 0 !important;
+    border-radius: 50px;
+    line-height: 1;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.es-ganador .btn-invisible:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0px #2a471b !important;
+}
+
 #modal-puntos .portero-final-img[src*="copa.png"] {
-    width: 60%; /* Ajusta según prefieras el tamaño */
+    width: 60%;
     max-width: 250px;
     margin: 20px auto;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6)); /* Brillo dorado */
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
     animation: flotarCopa 3s ease-in-out infinite;
 }
 
@@ -477,7 +871,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     50% { transform: translateY(-10px); }
 }
 
-/* EL PORTERO: Base profunda */
 .portero-final-pos {
     position: absolute; 
     bottom: -45%; 
@@ -487,9 +880,8 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     z-index: 5; 
     pointer-events: none;
 }
-/* --- 10. ESTILOS EXCLUSIVOS PARA EL MODAL DE PASAR FASE (GANADOR) --- */
 
-/* Contenedor principal: Usamos Flexbox para que los elementos se apilen solitos */
+/* --- 10. MODAL PASAR FASE (GANADOR) --- */
 .final-screen-content.es-ganador {
     display: flex;
     flex-direction: column;
@@ -500,15 +892,13 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     margin: 0 auto;
 }
 
-/* 1. Imagen superior (PASAS A OCTAVOS) */
 .es-ganador .titulo-fase-superior {
-    width: 85%; /* Ajusta según prefieras el tamaño */
+    width: 85%;
     height: auto;
     z-index: 20;
-    margin-bottom: 10px; /* Espacio real entre el título y el banner */
+    margin-bottom: 10px;
 }
 
-/* 2. El banner verde de PUNTOS.png */
 .es-ganador .contenedor-puntos-verde {
     position: relative;
     width: 100%;
@@ -521,7 +911,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     display: block;
 }
 
-/* Textos dentro del banner (MARCASTE / GANASTE) */
 .es-ganador .textos-encima-puntos {
     position: absolute;
     top: 30%; 
@@ -532,15 +921,14 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 }
 
 .es-ganador .textos-encima-puntos p {
-    color: #000 !important; /* Negro para que resalte en el fondo blanco del banner */
+    color: #000 !important;
     font-weight: 700;
     font-size: 0.7rem;
     margin: 2px 0;
 }
 
-/* Botones invisibles sobre la franja verde inferior del PNG */
 .es-ganador .final-botones-container-ganador {
-  position: absolute;
+    position: absolute;
     top: 73%; 
     left: 50%;
     transform: translateX(-50%);
@@ -548,181 +936,206 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     height: 10%; 
     display: flex;
     justify-content: space-between;
-    z-index: 100 !important; /* <--- Subimos el nivel */
+    align-items: center;
+    z-index: 100 !important;
     pointer-events: auto !important;
 }
- 
-.es-ganador .btn-invisible {
-    flex: 1;
-    background: transparent !important;
-    border: none !important;
-    color: white !important;
-    font-size: 0.65rem;
-    font-weight: 900;
-    cursor: pointer;
-}
 
-/* 3. El portero (ABAJO DEL TODO) */
 .es-ganador .portero-final-pos-ganador {
-    width: 110%; /* Un poco más ancho para que destaque abajo */
+    width: 110%;
     max-width: 450px;
     height: auto;
-    margin-top: 10px; /* Espacio para que no toque el banner si no quieres */
+    margin-top: 10px;
     z-index: 5;
-    pointer-events: none; /* <--- ESTO ES CLAVE */
+    pointer-events: none;
 }
-/* Ajuste para que la copa se vea centrada y elegante en la pantalla final */
+
 #modal-puntos .portero-final-img[src*="copa.png"] {
-    /* Tamaño: lo subimos para que luzca imponente */
     width: clamp(40px, 40vw, 220px) !important; 
     max-width: 220px;
-    
-    /* Posición: la centramos y ajustamos la altura */
     position: absolute;
-    bottom: 5% !important; /* Ajusta este número para subirla o bajarla del borde inferior */
+    bottom: 5% !important;
     left: 50%;
     transform: translateX(-50%);
-    
-    /* Estética: Brillo y animación */
     filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.7)); 
     margin: 0 auto;
     z-index: 10;
     animation: flotarCopa 3s ease-in-out infinite;
 }
 
-/* Animación de flotado suave */
 @keyframes flotarCopa {
     0%, 100% { transform: translate(-50%, 0); }
     50% { transform: translate(-50%, -15px); }
 }
+
 /* --- 9. RESPONSIVE (MÓVIL) --- */
-@media (max-width: 380px) {
-/* --- AJUSTE DE LOGO Y BOTÓN EN MÓVIL --- */
-    
-    /* 1. Aseguramos que el contenedor tenga espacio */
-    .center-content {
-        gap: 20px !important; /* Añade espacio automático entre logo y botón */
+@media (max-width: 600px) {
+
+    /* ── Banner superior ── */
+    .ad-bar-top {
+        top: 42px !important;
+        height: 42px !important;
+    }
+    .nike-logo-banner { height: 22px !important; }
+    .nike-ticker-tag { font-size: 0.65rem !important; letter-spacing: 0.5px !important; }
+    .ad-top-item { padding: 0 14px !important; height: 42px !important; }
+    .ad-top-sep { font-size: 0.8rem !important; }
+
+    /* ── Trivia: bien arriba, ancho completo ── */
+    #trivia-container {
+        top: 12% !important;
+        width: 92% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+    .pregunta-card p { font-size: 0.92rem !important; }
+    .btn-respuesta { font-size: 0.8rem !important; padding: 10px 4px !important; }
+
+    /* ── Franja inferior: OCULTAR en mobile ── */
+    .ad-bar-bottom {
+        display: none !important;
     }
 
-    /* 2. Quitamos el margen negativo que lo encimaba */
-    #btn-jugar {
-        margin-top: 10px !important; /* Cambiamos -30px por 10px positivos */
+    /* ── Banner "Ver colección": debajo del slider, centrado ── */
+    .ad-corner-izq {
+        top: 35% !important;
+        bottom: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: auto !important;
+        border-radius: 8px !important;
+        border: 3px solid #FF2D20 !important;
+    }
+    .corner-inner {
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 5px 10px !important;
+        gap: 8px !important;
+    }
+    .nike-logo-corner { height: 18px !important; }
+    .corner-texto { display: none !important; }
+    .corner-cta {
+        font-size: 0.6rem !important;
+        padding: 4px 10px !important;
+        margin-top: 0 !important;
     }
 
-    /* 3. Ajustamos el tamaño del logo si es necesario para que no empuje todo abajo */
-    .main-logo {
-        width: 280px !important; 
-        margin-bottom: 0 !important;
-    }
-
-    /* 4. Tamaño del botón jugar */
-    #btn-jugar img {
-        width: 150px !important;
-    }
-}
-    /* Ajustes generales de UI */
-    .main-logo { width: 310px; }
-    .logo-26 { height: 65px; }
-    .top-icon { height: 35px; }
-    
-    /* MODAL PUNTOS (ELIMINADO / FINAL) */
-    .final-screen-content {
-        max-width: 350px;
-        width: 85vw; /* Un poco más pequeño en móviles */
-    }
-    
-    /* Forzamos tus valores para que los textos caigan en el PNG */
-    .bocadillo-puntuacion { top: 42% !important; }
-    .bocadillo-puntuacion p { font-size: 0.8rem; }
-    
-    .final-botones-container { top: 51.5% !important; }
-    .btn-final-verde { font-size: 0.55rem; }
-    
-    .portero-final-pos { bottom: -50% !important; }
-
-    /* MODAL PASASTE DE FASE (GANADOR) */
-    .es-ganador .titulo-fase-superior { width: 75%; }
-    
-    .bocadillo-puntuacion-ganador { top: 38.5% !important; }
-    .bocadillo-puntuacion-ganador p { font-size: 0.85rem; }
-    
-    .botones-pasaste-container { top: 51% !important; }
-    
-    .es-ganador .textos-encima-puntos p { font-size: 0.8rem; }
-    .es-ganador .btn-invisible { font-size: 0.55rem; }
-    
-    .es-ganador .portero-final-pos-ganador {
-        width: 100%;
-        margin-top: 5px;
-    }
-
-    /* MODAL PISTA (LIBRETA) - Ajuste fino para móvil */
-    #modal-pista #pista-texto-contenido {
-        font-size: 0.85rem;
-        top: 25%;
-        width: 75%;
-    }
-    #modal-pista .pista-acciones {
-        bottom: 24%;
-        gap: 15px;
-    }
-    #modal-pista .btn-pista-label {
-        font-size: 0.6rem;
-    }
-/* HUD MÓVIL: CORRECCIÓN DE POSICIÓN EXTREMA */
+    /* ── HUD: arriba del balón, esquina derecha ── */
     #hud-inferior {
-        display: flex !important;
-        flex-direction: column !important; /* Fuerza vertical */
-        align-items: flex-end !important;   /* Todo pegado a la orilla derecha de su propia caja */
-        justify-content: flex-end !important;
-        
-        bottom: 150px !important; 
-        
-        /* --- AJUSTE CLAVE --- */
-        right: 10px !important;  /* ¡Más cerca de la orilla! (Cambiado de 15px o 20px a 10px) */
-        left: auto !important;   /* Elimina cualquier centrado previo */
-        /* -------------------- */
-
-        width: fit-content !important;     /* IMPORTANTE: La caja no ocupa el 100% del ancho */
-        height: auto !important;
-        
-        gap: 12px !important;              /* Espacio entre las dos cajas (4y4 y stats) */
-        transform: none !important;        /* Elimina el centrado con translateX(-50%) */
-        padding: 0 !important;
+        bottom: 17% !important;
+        right: 6px !important;
+        width: auto !important;
     }
-
-    /* BARRA DE BALONES DIVIDIDA (4 y 4) */
-    .balones-tracker {
-        display: grid !important;
-        grid-template-columns: repeat(4, 1fr) !important; /* Fuerza 4 columnas */
-        gap: 6px !important;
-        padding: 10px !important;
-        height: auto !important;           /* Crece según las dos filas */
-        width: fit-content !important;     /* Se ajusta al ancho de los balones */
-        border-radius: 15px !important;    /* Menos redondeado para el grid */
-        background: rgba(0, 0, 0, 0.8) !important;
-        order: 1 !important;               /* Asegura que vaya arriba */
-        justify-items: center !important;  /* Centra balones dentro de su celda grid */
-        margin: 0 !important;              /* Elimina márgenes fantasma */
-    }
-
-    /* CAJA DE STATS */
     .stats-box {
-        order: 2 !important;               /* Asegura que vaya abajo */
-        background: rgba(0, 0, 0, 0.8) !important;
-        border: 1px solid #333 !important;
-        border-radius: 12px !important;
-        padding: 8px 12px !important;
-        min-width: 110px !important;       /* Un poco más ancha para simular el "escalón" */
-        text-align: right !important;      /* Texto alineado a la derecha */
-        font-size: 0.8rem !important;
-        margin: 0 !important;              /* Elimina márgenes fantasma */
+        font-size: 0.7rem !important;
+        padding: 5px 9px !important;
+        min-width: 85px !important;
+    }
+    .dot { width: 14px !important; height: 14px !important; }
+    .balones-tracker {
+        gap: 5px !important;
+        padding: 8px !important;
     }
 
-    /* Ajuste de escala de iconos y textos */
-    .dot {
-        width: 18px !important;
-        height: 18px !important;
-        margin: 0 auto !important;
-    }
-    
+    /* ── Menú inicio ── */
+    .center-content { gap: 20px !important; }
+    #btn-jugar { margin-top: 10px !important; }
+    .main-logo { width: 260px !important; }
+    #btn-jugar img { width: 140px !important; }
+    .nike-logo-inicio { height: 40px !important; }
+}
+
+.main-logo { width: 310px; }
+.logo-26 { height: 65px; }
+.top-icon { height: 35px; }
+
+.final-screen-content { max-width: 350px; width: 85vw; }
+
+.bocadillo-puntuacion { top: 42% !important; }
+.bocadillo-puntuacion p { font-size: 0.8rem; }
+
+.final-botones-container { top: 51.5% !important; }
+.btn-final-verde { font-size: 0.55rem; }
+
+.portero-final-pos { bottom: -50% !important; }
+
+.es-ganador .titulo-fase-superior { width: 75%; }
+
+.bocadillo-puntuacion-ganador { top: 38.5% !important; }
+.bocadillo-puntuacion-ganador p { font-size: 0.85rem; }
+
+.botones-pasaste-container { top: 51% !important; }
+
+.es-ganador .textos-encima-puntos p { font-size: 0.8rem; }
+.es-ganador .btn-invisible { font-size: 0.55rem; }
+
+.es-ganador .portero-final-pos-ganador {
+    width: 100%;
+    margin-top: 5px;
+}
+
+#modal-pista #pista-texto-contenido {
+    font-size: 0.85rem;
+    top: 25%;
+    width: 75%;
+}
+#modal-pista .pista-acciones {
+    bottom: 24%;
+    gap: 15px;
+}
+#modal-pista .btn-pista-label {
+    font-size: 0.94rem;
+    font-weight: 900;
+    color: white !important;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    width: 100%;
+    line-height: 1;
+    letter-spacing: 0px;
+}
+
+#hud-inferior {
+    position: absolute;
+    bottom: 150px;
+    right: 10px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 50;
+    padding: 0;
+    pointer-events: none;
+}
+
+.balones-tracker {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
+    padding: 10px !important;
+    height: auto !important;
+    width: fit-content !important;
+    border-radius: 15px !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    order: 1 !important;
+    justify-items: center !important;
+    margin: 0 !important;
+}
+
+.stats-box {
+    order: 2 !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid #333 !important;
+    border-radius: 12px !important;
+    padding: 8px 12px !important;
+    min-width: 110px !important;
+    text-align: right !important;
+    font-size: 0.8rem !important;
+    margin: 0 !important;
+}
+
+.dot {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 auto !important;
+}
