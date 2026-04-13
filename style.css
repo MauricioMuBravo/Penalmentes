@@ -126,8 +126,7 @@ body, html {
 .nike-logo-inicio {
     height: 60px;
     width: auto;
-    filter: brightness(0) invert(1);
-    drop-shadow: 0 2px 14px rgba(0,0,0,0.5);
+    filter: drop-shadow(0 2px 14px rgba(0,0,0,0.5));
 }
 
 .nike-slogan-inicio {
@@ -139,43 +138,34 @@ body, html {
 }
 
 /* ============================================================
-   ✅ PUBLICIDAD NIKE — BANNER SUPERIOR SLIDER HORIZONTAL
+PUBLICIDAD NIKE — BANNER SUPERIOR SLIDER HORIZONTAL
    ============================================================ */
+
 .ad-bar-top {
-    position: absolute;
-    top: 55px;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    overflow: hidden;
-    z-index: 200;
-    pointer-events: auto;
-    background: #111;
-     border-top: 3px solid #FF2D20;
-    border-bottom: 3px solid #FF2D20;
-    display: flex;
-    align-items: center;
+  position: absolute;
+  top: 4%;
+  left: 0;
+  width: 100%;
+  pointer-events: auto;
+  background: #111;
+  padding: 1% 0px;
 }
 
-/* Track con scroll continuo */
 .ad-top-track {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    white-space: nowrap;
-    width: max-content;
-    animation: nike-scroll-top 22s linear infinite;
+  display: flex;
+  align-items: center;
+  animation: nike-scroll-top 22s linear infinite;
+  height: 42px;
+  position: relative;
 }
 
-/* ✅ Imagen SVG en el ticker superior */
 .ad-top-img {
-    height: 70px;
-    width: auto;
-    display: block;
-    flex-shrink: 0;
+  height: 100%;
+  display: block;
+  margin: 0 5%;
 }
 
-/* ✅ Imagen SVG en franjas inferiores */
+/*Imagen SVG en franjas inferiores */
 .ad-bottom-img {
     height: 44px;
     width: auto;
@@ -183,7 +173,7 @@ body, html {
     flex-shrink: 0;
 }
 
-/* ✅ Imagen SVG banner esquina */
+/*Imagen SVG banner esquina */
 .nike-corner-img {
     width: 140px;
     height: auto;
@@ -218,7 +208,6 @@ body, html {
 .nike-logo-banner {
     height: 36px;
     width: auto;
-    filter: brightness(0) invert(1);
     display: block;
     flex-shrink: 0;
 }
@@ -239,7 +228,7 @@ body, html {
 }
 
 /* ============================================================
-   ✅ PUBLICIDAD NIKE — FRANJA INFERIOR (izq + der, centro abierto)
+   PUBLICIDAD NIKE — FRANJA INFERIOR (izq + der, centro abierto)
    ============================================================ */
 .ad-bar-bottom {
     position: absolute;
@@ -260,11 +249,9 @@ body, html {
     align-items: center;
     flex: 1;
     max-width: 45%;
-    border-top: 2px solid #FF2D20;
-    border-bottom: 2px solid #FF2D20;
 }
 
-/* ✅ ÚNICO CAMBIO: gap fijo con position absolute en los strips */
+/* ÚNICO CAMBIO: gap fijo con position absolute en los strips */
 .ad-bottom-left {
     position: absolute;
     left: 0;
@@ -314,7 +301,6 @@ body, html {
 .nike-logo-bottom {
     height: 20px;
     width: auto;
-    filter: brightness(0) invert(1);
     flex-shrink: 0;
     display: inline-block;
     vertical-align: middle;
@@ -355,7 +341,7 @@ body, html {
 }
 
 /* ============================================================
-   ✅ PUBLICIDAD NIKE — BANNER ESQUINA
+   PUBLICIDAD NIKE — BANNER ESQUINA
    ============================================================ */
 .ad-corner-izq {
     position: absolute;
@@ -383,7 +369,6 @@ body, html {
 .nike-logo-corner {
     height: 28px;
     width: auto;
-    filter: brightness(0) invert(1);
     display: block;
 }
 
@@ -974,7 +959,7 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     /* ── Banner superior ── */
     .ad-bar-top {
         top: 42px !important;
-        height: 42px !important;
+        padding: 3% 0;
     }
     .nike-logo-banner { height: 22px !important; }
     .nike-ticker-tag { font-size: 0.65rem !important; letter-spacing: 0.5px !important; }
@@ -983,7 +968,7 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
     /* ── Trivia: bien arriba, ancho completo ── */
     #trivia-container {
-        top: 12% !important;
+        top: 18% !important;
         width: 92% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
@@ -997,28 +982,28 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     }
 
     /* ── Banner "Ver colección": debajo del slider, centrado ── */
-    .ad-corner-izq {
-        top: 35% !important;
-        bottom: auto !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: auto !important;
-        border-radius: 8px !important;
-        border: 3px solid #FF2D20 !important;
-    }
-    .corner-inner {
-        flex-direction: row !important;
-        align-items: center !important;
-        padding: 5px 10px !important;
-        gap: 8px !important;
-    }
-    .nike-logo-corner { height: 18px !important; }
-    .corner-texto { display: none !important; }
-    .corner-cta {
-        font-size: 0.6rem !important;
-        padding: 4px 10px !important;
-        margin-top: 0 !important;
-    }
+  .ad-corner-izq {
+    top: auto !important;
+    bottom: 22% !important;
+    left: 0 !important;
+    transform: none !important;
+    width: auto !important;
+    border-radius: 0 8px 8px 0 !important;
+    border: 3px solid #FF2D20 !important;
+}
+.corner-inner {
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 5px 10px !important;
+    gap: 8px !important;
+}
+.nike-logo-corner { height: 18px !important; }
+.corner-texto { display: none !important; }
+.corner-cta {
+    font-size: 0.6rem !important;
+    padding: 4px 10px !important;
+    margin-top: 0 !important;
+}
 
     /* ── HUD: arriba del balón, esquina derecha ── */
     #hud-inferior {
