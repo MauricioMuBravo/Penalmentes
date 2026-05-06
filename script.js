@@ -1,15 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 // --- 1. CONFIGURACIÓN Y ASSETS ---
-const audioIntro = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3");
-audioIntro.loop = true;
-const audioEstadio = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/gente1.mp3");
-const audioTiro = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/tiro.mp3");
-const audioFallo = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/fallo.mp3");
-const audioGol = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Gool.mp3");
-const audioSilbato = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/silbato.mp3");
+const audioIntro    = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3");
+audioIntro.loop     = true;
 
-audioEstadio.loop = true;
+// preload="auto": el browser descarga el audio completo de inmediato,
+// listo para reproducirse sin latencia cuando el usuario interactúe.
+const audioEstadio  = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/gente1.mp3");
+audioEstadio.preload = "auto";
+audioEstadio.loop   = true;
+
+const audioTiro     = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/tiro.mp3");
+audioTiro.preload   = "auto";
+
+const audioFallo    = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/09.Septiembre/Mundial-2026/fallo.mp3");
+audioFallo.preload  = "auto";
+
+const audioGol      = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Gool.mp3");
+audioGol.preload    = "auto";
+
+const audioSilbato  = new Audio("https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/silbato.mp3");
+audioSilbato.preload = "auto";
 
 document.addEventListener('click', function() {
     if (audioIntro.paused && document.getElementById('menu-inicio').style.display !== 'none') {
@@ -17,59 +28,106 @@ document.addEventListener('click', function() {
     }
 }, { once: true });
 
-
 const iconInfoNormal = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png";
 const iconInfoActivo = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFONEG.png";
 const iconCredNormal = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CRED.png";
 const iconCredActivo = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CREDNEG.png";
-const imgConVol = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png";
-const imgSinVol = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/SINVOL.png";
+const imgConVol      = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png";
+const imgSinVol      = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/SINVOL.png";
 
 const imgFinalPuntos = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PUNTOS.png";
-const imgEliminado = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ELIMINADO.png";
+const imgEliminado   = "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ELIMINADO.png";
+
+// ─── PRECARGA DE IMÁGENES VÍA JS ────────────────────────────────────────────
+// Las imágenes del juego (GOL, ATAJADA, iconos de estado) se asignan
+// dinámicamente por JS y el browser no las descubre por sí solo hasta
+// que ya se necesitan. Se precargan aquí con HTMLLinkElement, siguiendo
+// la misma técnica que describe MDN en rel="preload" > Scripting and preloads.
+function precargarImagen(url) {
+    const link = document.createElement('link');
+    link.rel  = 'preload';
+    link.as   = 'image';
+    link.href = url;
+    document.head.appendChild(link);
+}
+
+// Imágenes críticas del juego que el HTML no puede precargar
+// porque solo se conocen en tiempo de ejecución
+const imagenesCriticas = [
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GOL.png",
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ATAJADA.png",
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ELIMINADO.png",
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GANASTELMUNDIALITO.png",
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Interactivo/copa.png",
+    // Íconos que cambian de estado (activo/silencio): el browser no los
+    // conoce hasta que el usuario los activa por primera vez
+    iconInfoActivo,
+    iconCredActivo,
+    imgSinVol,
+    // Pantallas de avance de fase
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PASASAOCTAVOS.png",
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CUARTOS.png",
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/SEMIFINALES.png",
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GFINAL.png"
+];
+imagenesCriticas.forEach(precargarImagen);
+
+// ─── PRECARGA DE PORTEROS DE SIGUIENTE FASE ─────────────────────────────────
+// Se llama cada vez que el usuario avanza de ronda para que las
+// imágenes del siguiente portero estén listas antes de usarse.
+function precargarPorterosFase(fase) {
+    const p = porterosPorFase[fase];
+    if (!p) return;
+    [p.base, p.alegre, p.enojado, p.finalGana, p.finalPierde].forEach(precargarImagen);
+}
 
 const porterosPorFase = {
     0: {
         nombre: "Ochoa",
-        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%284%29.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%289%29.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%2810%29.png",
-        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%2810%29.png",
-        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%281%29.png"
+        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%287%29.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2815%29.png",
+        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%2812%29.png",
+        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%2811%29.png"
     },
     1: {
         nombre: "Buffon",
-        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%284%29.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%281%29.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%286%29.png",
-        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%282%29.png",
-        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%287%29.png"
+        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%285%29.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%289%29.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%288%29.png",
+        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%2814%29.png",
+        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%2813%29.png"
     },
     2: {
         nombre: "Jorge Campos",
-        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%284%29.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%287%29.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%286%29.png",
-        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%288%29.png",
-        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%287%29.png"
+        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2811%29.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2810%29.png",
+        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%282%29.png",
+        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%2815%29.png"
     },
     3: {
         nombre: "Oliver Kahn",
-        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%284%29.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%289%29.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%2811%29.png",
-        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%2810%29.png",
-        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%285%29.png"
+        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2813%29.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2812%29.png",
+        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%284%29.png",
+        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%283%29.png"
     },
     4: {
         nombre: "Lev Yashin",
-        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%284%29.png",
-        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%281%29.png",
-        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%282%29.png",
-        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%283%29.png",
-        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/frases/xuxin_frases%20%286%29.png"
+        base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
+        alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%281%29.png",
+        enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2814%29.png",
+        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%286%29.png",
+        finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_FRASES/XUXIN_FRASES%20%285%29.png"
     }
 };
+
+// Precarga el portero de fase 0 (ya está en HTML) y del siguiente (fase 1)
+// para que esté listo cuando el usuario pase de ronda por primera vez
+precargarPorterosFase(0);
+precargarPorterosFase(1);
 
 const bancoPreguntas = [
     [ // Fase 1: Grupos
@@ -124,7 +182,6 @@ const bancoPreguntas = [
     ]
 ];
 
-
 // ─── FUNCIÓN PARA BARAJAR ─────────────────────────────────────────────────────
 function shuffleArray(arr) {
     const shuffled = arr.slice();
@@ -140,12 +197,15 @@ function shuffleArray(arr) {
 let preguntasActuales = [];
 
 // --- 3. ESTADO DEL JUEGO ---
-let faseActual = 0;
-let preguntaIndice = 0;
-let vidas = 5;
-let goles = 0;
-let tiempo = 12;
+let faseActual       = 0;
+let preguntaIndice   = 0;
+let vidas            = 5;
+let goles            = 0;
+let tiempo           = 12;
 let crono;
+let tiempoAcumulado  = 0;
+// Variable local para el intervalo del confeti (antes estaba en window, contaminando el scope global)
+let confettiInterval = null;
 
 // --- 4. REFERENCIAS A MODALES ---
 const modalInfo     = document.getElementById('modal-info');
@@ -200,7 +260,6 @@ document.querySelectorAll('.btn-cred-trigger').forEach(function(btn) {
     };
 });
 
-// Cerrar modales de info/créditos (NO afecta la pista)
 document.querySelectorAll('.btn-close-trigger, .close-modal').forEach(function(btn) {
     btn.onclick = function() {
         modalInfo.style.display = 'none';
@@ -210,7 +269,7 @@ document.querySelectorAll('.btn-close-trigger, .close-modal').forEach(function(b
     };
 });
 
-// ✅ VOLVER desde la pista: cierra modal Y reanuda el cronómetro
+// VOLVER desde la pista: cierra modal Y reanuda el cronómetro
 document.getElementById('btn-volver-juego').onclick = function() {
     modalPista.style.display = 'none';
     if (tiempo > 0) {
@@ -263,8 +322,7 @@ function cargarPregunta() {
         modalPista.style.display = 'flex';
         btnPista.style.opacity = '0.5';
         btnPista.style.pointerEvents = 'none';
-        // ✅ PAUSA el cronómetro al abrir la pista
-        clearInterval(crono);
+        clearInterval(crono); // pausa al abrir pista
     };
 
     tiempo = 12;
@@ -284,6 +342,7 @@ function iniciarCronometro() {
 function manejarSeleccion(opcion) {
     if (vidas <= 0) return;
     clearInterval(crono);
+    tiempoAcumulado += (12 - tiempo);
     const data = preguntasActuales[preguntaIndice];
     const esCorrecto = (opcion === data.a);
     document.querySelectorAll('.btn-respuesta').forEach(function(b) { b.style.pointerEvents = 'none'; });
@@ -372,7 +431,7 @@ document.getElementById('btn-siguiente').onclick = function() {
     const portero = document.getElementById('portero');
 
     balon.style.transition = 'none';
-    balon.style.opacity = '1';  
+    balon.style.opacity = '1';
     balon.style.transform = 'translate(-50%, -50%)';
     void balon.offsetHeight;
     portero.className = '';
@@ -423,6 +482,9 @@ function mostrarModalPasaste() {
             document.querySelectorAll('.dot').forEach(function(dot) {
                 dot.classList.remove('green', 'red');
             });
+            // Precarga el portero de la siguiente fase al avanzar,
+            // de modo que sus imágenes estén listas antes de usarse
+            precargarPorterosFase(faseActual + 1);
             cargarPregunta();
         };
     }
@@ -430,7 +492,7 @@ function mostrarModalPasaste() {
 
 function mostrarPantallaCampeon() {
     document.getElementById('puntos-titulo-img').src = 'https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GANASTELMUNDIALITO.png';
-    document.getElementById('portero-final-img').src = 'https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/copa2.png';
+    document.getElementById('portero-final-img').src = 'https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Interactivo/copa.png';
     document.getElementById('final-goles-count').innerText = goles;
     document.getElementById('btn-puntos-reintentar').innerText = '¡JUGAR OTRA VEZ!';
 
@@ -441,17 +503,13 @@ function mostrarPantallaCampeon() {
 }
 
 function dispararConfeti() {
-    const duration = 5000;
-    const animationEnd = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10001 };
     function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-    const interval = setInterval(function() {
-        const timeLeft = animationEnd - Date.now();
-        if (timeLeft <= 0) return clearInterval(interval);
-        const particleCount = 50 * (timeLeft / duration);
-        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-    }, 250);
+    // Variable local en lugar de window.confettiInterval para no contaminar el scope global
+    confettiInterval = setInterval(function() {
+        confetti(Object.assign({}, defaults, { particleCount: 40, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount: 40, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+    }, 400);
 }
 
 function mostrarPantallaFinal(ganoMundial) {
@@ -475,8 +533,26 @@ function mostrarPantallaFinal(ganoMundial) {
     modalPuntos.style.display = 'flex';
 }
 
+// ─── FUNCIÓN COMPARTIR (centralizada — eliminada la duplicación) ──────────────
+function ejecutarCompartir() {
+    const texto = '¡Metí ' + goles + ' goles en el Mundialito Milenio! ⚽ Respondí en ' + tiempoAcumulado + ' segundos. ¿Puedes superarme?';
+    const url = window.location.href;
+    if (navigator.share) {
+        navigator.share({ title: 'Mundialito Milenio', text: texto, url: url }).catch(console.error);
+    } else {
+        const textoCod = encodeURIComponent(texto);
+        const urlCod   = encodeURIComponent(url);
+        window.open('https://twitter.com/intent/tweet?text=' + textoCod + '&url=' + urlCod, '_blank');
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + urlCod + '&quote=' + textoCod, '_blank');
+        window.open('https://wa.me/?text=' + textoCod + '%20' + urlCod, '_blank');
+    }
+}
+
 // --- 9. BOTONES FINALES ---
-document.getElementById('btn-puntos-reintentar').onclick = function() { location.reload(); };
+document.getElementById('btn-puntos-reintentar').onclick = function() {
+    clearInterval(confettiInterval);
+    location.reload();
+};
 
 const btnCopaFinal = document.getElementById('btn-puntos-copa');
 if (btnCopaFinal) {
@@ -487,14 +563,7 @@ if (btnCopaFinal) {
 
 const btnCompartirFinal = document.getElementById('btn-puntos-compartir');
 if (btnCompartirFinal) {
-    btnCompartirFinal.onclick = function() {
-        const texto = '¡Metí ' + goles + ' goles en el Mundialito Milenio! ⚽ ¿Puedes superarme?';
-        if (navigator.share) {
-            navigator.share({ title: 'Mundialito Milenio', text: texto, url: window.location.href }).catch(console.error);
-        } else {
-            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(texto), '_blank');
-        }
-    };
+    btnCompartirFinal.onclick = ejecutarCompartir;
 }
 
 // --- 10. FUNCIONES GLOBALES ---
@@ -502,28 +571,21 @@ window.irACopa = function() {
     window.open('https://www.milenio.com/deportes/futbol-internacional/mundial', '_blank');
 };
 
-window.compartir = function() {
-    const texto = '¡Metí ' + goles + ' goles en el Mundialito Milenio! ⚽ ¿Puedes superarme?';
-    if (navigator.share) {
-        navigator.share({ title: 'Mundialito Milenio', text: texto, url: window.location.href }).catch(console.error);
-    } else {
-        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(texto), '_blank');
-    }
-};
+// Apunta a la misma función centralizada, sin duplicar código
+window.compartir = ejecutarCompartir;
+
 // --- PAUSA/REANUDA al cambiar de pestaña ---
 document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
-        // Usuario salió de la pestaña → pausar cronómetro
         clearInterval(crono);
     } else {
-        // Usuario regresó → reanudar solo si hay tiempo restante y el juego está activo
-        const campoVisible = document.getElementById('campo-juego').style.display !== 'none';
+        const campoVisible   = document.getElementById('campo-juego').style.display !== 'none';
         const feedbackVisible = modalFeedback.style.display === 'flex';
-        const pistaVisible = modalPista.style.display === 'flex';
-
+        const pistaVisible   = modalPista.style.display === 'flex';
         if (campoVisible && !feedbackVisible && !pistaVisible && tiempo > 0) {
             iniciarCronometro();
         }
     }
 });
+
 }); // ← cierre del DOMContentLoaded
