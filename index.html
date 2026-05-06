@@ -4,6 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundialito Milenio 2026</title>
+
+    <!-- ============================================================
+         PRELOADS — Recursos críticos descargados con alta prioridad
+         antes de que el render engine los descubra por sí solo.
+         Orden: CSS y JS → fondo (oculto en CSS) → pantalla inicial
+                → juego → íconos de estado (descubiertos solo por JS)
+         ============================================================ -->
+
+    <!-- CSS y JS principal -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+
+    <!-- Fondo del juego: declarado en CSS ::before — el browser
+         no lo descubre hasta parsear el CSS completo -->
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png" as="image">
+
+    <!-- Pantalla de inicio -->
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/NUEVOLOGOFUTBOLITO.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGO26.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/JUGAR.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" as="image">
+
+    <!-- Gameplay crítico -->
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PISTA.png" as="image">
+
+    <!-- Imágenes asignadas dinámicamente por JS (sin preload el browser
+         no las descubre hasta que el JS las asigna en tiempo de juego) -->
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GOL.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ATAJADA.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ELIMINADO.png" as="image">
+
+    <!-- Íconos de estado: solo se asignan cuando el usuario los activa
+         por primera vez (info activo, créditos activo, sin volumen) -->
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFONEG.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CREDNEG.png" as="image">
+    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/SINVOL.png" as="image">
+
+    <!-- ============================================================
+         RECURSOS REALES — CSS y favicon
+         ============================================================ -->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png">
 </head>
@@ -21,13 +65,12 @@
 
             <main id="menu-inicio">
                 <div class="center-content">
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGOMUNDIALITOM.png" class="main-logo" alt="Mundialito Milenio">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/NUEVOLOGOFUTBOLITO.png" class="main-logo" alt="Mundialito Milenio">
                     <div class="container-btn-jugar">
                         <button id="btn-jugar">
                             <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/JUGAR.png" alt="Jugar">
                         </button>
                     </div>
-                    <!-- PUBLICIDAD NIKE - DEBAJO DEL BOTÓN JUGAR -->
                     <div class="sponsor-inicio">
                         <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="nike-logo-inicio" alt="Nike">
                     </div>
@@ -37,61 +80,41 @@
             <section id="campo-juego" style="display: none;">
                 <div class="escena-penal">
 
-                    <!-- PUBLICIDAD NIKE - BANNER SUPERIOR SLIDER HORIZONTAL -->
                     <div class="ad-bar-top">
-                        <div class="ad-top-track">
-                            <!-- Bloque 1 — imágenes SVG -->
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Just Do It">
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Patrocinador">
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Juega sin límites">
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Colección Mundial 2026">
-                            <!-- Duplicado para loop infinito -->
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Just Do It">
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Patrocinador">
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Juega sin límites">
-                            <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" alt="Nike Colección Mundial 2026">
-                        </div>
+                        <a href="https://www.nike.com/mx/futbol" target="_blank" title="Visita nike.com">
+                            <div class="ad-top-track">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" width="118" height="42" alt="Nike Just Do It">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" width="118" height="42" alt="Nike Patrocinador">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" width="118" height="42" alt="Nike Juega sin límites">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" width="118" height="42" alt="Nike Colección Mundial 2026">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" width="118" height="42" alt="Nike Just Do It">
+                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-top-img" width="118" height="42" alt="Nike Patrocinador">
+                            </div>
+                        </a>
                     </div>
-                    <!-- FIN BANNER SUPERIOR SLIDER -->
 
-                    <!-- PUBLICIDAD NIKE - FRANJA INFERIOR (izq + der, centro libre) -->
                     <div class="ad-bar-bottom">
-
-                        <div class="ad-bottom-strip ad-bottom-left">
-                            <div class="bottom-strip-track">
-                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Just Do It">
-                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Colección">
-                                <!-- duplicado -->
-                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Just Do It">
-                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Colección">
+                        <a href="https://www.nike.com/mx/futbol" target="_blank" title="Visita nike.com">
+                            <div class="ad-bottom-track">
+                                <div class="ad-bottom-strip ad-bottom-left">
+                                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" width="78" height="28" alt="Nike Colección">
+                                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" width="78" height="28" alt="Nike Just Do It">
+                                </div>
+                                <div class="ad-bottom-strip ad-bottom-right">
+                                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" width="78" height="28" alt="Nike Patrocinador">
+                                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" width="78" height="28" alt="Nike Juega sin límites">
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Hueco central — portería visible -->
-                        <div class="ad-bottom-gap"></div>
-
-                        <div class="ad-bottom-strip ad-bottom-right">
-                            <div class="bottom-strip-track bottom-strip-rtl">
-                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Patrocinador">
-                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Juega sin límites">
-                                <!-- duplicado -->
-                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Patrocinador">
-                                <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="ad-bottom-img" alt="Nike Juega sin límites">
-                            </div>
-                        </div>
-
+                        </a>
                     </div>
-                    <!-- FIN FRANJA INFERIOR -->
 
-                    <!-- BANNER ESQUINA: Nike -->
-                                <div class="ad-corner-izq">
+                    <div class="ad-corner-izq">
                         <div class="corner-inner">
                             <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Nike/Logo_NIKEWhite.svg" class="nike-logo-corner" alt="Nike">
                             <p class="corner-texto">Just Do It.</p>
                             <a href="https://www.nike.com/mx/futbol" target="_blank" class="corner-cta">Ver colección</a>
                         </div>
                     </div>
-                    <!-- FIN BANNER ESQUINA -->
 
                     <div id="trivia-container">
                         <div class="trivia-header-row">
@@ -112,7 +135,7 @@
                         </div>
                     </div>
 
-                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/soloportero/xuxin_portero%20%284%29.png" id="portero" alt="Portero">
+                    <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png" id="portero" alt="Portero">
                     <img src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png" id="balon" alt="Balón">
 
                     <div id="hud-inferior">
@@ -228,14 +251,18 @@
                 </div>
             </div>
 
-            <audio id="bg-music" loop>
+            <!-- Audio de fondo: preload="none" evita descargar el MP3 innecesariamente.
+                 El JS lo gestiona directamente con new Audio() y preload="auto". -->
+            <audio id="bg-music" loop preload="none">
                 <source src="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Intro.mp3" type="audio/mpeg">
             </audio>
 
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Scripts al final del body con defer para no bloquear el render.
+         El preload del <head> garantiza que script.js ya está en caché. -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
