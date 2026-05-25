@@ -589,7 +589,20 @@ function ejecutarPenal(esCorrecto) {
         let currentFrameIndex = 0;
         const tiempoPorFotograma = 130; // Tiempo perfecto para que no se salte el 4.1
 
-       clearInterval(spriteInterval);
+        const spriteInterval = setInterval(function() {
+            if (currentFrameIndex < frames.length) {
+                // Va cambiando el atributo src renderizando cada imagen
+                portero.src = frames[currentFrameIndex];
+
+                // Si es atajada, desvanecer el balón al tocar las manos (índice 2)
+                if (!esCorrecto && currentFrameIndex === 2) {
+                    balon.style.transition = 'none';
+                    balon.style.opacity = '0';
+                }
+                currentFrameIndex++;
+            } else {
+                // ... dentro de ejecutarPenal, cuando termina el recorrido de los frames:
+clearInterval(spriteInterval);
 
 const delayCierre = esCorrecto ? 650 : 200; // Damos tiempo de ver el 4.1 y 5
 
