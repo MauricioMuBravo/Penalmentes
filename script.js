@@ -589,41 +589,26 @@ function ejecutarPenal(esCorrecto) {
         let currentFrameIndex = 0;
         const tiempoPorFotograma = 130; // Tiempo perfecto para que no se salte el 4.1
 
-        const spriteInterval = setInterval(function() {
-            if (currentFrameIndex < frames.length) {
-                // Va cambiando el atributo src renderizando cada imagen
-                portero.src = frames[currentFrameIndex];
+       clearInterval(spriteInterval);
 
-                // Si es atajada, desvanecer el balón al tocar las manos (índice 2)
-                if (!esCorrecto && currentFrameIndex === 2) {
-                    balon.style.transition = 'none';
-                    balon.style.opacity = '0';
-                }
-                currentFrameIndex++;
-            } else {
-                clearInterval(spriteInterval);
+const delayCierre = esCorrecto ? 650 : 200; // Damos tiempo de ver el 4.1 y 5
 
-                // Si es gol, damos 650ms para que se dibuje el vuelo de 4.1 y la caída de 5
-                const delayCierre = esCorrecto ? 650 : 200;
+setTimeout(function() {
+    if (esCorrecto) {
+        audioGol.play();
+        actualizarMarcador(true);
+        mostrarModalResultado('GOL');
+    } else {
+        audioFallo.play();
+        actualizarMarcador(false);
+        mostrarModalResultado('ATAJADA');
+    }
+    
+    // AQUÍ ESTÁ EL TRUCO: El JS se encarga de ocultarlo de manera ordenada
+    // JUSTO CUANDO el modal ya cubre o aparece en la pantalla.
+    portero.style.opacity = '0'; 
 
-                setTimeout(function() {
-                    if (esCorrecto) {
-                        audioGol.play();
-                        audioEstadio.volume = 1.0;
-                        actualizarMarcador(true);
-                        mostrarModalResultado('GOL');
-                    } else {
-                        audioFallo.play();
-                        audioEstadio.volume = 1.0;
-                        balon.style.opacity = '0';
-                        actualizarMarcador(false);
-                        mostrarModalResultado('ATAJADA');
-                    }
-                    
-                    // Ocultamos el portero de forma limpia mediante JS JUSTO AQUÍ, 
-                    // garantizando que ya pasaron todas las poses de la secuencia.
-                    portero.style.opacity = '0';
-                }, delayCierre);
+}, delayCierre);
             }
         }, tiempoPorFotograma);
 
