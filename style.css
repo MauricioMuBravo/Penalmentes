@@ -1401,7 +1401,7 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
     padding: 10px !important;
 
-    background: rgba(0,0,0,0.85) !important;
+    background: rgba(0,0,0,1.91) !important;
 
     border: 1px solid #444 !important;
 
@@ -1417,7 +1417,7 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
     order: 2 !important; 
 
-    background: rgba(0,0,0,0.85) !important;
+    background: rgba(0,0,0,1.91) !important;
 
     border: 1px solid #444 !important;
 
