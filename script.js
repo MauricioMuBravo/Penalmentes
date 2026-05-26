@@ -98,36 +98,23 @@ const porterosPorFase = {
         enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2815%29.png",
         finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero1Al.png",
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero1En.png",
-        derecha: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png"
-            ]
-        },
-        izquierda: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png"
-            ]
-        }
+        
+      spritesDerecha: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+        ],
+        spritesIzquierda: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+        ]
     },
     1: {
         nombre: "Buffon",
@@ -136,36 +123,24 @@ const porterosPorFase = {
         enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%288%29.png",
         finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero2Al.png",
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero2En.png",
-        derecha: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%285%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%285%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png"
-            ]
-        },
-        izquierda: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%285%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%285%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png"
-            ]
-        }
+        spritesDerecha: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+        ],
+        spritesIzquierda: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+
+        ]
+        
     },
     2: {
         nombre: "Jorge Campos",
@@ -174,36 +149,23 @@ const porterosPorFase = {
         enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2810%29.png",
         finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero3Al.png",
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero3En.png",
-        derecha: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png"
-            ]
-        },
-        izquierda: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png"
-            ]
-        }
+        spritesDerecha: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
+           "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+            
+        ],
+        spritesIzquierda: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
+             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+        ]
     },
     3: {
         nombre: "Oliver Kahn",
@@ -212,36 +174,22 @@ const porterosPorFase = {
         enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2812%29.png",
         finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero4Al.png",
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero4En.png",
-        derecha: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png",
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png"
-            ]
-        },
-        izquierda: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png"
-            ]
-        }
+       spritesDerecha: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+        ],
+        spritesIzquierda: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+        ]
     },
     4: {
         nombre: "Lev Yashin",
@@ -250,42 +198,31 @@ const porterosPorFase = {
         enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2814%29.png",
         finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero5Al.png",
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero5En.png",
-        derecha: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png"
-            ]
-        },
-        izquierda: {
-            gol: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png",
-                 "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"
-            ],
-            atajada: [
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-                "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png"
-            ]
-        }
+       spritesDerecha: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+        ],
+        spritesIzquierda: [
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
+             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+        ]
     }
 };
+
 // Precarga el portero de fase 0 (ya está en HTML) y del siguiente (fase 1)
 // para que esté listo cuando el usuario pase de ronda por primera vez
 precargarPorterosFase(0);
 precargarPorterosFase(1);
+    
+    
 
 const bancoPreguntas = [
     [ // Fase 1: Grupos
@@ -550,82 +487,77 @@ function manejarSeleccion(opcion) {
 }
 
 function ejecutarPenal(esCorrecto) {
-    audioIntro.pause();
-    audioTiro.currentTime = 0;
-    audioTiro.play();
-
-    audioEstadio.volume = 0.2;
-
     const balon = document.getElementById('balon');
     const portero = document.getElementById('portero');
-    const pData = porterosPorFase[faseActual];
+    const porteroData = porterosPorFase[faseActual];
 
-    // Forzamos que el portero sea 100% visible al iniciar el tiro
-    portero.style.opacity = '1';
+    balon.style.opacity = '1'; 
+    balon.style.visibility = 'visible';
+    balon.style.transition = 'none'; 
+    balon.style.transform = 'translateX(-50%)';
+    void balon.offsetHeight;
+    audioEstadio.volume = 0.1;
+    audioSilbato.play(); // ← suena AL INSTANTE al elegir respuesta
 
-    // Selección aleatoria del lado del tiro
-    const lado = Math.random() < 0.5 ? 'derecha' : 'izquierda';
-    const frames = esCorrecto ? pData[lado].gol : pData[lado].atajada;
-
-    // --- ANIMACIÓN DEL BALÓN VIAJANDO ---
-    balon.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
-
-    if (lado === 'derecha') {
-        if (esCorrecto) {
-            balon.style.transform = 'translate(110px, -230px) scale(0.35)';
-        } else {
-            balon.style.transform = 'translate(75px, -200px) scale(0.38)';
-        }
-    } else {
-        if (esCorrecto) {
-            balon.style.transform = 'translate(-110px, -230px) scale(0.35)';
-        } else {
-            balon.style.transform = 'translate(-75px, -200px) scale(0.38)';
-        }
-    }
-
-    // --- ENTRADA DE LOS SPRITES DEL PORTERO ---
     setTimeout(function() {
-        let currentFrameIndex = 0;
-        const tiempoPorFotograma = 130; // Tiempo perfecto para que no se salte el 4.1
+        balon.style.transition = 'transform 0.5s ease-out';
+        audioTiro.play(); // ← 600ms después suena el tiro y se mueve el balón
+        
+        const esDireccionDerecha = Math.random() > 0.5;
+        const ladoX = esDireccionDerecha ? '15vh' : '-15vh';
 
-        const spriteInterval = setInterval(function() {
-            if (currentFrameIndex < frames.length) {
-                // Va cambiando el atributo src renderizando cada imagen
-                portero.src = frames[currentFrameIndex];
+        const porteroSeTiraDerecha = esCorrecto ? !esDireccionDerecha : esDireccionDerecha;
+        const spritesPortero = porteroSeTiraDerecha ? porteroData.spritesDerecha : porteroData.spritesIzquierda;
 
-                // Si es atajada, desvanecer el balón al tocar las manos (índice 2)
-                if (!esCorrecto && currentFrameIndex === 2) {
-                    balon.style.transition = 'none';
-                    balon.style.opacity = '0';
-                }
-                currentFrameIndex++;
-            } else {
-                // ... dentro de ejecutarPenal, cuando termina el recorrido de los frames:
-clearInterval(spriteInterval);
+        portero.className = ''; 
+        portero.classList.add(porteroSeTiraDerecha ? 'portero-der' : 'portero-izq');
 
-const delayCierre = esCorrecto ? 650 : 200; // Damos tiempo de ver el 4.1 y 5
+       // GOL:     base(0) → /2(1) → /3(2) → /4.1(4) → /5(5)  — cae al piso
+// ATAJADA: base(0) → /2(1) → /3(2) → /4(3)             — atrapa el balón
+const frames = esCorrecto 
+    ? [spritesPortero[2], spritesPortero[4], spritesPortero[5]]
+    : [spritesPortero[2], spritesPortero[3]];
 
-setTimeout(function() {
-    if (esCorrecto) {
-        audioGol.play();
-        actualizarMarcador(true);
-        mostrarModalResultado('GOL');
+portero.src = spritesPortero[1]; // /2.png aparece al instante
+let currentFrameIndex = 0;
+const tiempoPorFotograma = 150; 
+
+const spriteInterval = setInterval(function() {
+    if (currentFrameIndex < frames.length) {
+        portero.src = frames[currentFrameIndex];
+        currentFrameIndex++;
     } else {
+        clearInterval(spriteInterval);
+    }
+}, tiempoPorFotograma);
+
+      if (esCorrecto) {
+            // Caso: GOL (El balón entra, NO desaparece)
+            balon.style.transform = 'translate(calc(-50% + ' + ladoX + '), -36vh)';
+            setTimeout(function() {
+                audioGol.play();
+                audioEstadio.volume = 1.0;
+                actualizarMarcador(true);
+                mostrarModalResultado('GOL');
+            }, 600);
+       } else {
+    balon.style.transform = 'translate(calc(-50% + ' + ladoX + '), -30vh)';
+
+    setTimeout(function() {
+        balon.style.transition = 'opacity 0.08s ease';
+        balon.style.opacity = '0';
+        
+        setTimeout(function() {
+            balon.style.visibility = 'hidden';
+        }, 80);
+
         audioFallo.play();
+        audioEstadio.volume = 1.0;
         actualizarMarcador(false);
         mostrarModalResultado('ATAJADA');
-    }
-    
-    // AQUÍ ESTÁ EL TRUCO: El JS se encarga de ocultarlo de manera ordenada
-    // JUSTO CUANDO el modal ya cubre o aparece en la pantalla.
-    portero.style.opacity = '0'; 
-
-}, delayCierre);
-            }
-        }, tiempoPorFotograma);
-
-    }, 350); 
+    }, 430);
+       }
+    }, 600);
 }
 
 function actualizarMarcador(fueGol) {
@@ -674,9 +606,10 @@ document.getElementById('btn-siguiente').onclick = function() {
     const balon = document.getElementById('balon');
     const portero = document.getElementById('portero');
 
-    balon.style.transition = 'none';
-    balon.style.opacity = '1';
-    balon.style.transform = 'translate(-50%, -50%)';
+    balon.style.opacity = '1'; 
+    balon.style.visibility = 'visible';
+    balon.style.transition = 'none'; 
+    balon.style.transform = 'translateX(-50%)';
     void balon.offsetHeight;
     portero.className = '';
 
@@ -692,7 +625,6 @@ document.getElementById('btn-siguiente').onclick = function() {
         }
     }
 };
-
 // --- 8. FASES Y FINAL ---
 function mostrarModalPasaste() {
     if (faseActual >= 4) {
