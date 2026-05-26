@@ -551,7 +551,7 @@ const spriteInterval = setInterval(function() {
         audioEstadio.volume = 1.0;
         actualizarMarcador(false);
         mostrarModalResultado('ATAJADA');
-    }, 200);
+    }, 400);
        }
     }, 600);
 }
