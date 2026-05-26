@@ -543,16 +543,19 @@ const spriteInterval = setInterval(function() {
        } else {
     balon.style.transform = 'translate(calc(-50% + ' + ladoX + '), -30vh)';
 
-    balon.addEventListener('transitionend', function handler() {
-        balon.removeEventListener('transitionend', handler);
+    setTimeout(function() {
+        balon.style.transition = 'transform 0.5s ease-out, opacity 0.15s ease';
         balon.style.opacity = '0';
-        balon.style.visibility = 'hidden';
 
-        audioFallo.play();
-        audioEstadio.volume = 1.0;
-        actualizarMarcador(false);
-        mostrarModalResultado('ATAJADA');
-    });
+        setTimeout(function() {
+            balon.style.visibility = 'hidden';
+            audioFallo.play();
+            audioEstadio.volume = 1.0;
+            actualizarMarcador(false);
+            mostrarModalResultado('ATAJADA');
+        }, 150);
+
+    }, 280); // ← desaparece a mitad del vuelo
        }
     }, 600);
 }
