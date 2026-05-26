@@ -541,9 +541,10 @@ const spriteInterval = setInterval(function() {
                 mostrarModalResultado('GOL');
             }, 600);
        } else {
-     balon.style.transform = 'translate(calc(-50% + ' + ladoX + '), -30vh)';
+    balon.style.transform = 'translate(calc(-50% + ' + ladoX + '), -30vh)';
 
-    setTimeout(function() {
+    balon.addEventListener('transitionend', function handler() {
+        balon.removeEventListener('transitionend', handler);
         balon.style.opacity = '0';
         balon.style.visibility = 'hidden';
 
@@ -551,7 +552,7 @@ const spriteInterval = setInterval(function() {
         audioEstadio.volume = 1.0;
         actualizarMarcador(false);
         mostrarModalResultado('ATAJADA');
-    }, 400);
+    });
        }
     }, 600);
 }
