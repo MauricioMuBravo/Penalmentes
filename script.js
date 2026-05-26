@@ -541,15 +541,11 @@ const spriteInterval = setInterval(function() {
                 mostrarModalResultado('GOL');
             }, 600);
        } else {
-    balon.style.transform = 'translate(calc(-50% + ' + ladoX + '), -30vh)';
+     balon.style.transform = 'translate(calc(-50% + ' + ladoX + '), -30vh)';
 
     setTimeout(function() {
-        balon.style.transition = 'opacity 0.08s ease';
         balon.style.opacity = '0';
-        
-        setTimeout(function() {
-            balon.style.visibility = 'hidden';
-        }, 80);
+        balon.style.visibility = 'hidden';
 
         audioFallo.play();
         audioEstadio.volume = 1.0;
