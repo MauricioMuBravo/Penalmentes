@@ -96,7 +96,7 @@ const porterosPorFase = {
         base: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
         alegre: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%287%29.png",
         enojado: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%2815%29.png",
-        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero1Al.png",
+        finalGana: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero1AlI.png",
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero1En.png",
         
       spritesDerecha: [
@@ -125,19 +125,19 @@ const porterosPorFase = {
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero2En.png",
         spritesDerecha: [
             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
-    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/atajada_1_negro/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/atajada_1_negro/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/atajada_1_negro/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/gol_1_negro/4.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/gol_1_negro/5.png"  // Nueva
         ],
         spritesIzquierda: [
             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
-    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/atajada_2_negro/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/atajada_2_negro/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/atajada_2_negro/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/gol_2_negro/4.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Negro/gol_2_negro/5.png"  // Nueva
 
         ]
         
