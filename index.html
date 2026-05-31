@@ -6,43 +6,39 @@
     <title>Mundialito Milenio 2026</title>
 
     <!-- ============================================================
-         PRELOADS — Recursos críticos descargados con alta prioridad
-         antes de que el render engine los descubra por sí solo.
-         Orden: CSS y JS → fondo (oculto en CSS) → pantalla inicial
-                → juego → íconos de estado (descubiertos solo por JS)
+         PRECONNECT — Establece conexión anticipada con Google Fonts
+         antes de que el browser parsee el CSS.
+         ============================================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- ============================================================
+         FUENTE — Cargada como <link> (no @import en CSS) para no
+         bloquear el render. Solo los pesos realmente usados: 700/800/900.
+         ============================================================ -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- ============================================================
+         PRELOADS — Solo los recursos críticos de la PANTALLA INICIAL.
+         Los assets del juego (balón, portero, GOL, ATAJADA, sprites…)
+         se precargan en JS al momento de presionar "Jugar", para no
+         competir por ancho de banda en la carga inicial (especialmente
+         en mobile con datos móviles).
          ============================================================ -->
 
     <!-- CSS y JS principal -->
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="script.js" as="script">
 
-    <!-- Fondo del juego: declarado en CSS ::before — el browser
-         no lo descubre hasta parsear el CSS completo -->
+    <!-- Fondo del juego: declarado en CSS ::before -->
     <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/FondoWeb.png" as="image">
 
-    <!-- Pantalla de inicio -->
+    <!-- Pantalla de inicio — únicos visibles antes de presionar "Jugar" -->
     <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/NUEVOLOGOFUTBOLITO.png" as="image">
     <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/LOGO26.png" as="image">
     <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/JUGAR.png" as="image">
     <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" as="image">
     <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFO.png" as="image">
-   
-    <!-- Gameplay crítico -->
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2025/PublicidadEditorial/05.Mayo/slider-yt/ProyectoMundial2026/Juego_vectores/balon.png" as="image">
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%282%29.png" as="image">
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/PISTA.png" as="image">
-
-    <!-- Imágenes asignadas dinámicamente por JS (sin preload el browser
-         no las descubre hasta que el JS las asigna en tiempo de juego) -->
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/GOL.png" as="image">
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ATAJADA.png" as="image">
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/ELIMINADO.png" as="image">
-
-    <!-- Íconos de estado: solo se asignan cuando el usuario los activa
-         por primera vez (info activo, créditos activo, sin volumen) -->
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/INFONEG.png" as="image">
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CREDNEG.png" as="image">
-    <link rel="preload" href="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/SINVOL.png" as="image">
 
     <!-- ============================================================
          RECURSOS REALES — CSS y favicon
@@ -117,7 +113,7 @@
                 <div class="modal-wrapper">
                     <div class="modal-content-img">
                         <span class="close-modal">&times;</span>
-                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/Instrucciones_III.png" class="img-instrucciones" alt="Cómo jugar">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/como-jugar.png" class="img-instrucciones" alt="Cómo jugar">
                     </div>
                     <div class="side-menu-modal">
                         <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" class="side-icon btn-audio-sync">
@@ -132,7 +128,7 @@
                 <div class="modal-wrapper">
                     <div class="modal-content-img">
                         <span class="close-modal">&times;</span>
-                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/creditos2.png" class="img-instrucciones" alt="Créditos">
+                        <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/creditos.png" class="img-instrucciones" alt="Créditos">
                     </div>
                     <div class="side-menu-modal">
                         <img src="https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/MUNDIALITO%20/CONVOL.png" class="side-icon btn-audio-sync">
@@ -221,9 +217,9 @@
         </div>
     </div>
 
-    <!-- Scripts al final del body con defer para no bloquear el render.
-         El preload del <head> garantiza que script.js ya está en caché. -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+    <!-- canvas-confetti se carga dinámicamente en JS solo si el jugador
+         llega a ganar el torneo completo, para no descargar el script
+         en cada visita sin necesidad. -->
     <script src="script.js" defer></script>
 </body>
 </html>
