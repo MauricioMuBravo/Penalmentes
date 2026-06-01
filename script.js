@@ -151,20 +151,20 @@ const porterosPorFase = {
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero3En.png",
         spritesDerecha: [
             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
-           "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
-    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+           "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/atajada_1_verde/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/atajada_1_verde/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/atajada_1_verde/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/gol_1%20_verde/4.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/gol_1%20_verde/5.png"  // Nueva
             
         ],
         spritesIzquierda: [
             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%286%29.png",
-             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
-    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/atajada_2_verde/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/atajada_2_verde/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/atajada_2_verde/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/gol_2_verde/4.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Verde/gol_2_verde/5.png"  // Nueva
         ]
     },
     3: {
@@ -176,19 +176,19 @@ const porterosPorFase = {
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero4En.png",
        spritesDerecha: [
             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
-    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/atajada_1_Azul/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/atajada_1_Azul/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/atajada_1_Azul/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/gol_1%20_azul/4.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/gol_1%20_azul/5.png"  // Nueva
         ],
         spritesIzquierda: [
             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%283%29.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
-    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/atajada_2%20_azul/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/atajada_2%20_azul/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/atajada_2%20_azul/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/gol_2_azul/4.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Azul/gol_2_azul/5.png"  // Nueva
         ]
     },
     4: {
@@ -200,19 +200,19 @@ const porterosPorFase = {
         finalPierde: "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorterosMon/Portero5En.png",
        spritesDerecha: [
             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/2.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/3.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/4.1.png", // Nueva
-    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Derecha/5.png"  // Nueva
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/atajada_1_amarillo/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/atajada_1_amarillo/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/atajada_1_amarillo/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/gol_1_amarillo/4.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/gol_1_amarillo/5.png"  // Nueva
         ],
         spritesIzquierda: [
             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/PorteroBase/PORTEROS/PORTERO_COLORES/XUXIN%20%284%29.png",
-             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/2.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/3.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.png",
-            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/4.1.png", // Nueva
-    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Izquierda/5.png"  // Nueva
+             "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/atajada_2_amarillo/2.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/atajada_2_amarillo/3.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/atajada_2_amarillo/4.png",
+            "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/gol_2_amarillo/3.png", // Nueva
+    "https://cdnpublicidad.milenio.com/2026/PublicidadOperaciones/MundialitoMilenio/SINAD/Sprites/Amarillo/gol_2_amarillo/5.png"  // Nueva
         ]
     }
 };
@@ -234,7 +234,7 @@ const bancoPreguntas = [
 
 { q:"¿Qué selección africana fue la primera en llegar a semifinales de un Mundial?", a:"Marruecos", options:["Nigeria","Camerún","Marruecos"], hintText:"Lo logró en Qatar 2022.", exp:"Marruecos hizo historia en 2022 al convertirse en la primera selección africana en alcanzar semifinales.", link:"https://www.milenio.com/deportes/africa-orgullosa-avance-marruecos-qatar-2022" },
 
-{ q:"¿Qué jugador portugués es el máximo goleador histórico de su selección?", a:"Cristiano Ronaldo", options:["Eusébio","Cristiano Ronaldo","Luís Figo"], hintText:"Ha jugado cinco Mundiales y ganó la Eurocopa 2016.", exp:"Cristiano Ronaldo es el máximo goleador histórico de Portugal y uno de los futbolistas más importantes de su historia.", link:"https://www.milenio.com/deportes/futbol-internacional/cristiano-ronaldo-se-autoproclama-el-mejor-futbolista-de-la-historia" },
+{ q:"¿Qué jugador portugués es el máximo goleador histórico de su selección?", a:"Cristiano Ronaldo", options:["Eusébio","Cristiano Ronaldo","Luís Figo"], hintText:"Ha estado cinco apariciones y ganó la Eurocopa 2016.", exp:"Cristiano Ronaldo es el máximo goleador histórico de Portugal y uno de los futbolistas más importantes de su historia.", link:"https://www.milenio.com/deportes/futbol-internacional/cristiano-ronaldo-se-autoproclama-el-mejor-futbolista-de-la-historia" },
 
 { q:"¿Qué selección humilló a España con una goleada en fase de grupos del Mundial 2014?", a:"Países Bajos", options:["Chile","Países Bajos","Croacia"], hintText:"La derrotó 5-1 en su debut.", exp:"Países Bajos goleó 5-1 a España en Brasil 2014, en una revancha de la final de 2010.", link:"https://www.milenio.com/deportes/extra-cancha/humillacion-prensa-espanola-sobre-goleada-de-holanda" },
 
@@ -253,7 +253,7 @@ const bancoPreguntas = [
 
 { q:"¿Contra qué selección Argentina usó las famosas playeras de Tepito en 1986?", a:"Inglaterra", options:["Alemania","Inglaterra","Bélgica"], hintText:"En ese partido se anotó el llamado “Gol del Siglo”.", exp:"Argentina usó esas playeras en el histórico partido de cuartos de final contra Inglaterra.", link:"https://www.milenio.com/futbol-internacional/mundial/argentina-vs-inglaterra-1986-mundial-mexico" },
 
-{ q:"¿Qué animal caracteriza la camiseta con la que Francia jugó el torno de 1982?", a:"Gallo", options:["León","Águila","Gallo"], hintText:"Al día de hoy es una de las características del combinado francés.", exp:"El escudo de la federación francesa se caracteriza por mostrar un gallo junto a sus siglas.", link:"https://www.milenio.com/futbol-internacional/mundial/los-mejores-jerseys-en-la-historia-de-los-mundiales-de-futbol" },
+{ q:"¿Qué animal caracteriza la camiseta con la que Francia jugó el torneo de 1982?", a:"Gallo", options:["León","Águila","Gallo"], hintText:"Al día de hoy es una de las características del combinado francés.", exp:"El escudo de la federación francesa se caracteriza por mostrar un gallo junto a sus siglas.", link:"https://www.milenio.com/futbol-internacional/mundial/los-mejores-jerseys-en-la-historia-de-los-mundiales-de-futbol" },
 
 { q:"¿Qué selección usó una camiseta sin mangas en el torneo de 2002?", a:"Camerún", options:["Nigeria","Camerún","Senegal"], hintText:"El organismo rector les obligó a usar camisetas con mangas abajo", exp:"Este uniforme quedó grabado como una rareza que aún se comenta entre risas y desconcierto", link:"https://www.milenio.com/futbol-internacional/mundial/las-camisetas-mas-feas-en-la-historia-de-los-mundiales-de-futbol" },
 
@@ -278,14 +278,14 @@ const bancoPreguntas = [
 ],
     [ // Fase 3: Cuartos
         
-  { "q": "¿Quién marcó el gol de la victoria en la final del Mundial 2010?", "a": "Andrés Iniesta", "options": ["David Villa", "Xavi Hernández", "Andrés Iniesta"], "hintText": "El tanto llegó en el minuto 116.", "exp": "Iniesta marcó el gol del título ante Países Bajos en tiempo extra.", "link": "https://www.milenio.com/deportes/futbol-internacional/andres-iniesta-el-discreto-autor-del-gol-mas-importante-de-espana" },
-  { "q": "¿Qué jugador fue expulsado en el minuto 0 en un Mundial?", "a": "José Batista", "options": ["José Batista", "Diego Maradona", "Hugo Sánchez"], "hintText": "Fue en 1986.", "exp": "Batista fue expulsado a los pocos segundos en 1986.", "link": "https://www.milenio.com/futbol-internacional/mundial/batista-y-la-expulsion-mas-rapida-en-la-historia-del-mundial" },
+  { "q": "¿Quién marcó el gol de la victoria en la final del 2010?", "a": "Andrés Iniesta", "options": ["David Villa", "Xavi Hernández", "Andrés Iniesta"], "hintText": "El tanto llegó en el minuto 116.", "exp": "Iniesta marcó el gol del título ante Países Bajos en tiempo extra.", "link": "https://www.milenio.com/deportes/futbol-internacional/andres-iniesta-el-discreto-autor-del-gol-mas-importante-de-espana" },
+  { "q": "¿Qué jugador fue expulsado en el minuto 0 en el torneo internacional?", "a": "José Batista", "options": ["José Batista", "Diego Maradona", "Hugo Sánchez"], "hintText": "Fue en 1986.", "exp": "Batista fue expulsado a los pocos segundos en 1986.", "link": "https://www.milenio.com/futbol-internacional/mundial/batista-y-la-expulsion-mas-rapida-en-la-historia-del-mundial" },
   { "q": "¿Qué jugador fue expulsado por un cabezazo en la final del 2006?", "a": "Zinedine Zidane", "options": ["Zinedine Zidane", "Thierry Henry", "Fabio Cannavaro"], "hintText": "Fue su último partido profesional.", "exp": "Zidane fue expulsado por el cabezazo a Materazzi en la prórroga de la final de 2006.", "link": "https://www.milenio.com/futbol-internacional/mundial/mundial-de-alemania-2006-la-triste-final-de-zinedine-zidane" },
   { "q": "¿Qué jugador anotó un hat-trick en la final de 2022?", "a": "Kylian Mbappé", "options": ["Lionel Messi", "Kylian Mbappé", "Ángel Di María"], "hintText": "A pesar de eso, no ganó el título.", "exp": "Mbappé marcó tres goles en la final, pero Francia perdió en penales ante Argentina.", "link": "https://www.milenio.com/futbol-internacional/mundial/mbappe-campeon-goleo-qatar-heredero-messi-cristiano" },
   { "q": "¿Qué selección eliminó a México en 1994 en penales?", "a": "Bulgaria", "options": ["Bulgaria", "Alemania", "Argentina"], "hintText": "El partido fue 1-1.", "exp": "Bulgaria eliminó a México en penales en Estados Unidos 1994.", "link": "https://www.milenio.com/futbol/seleccion-mexicana/jorge-campos-culpa-luis-garcia-eliminacion-tri-mundial-eu" },
   { "q": "¿Qué selección dejó fuera a Argentina en el Mundial 2002 en fase de grupos?", "a": "Suecia", "options": ["Suecia", "Inglaterra", "Nigeria"], "hintText": "Fue un empate clave el que selló su eliminación.", "exp": "Argentina no pudo vencer a Suecia y quedó fuera en fase de grupos.", "link": "https://www.milenio.com/futbol-internacional/mundial/argentina-2002-el-empate-con-suecia-que-los-elimino" },
   { "q": "¿Qué objeto fue robado antes del Mundial de 1966 y luego recuperado por un perro llamado Pickles?", "a": "La Copa Jules Rimet", "options": ["El balón oficial", "La Copa Jules Rimet", "La bandera de Inglaterra"], "hintText": "Era el trofeo original del torneo.", "exp": "El trofeo Jules Rimet fue robado meses antes del Mundial de Inglaterra 1966 y apareció gracias a Pickles.", "link": "https://www.milenio.com/deportes/futbol-internacional/pickles-perro-rescato-jules-rimet-mundial-1966" },
-  { "q": "¿Quién anotó el primer gol en la historia de los Mundiales?", "a": "Lucien Laurent", "options": ["Lucien Laurent", "Raymond Kopa", "Just Fontaine"], "hintText": "Fue Francia vs México en 1930.", "exp": "Lucien Laurent marcó el primer gol en la historia, en el partido entre Francia y México de 1930.", "link": "https://www.milenio.com/deportes/extra-cancha/once-goles-historicos-en-el-mundial" },
+  { "q": "¿Quién anotó el primer gol en la historia del torneo internacional?", "a": "Lucien Laurent", "options": ["Lucien Laurent", "Raymond Kopa", "Just Fontaine"], "hintText": "Fue Francia vs México en 1930.", "exp": "Lucien Laurent marcó el primer gol en la historia, en el partido entre Francia y México de 1930.", "link": "https://www.milenio.com/deportes/extra-cancha/once-goles-historicos-en-el-mundial" },
   { "q": "¿Por qué México no participó en Italia 1990?", "a": "Por sanción del organismo rector internacional", "options": ["Por sanción del organismo rector internacional", "Protestas de los jugadores", "Falta de recursos"], "hintText": "No se trató de una eliminación en el campo", "exp": "México fue sancionado por el caso de los 'cachirules'.", "link": "https://www.milenio.com/futbol-internacional/mundial/mexico-y-los-cachirules-el-escandalo-que-dejo-al-tri-sin-mundial" },
   { "q": "¿Qué cantidad de atajadas clave logró Memo Ochoa contra Brasil en 2014?", "a": "4", "options": ["8", "6", "4"], "hintText": "Ochoa fue clave para evitar goles.", "exp": "México y Brasil empataron 0-0 gracias a esta actuación memorable.", "link": "https://www.milenio.com/futbol-internacional/mundial/memo-ochoa-atajadas-historicas-brasil-2014" },
   { "q": "¿Qué jugador anotó el ‘gol de honra’ para Brasil en el 1-7 contra Alemania en 2014?", "a": "Oscar", "options": ["Fred", "Oscar", "Hulk"], "hintText": "Lo hizo en un mano a mano contra Manuel Neuer", "exp": "Aunque sirvió de poco, este gol ayudó a los brasileños al final.", "link": "https://www.milenio.com/deportes/futbol-internacional/a-8-anos-brasil-1-7-alemania-copa-del-mundo-de-2014" },
@@ -298,13 +298,13 @@ const bancoPreguntas = [
     [ // Fase 4: Semis
 
   { "q": "¿Quién anotó el gol más rápido en la historia del máximo torneo de selecciones?", "a": "Hakan Şükür", "options": ["Clint Dempsey", "Hakan Şükür", "Miroslav Klose"], "hintText": "Ocurrió a los 11 segundos.", "exp": "Hakan Şükür marcó a los 11 segundos en 2002, récord histórico.", "link": "https://www.milenio.com/deportes/extra-cancha/los-goles-mas-rapidos-en-la-historia-del-futbol" },
-  { "q": "¿Qué país tuvo que renunciar a la organización del Mundial 1986?", "a": "Colombia", "options": ["Argentina", "Colombia", "Chile"], "hintText": "A la fecha no ha organizado el torneo.", "exp": "Colombia renunció por imposibilidad económica y falta de infraestructura.", "link": "https://www.milenio.com/futbol-internacional/mundial/el-dia-que-estados-unidos-intento-robarle-un-mundial-a-mexico" },
+  { "q": "¿Qué país tuvo que renunciar a la organización de 1986?", "a": "Colombia", "options": ["Argentina", "Colombia", "Chile"], "hintText": "A la fecha no ha organizado el torneo.", "exp": "Colombia renunció por imposibilidad económica y falta de infraestructura.", "link": "https://www.milenio.com/futbol-internacional/mundial/el-dia-que-estados-unidos-intento-robarle-un-mundial-a-mexico" },
   { "q": "¿Qué jugador colombiano fue asesinado tras un autogol en 1994?", "a": "Andrés Escobar", "options": ["René Higuita", "Francisco Maturana", "Andrés Escobar"], "hintText": "El autogol representó el 2-1 en contra de su selección.", "exp": "Uno de los episodios más trágicos relacionados con apuestas ilegales.", "link": "https://www.milenio.com/deportes/futbol-internacional/andres-escobar-25-anos-muerte-autogol-mundial-1994" },
   { "q": "¿Qué jugador anotó el gol que eliminó a México en 2014 en tiempo extra?", "a": "Klaas-Jan Huntelaar", "options": ["Arjen Robben", "Wesley Sneijder", "Klaas-Jan Huntelaar"], "hintText": "El partido fue contra Países Bajos.", "exp": "Huntelaar marcó el penal definitivo tras la polémica falta sobre Robben.", "link": "https://www.milenio.com/futbol-internacional/mundial/mexico-fue-eliminado-por-holanda-en-mundial-de-brasil-2014" },
   { "q": "¿Qué selección fue eliminada por Senegal en 2002, víctima de la 'maldición del campeón'?", "a": "Francia", "options": ["Brasil", "Francia", "Alemania"], "hintText": "Fue víctima de ‘la maldición del campeón’", "exp": "Senegal venció a Francia en el partido inaugural.", "link": "https://www.milenio.com/futbol-internacional/mundial/senegal-elimino-a-francia-en-el-mundial-2002" },
   { "q": "¿Cuál es la mayor goleada en la historia del máximo torneo de selecciones?", "a": "Hungría 10-1 El Salvador", "options": ["Hungría 10-1 El Salvador", "Portugal 7-0 Corea del Norte", "Yugoslavia 9-0 Zaire"], "hintText": "Sucedió en España 1982.", "exp": "Hungría goleó 10-1 a El Salvador en la mayor goleada registrada.", "link": "https://www.milenio.com/deportes/futbol-internacional/copa-mundo-salvador-goleada-siglo-unio" },
   { "q": "¿Quién es el único jugador en hacer 'hat-tricks' en dos ediciones consecutivas?", "a": "Gabriel Batistuta", "options": ["Cristiano Ronaldo", "Lionel Messi", "Gabriel Batistuta"], "hintText": "El primero fue ante Grecia y el segundo ante Jamaica.", "exp": "El primero fue en EE. UU. 1994 y el segundo en Francia 1998.", "link": "https://www.milenio.com/futbol-internacional/mundial/batistuta-unico-con-hat-tricks-en-dos-mundiales-seguidos" },
-  { "q": "¿Cuál es la selección que ha recibido más goles en contra en la historia de los Mundiales?", "a": "Alemania", "options": ["Alemania", "Brasil", "México"], "hintText": "Es también una de las que más apariciones tiene.", "exp": "Al tener tantas participaciones, ha recibido más goles en contra históricos.", "link": "https://www.milenio.com/futbol-internacional/mundial/alemania-la-seleccion-con-mas-goles-recibidos-en-mundiales" },
+  { "q": "¿Cuál es la selección que ha recibido más goles en contra en la historia del torneo internacional?", "a": "Alemania", "options": ["Alemania", "Brasil", "México"], "hintText": "Es también una de las que más apariciones tiene.", "exp": "Al tener tantas participaciones, ha recibido más goles en contra históricos.", "link": "https://www.milenio.com/futbol-internacional/mundial/alemania-la-seleccion-con-mas-goles-recibidos-en-mundiales" },
   { "q": "¿Contra qué equipo jugó México el único quinto partido de su historia?", "a": "Alemania", "options": ["Argentina", "Italia", "Alemania"], "hintText": "Ese rival llegaría a la final del torneo.", "exp": "México llegó a cuartos de final en 1986, eliminado por Alemania en penales.", "link": "https://www.milenio.com/futbol-internacional/mundial/mexico-en-los-mundiales-asi-fueron-todas-sus-eliminaciones-historicas" },
   { "q": "¿Contra qué selección fue eliminado México en penales en 1994?", "a": "Bulgaria", "options": ["Bulgaria", "Italia", "Noruega"], "hintText": "Hugo Sánchez se quedó en la banca.", "exp": "México cayó ante Bulgaria en octavos de final.", "link": "https://www.milenio.com/futbol-internacional/mundial/mexico-en-los-mundiales-asi-fueron-todas-sus-eliminaciones-historicas" },
   { "q": "¿Qué selección remontó y eliminó a México en el torneo de 1998?", "a": "Alemania", "options": ["Alemania", "Países Bajos", "Bulgaria"], "hintText": "Gary Lineker decía que al final siempre gana este país.", "exp": "México ganaba 1-0, pero Alemania remontó con goles de Klinsmann y Bierhoff.", "link": "https://www.milenio.com/futbol-internacional/mundial/mexico-en-los-mundiales-asi-fueron-todas-sus-eliminaciones-historicas" },
@@ -318,19 +318,19 @@ const bancoPreguntas = [
    [ // Fase 5: Final
   { "q": "¿Qué equipo jugó con playeras “pirata” en un partido de 1986?", "a": "Argentina", "options": ["México", "España", "Argentina"], "hintText": "De no haberlo hecho, hubiera perdido por default.", "exp": "En México 1986, el equipo resolvió el uniforme con playeras de emergencia conseguidas en Tepito.", "link": "https://www.milenio.com/futbol-internacional/mundial/argentina-vs-inglaterra-1986-mundial-mexico" },
   { "q": "¿Qué jugador fue el más joven en debutar en el máximo torneo?", "a": "Norman Whiteside", "options": ["Pelé", "Norman Whiteside", "Kylian Mbappé"], "hintText": "Jugó en 1982 con solo 17 años.", "exp": "El norirlandés debutó en España 1982 con 17 años y 42 días.", "link": "https://www.milenio.com/futbol-internacional/mundial/mundial-de-qatar-2022-los-records-que-se-buscaran-romper" },
-  { "q": "¿Qué jugador fue el primero en marcar en cuatro ediciones distintas?", "a": "Uwe Seeler", "options": ["Miroslav Klose", "Pelé", "Uwe Seeler"], "hintText": "Lo logró antes que Cristiano y Messi.", "exp": "El alemán Uwe Seeler fue uno de los pioneros en anotar en cuatro Mundiales.", "link": "https://www.milenio.com/deportes/rusia-2018/cristiano-cuarto-jugador-que-marca-en-cuatro-mundiales" },
+  { "q": "¿Qué jugador fue el primero en marcar en cuatro ediciones distintas?", "a": "Uwe Seeler", "options": ["Miroslav Klose", "Pelé", "Uwe Seeler"], "hintText": "Lo logró antes que Cristiano y Messi.", "exp": "El alemán Uwe Seeler fue uno de los pioneros en anotar en cuatro en el máximo torneo.", "link": "https://www.milenio.com/deportes/rusia-2018/cristiano-cuarto-jugador-que-marca-en-cuatro-mundiales" },
   { "q": "¿Qué jugador tiene más partidos disputados en la historia?", "a": "Lionel Messi", "options": ["Lionel Messi", "Lothar Matthäus", "Miroslav Klose"], "hintText": "Superó el récord en Qatar 2022.", "exp": "Messi rompió el récord de Matthäus y se convirtió en el líder en partidos disputados.", "link": "https://www.milenio.com/futbol-internacional/mundial/lionel-messi-jugador-partidos-historia-mundiales" },
-  { "q": "¿Qué jugador disputó 5 Mundiales consecutivos entre 1982 y 1998?", "a": "Lothar Matthäus", "options": ["Lothar Matthäus", "Franz Beckenbauer", "Karl-Heinz Rummenigge"], "hintText": "Es uno de los grandes capitanes de Alemania.", "exp": "Matthäus jugó cinco Copas del Mundo consecutivas con Alemania.", "link": "https://www.milenio.com/deportes/futbol-internacional/rafa-marquez-gano-quinto-mundial-lothar-matthaus" },
+  { "q": "¿Qué jugador disputó 5 apariciones consecutivos entre 1982 y 1998?", "a": "Lothar Matthäus", "options": ["Lothar Matthäus", "Franz Beckenbauer", "Karl-Heinz Rummenigge"], "hintText": "Es uno de los grandes capitanes de Alemania.", "exp": "Matthäus jugó cinco Copas del Mundo consecutivas con Alemania.", "link": "https://www.milenio.com/deportes/futbol-internacional/rafa-marquez-gano-quinto-mundial-lothar-matthaus" },
   { "q": "¿Qué selección fue la primera en perder una final en penales?", "a": "Italia", "options": ["Italia", "Brasil", "Alemania"], "hintText": "Ocurrió en 1994.", "exp": "Italia perdió ante Brasil en penales en la final de 1994.", "link": "https://www.milenio.com/futbol-internacional/mundial/baggio-y-el-penal-en-el-mundial-1994" },
   { "q": "¿Qué selección ganó el torneo de 2006 sin recibir goles en eliminación directa?", "a": "Italia", "options": ["Italia", "Brasil", "Francia"], "hintText": "Lo logró vestida de azul.", "exp": "Italia se coronó en Alemania 2006 manteniendo su meta imbatida en fase de eliminación.", "link": "https://www.milenio.com/deportes/la-aficion-90/italia-levanta-titulo-mundial-alemania-2006" },
-  { "q": "¿Quién marcó el gol 1,000 en la historia de los Mundiales?", "a": "Rob Rensenbrink", "options": ["Cristiano Ronaldo", "Lionel Messi", "Rob Rensenbrink"], "hintText": "El tanto fue anotado con un cobro de penal.", "exp": "Rensenbrink marcó el gol 1,000 en el Países Bajos vs Escocia de 1978.", "link": "https://www.milenio.com/futbol-internacional/mundial/quien-marco-el-gol-1000-en-la-historia-de-los-mundiales" },
-  { "q": "¿Qué jugador anotó en cinco ediciones distintas del Mundial?", "a": "Cristiano Ronaldo", "options": ["Cristiano Ronaldo", "Messi", "Neymar"], "hintText": "Lo logró en 2022 al marcar contra Ghana.", "exp": "CR7 se convirtió en el primer futbolista en marcar en cinco Mundiales distintos.", "link": "https://www.milenio.com/futbol-internacional/mundial/cristiano-ronaldo-anotar-mundiales-qatar-2022" },
+  { "q": "¿Quién marcó el gol 1,000 en la historia del torneo internacional?", "a": "Rob Rensenbrink", "options": ["Cristiano Ronaldo", "Lionel Messi", "Rob Rensenbrink"], "hintText": "El tanto fue anotado con un cobro de penal.", "exp": "Rensenbrink marcó el gol 1,000 en el Países Bajos vs Escocia de 1978.", "link": "https://www.milenio.com/futbol-internacional/mundial/quien-marco-el-gol-1000-en-la-historia-de-los-mundiales" },
+  { "q": "¿Qué jugador anotó en cinco ediciones distintas del máximo torneo?", "a": "Cristiano Ronaldo", "options": ["Cristiano Ronaldo", "Messi", "Neymar"], "hintText": "Lo logró en 2022 al marcar contra Ghana.", "exp": "CR7 se convirtió en el primer futbolista en marcar en cinco ediciones distintos.", "link": "https://www.milenio.com/futbol-internacional/mundial/cristiano-ronaldo-anotar-mundiales-qatar-2022" },
   { "q": "¿Qué jugador marroquí rompió el récord de salto de CR7 en 2022?", "a": "Youssef En-Nesyri", "options": ["Youssef En-Nesyri", "Achraf Hakimi", "Hakim Ziyech"], "hintText": "Su cabezazo llevó a Marruecos a semifinales.", "exp": "En-Nesyri saltó 2.78 metros, superando la marca anterior de Cristiano.", "link": "https://www.milenio.com/futbol-internacional/mundial/en-nesyri-rompe-record-de-cristiano-ronaldo-en-salto-del-gol" },
-  { "q": "¿Contra qué equipo consiguió México su primer punto en Mundiales?", "a": "Gales", "options": ["Gales", "Suecia", "Hungría"], "hintText": "Fue en Suecia 1958 con gol de Jaime Belmonte.", "exp": "México empató 1-1 con Gales en 1958.", "link": "https://www.milenio.com/futbol-internacional/mundial/seleccion-mexicana-historia-mundial-suecia-1958" },
+  { "q": "¿Contra qué equipo consiguió México su primer punto en el torneo internacional?", "a": "Gales", "options": ["Gales", "Suecia", "Hungría"], "hintText": "Fue en Suecia 1958 con gol de Jaime Belmonte.", "exp": "México empató 1-1 con Gales en 1958.", "link": "https://www.milenio.com/futbol-internacional/mundial/seleccion-mexicana-historia-mundial-suecia-1958" },
   { "q": "¿Qué campeón defensor no asistió a la siguiente edición para defender su título?", "a": "Uruguay", "options": ["Uruguay", "Italia", "Alemania"], "hintText": "Debido a un desaire de los europeos en 1930.", "exp": "Uruguay ganó en 1930 y no fue a Italia 1934.", "link": "https://www.milenio.com/futbol-internacional/mundial/todo-lo-que-debes-saber-del-mundial-qatar-2022" },
   { "q": "¿Qué país fue el primer representante africano en participar en un Mundial?", "a": "Egipto", "options": ["Egipto", "Marruecos", "Camerún"], "hintText": "Debutó en Italia en 1934.", "exp": "Egipto fue la primera selección africana en disputar el torneo.", "link": "https://www.milenio.com/futbol-internacional/mundial/todo-lo-que-debes-saber-del-mundial-qatar-2022" },
   { "q": "¿Qué edición fue la primera transmitida por televisión?", "a": "Suiza 1954", "options": ["Suiza 1954", "Suecia 1958", "México 1970"], "hintText": "También fue sede del 'Milagro de Berna'.", "exp": "Suiza 1954 fue la primera edición televisada.", "link": "https://www.milenio.com/futbol-internacional/mundial/todo-lo-que-debes-saber-del-mundial-qatar-2022" },
-  { "q": "¿Qué jugador marcó el único gol olímpico en la historia de los Mundiales?", "a": "Marco Coll", "options": ["Marco Coll", "Carlos Valderrama", "Faustino Asprilla"], "hintText": "Lo hizo por Colombia en 1962.", "exp": "Marco Coll anotó este gol ante la URSS en Chile 1962.", "link": "https://www.milenio.com/futbol-internacional/mundial/chile-1962-copa-mundo-sobrepuso-sismo" },
+  { "q": "¿Qué jugador marcó el único gol olímpico en la historia del torneo internacional?", "a": "Marco Coll", "options": ["Marco Coll", "Carlos Valderrama", "Faustino Asprilla"], "hintText": "Lo hizo por Colombia en 1962.", "exp": "Marco Coll anotó este gol ante la URSS en Chile 1962.", "link": "https://www.milenio.com/futbol-internacional/mundial/chile-1962-copa-mundo-sobrepuso-sismo" },
   { "q": "¿En qué edición se usaron por primera vez tarjetas de amonestación?", "a": "México en 1970", "options": ["Suecia en 1958", "México en 1970", "Chile en 1962"], "hintText": "Fue la primera edición que México organizó.", "exp": "En México 1970 se implementaron las tarjetas amarillas y rojas.", "link": "https://www.milenio.com/futbol-internacional/mundial/todo-lo-que-debes-saber-del-mundial-qatar-2022" }
 ]
 ];
