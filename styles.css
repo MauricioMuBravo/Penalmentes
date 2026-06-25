@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+/* Fuente cargada vía <link> en el HTML con preconnect.
+   Se eliminó el @import para no bloquear el render del CSS. */
 
 
 
@@ -138,7 +139,19 @@ body, html {
 
 .top-icon { height: 45px; cursor: pointer; transition: 0.2s; }
 
+/* NUEVO: Pulso de animación para el ícono de INFO */
+.btn-info-trigger {
+    animation: pulsoZoom 2s ease-in-out infinite;
+}
 
+@keyframes pulsoZoom {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
 
 #game-container.game-on header { 
 
@@ -299,14 +312,14 @@ body, html {
 /* --- 4. PERSONAJES Y BALÓN --- */
 .escena-penal {        
     width: 100%; height: 100%; position: absolute; bottom: 0; left: 0;
-    display: flex; /* <-- CORREGIDO: Aquí agregamos el punto y coma */
+    display: flex;
     justify-content: center; 
     align-items: flex-end; z-index: 10; pointer-events: none;        
 }
 
 #balon {    
  position: absolute; left: 50%; bottom: 12%; height: 6.5vh;    
-    transform: translateX(-50%); /* ← solo centra horizontalmente, sin mover en Y */
+    transform: translateX(-50%);
     z-index: 20;
     will-change: transform;
 }
@@ -336,13 +349,11 @@ body:has(#modal-feedback[style*="display: flex"]) #balon {
     display: block !important;
 }
 
-/* Esta clase ayudará a evitar que el portero desaparezca cuando sale el feedback */
 .portero-activo {
     opacity: 1 !important;
 }
 body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
-/* --- NUEVAS CLASES DE VUELO REAL (MANTIENEN TUS SPRITES AL DERECHO) --- */
 .avienta-der { 
     transform: translate(calc(-50% + 3vh), -1.2vh) rotate(5deg) !important; 
 }
@@ -350,7 +361,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     transform: translate(calc(-50% - 3vh), -1.2vh) rotate(-5deg) !important; 
 }
 
-/* Clases viejas por si se usan en otra sección del flujo */
 .portero-izq { transform: translate(calc(-50% - 80px), -20px) rotate(-30deg) !important; }
 .portero-der { transform: translate(calc(-50% + 80px), -20px) rotate(30deg) !important; }
 .portero-centro { transform: translateX(-50%) translateY(-30px) scale(1.1) !important; }
@@ -567,8 +577,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 
 
-/* 1. FASE / ELIMINADO */
-
 .titulo-final-asset {
 
     width: 85%; 
@@ -588,8 +596,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 }
 
 
-
-/* 2. LOS PUNTOS */
 
 .bocadillo-puntuacion {
 
@@ -632,8 +638,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 }
 
 
-
-/* 3. LOS BOTONES */
 
 .final-botones-container {
 
@@ -713,8 +717,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 
 
-/* 4. PORTERO (AL FONDO) */
-
 .portero-final-pos {    
 
     position: absolute !important; 
@@ -771,8 +773,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 
 
-/* 1. FASE GANADOR */
-
 .es-ganador .titulo-fase-superior { 
 
     width: 85%; 
@@ -788,8 +788,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 }
 
 
-
-/* 2. PUNTOS VERDES */
 
 .es-ganador .contenedor-puntos-verde { 
 
@@ -808,8 +806,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 .es-ganador .puntos-bg-img { width: 100%; height: auto; display: block; }
 
 
-
-/* BASE WEB: Aplica en Escritorio perfectamente */
 
 .es-ganador .textos-encima-puntos { 
 
@@ -840,8 +836,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 }
 
 
-
-/* 3. BOTONES GANADOR */
 
 .es-ganador .final-botones-container-ganador {
 
@@ -919,8 +913,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 
 
-/* 4. PORTERO / COPA GANADOR (AL FONDO) */
-
 .es-ganador .portero-final-pos-ganador { 
 
     position: absolute !important;
@@ -946,8 +938,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 }
 
 
-
-/* REGLA GLOBAL DE LA COPA (ESCRITORIO) */
 
 #modal-puntos .portero-final-img[src*="copa.png"] {
 
@@ -994,6 +984,16 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
    ============================================================ */
 
 @media (max-width: 600px) {
+
+    /* ─── OPTIMIZACIÓN MOBILE: se desactiva el blur del fondo ───────────────
+       El filter:blur() + transform:scale() en el pseudo-elemento ::before
+       consume GPU de forma continua en dispositivos de gama baja, causando
+       caídas de frames. En desktop se mantiene igual porque la GPU lo
+       maneja sin problema. */
+    #game-container::before {
+        filter: none;
+        transform: none;
+    }
 
     .ad-top-track .ad-top-img { height: 22px; }
 
@@ -1157,8 +1157,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 
 
-    /* SOBREESCRITURA EXCLUSIVA PARA MÓVIL (Cambia a 25%) */
-
     .es-ganador .textos-encima-puntos {
 
         position: absolute !important;
@@ -1215,8 +1213,6 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
 
 
-    /* --- CONTENEDORES MÓVIL DE LOGOS/PORTERO/TROFEO --- */
-
     .portero-final-pos { 
 
         width: 270px !important; 
@@ -1241,23 +1237,21 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
      
 
-    /* AJUSTE INTEGRADO PARA LA COPA EN MÓVIL */
-
     #modal-puntos .portero-final-img[src*="copa.png"] { 
 
         position: absolute !important;
 
-        bottom: -15px !important; /* Mueve la copa hacia abajo en móviles */
+        bottom: -15px !important;
 
         top: auto !important; 
 
-        width: 110px !important; /* Reduce su tamaño para que no estorbe */
+        width: 110px !important;
 
         left: 50% !important;
 
         transform: translateX(-50%) !important;
 
-        z-index: 5 !important; /* La coloca detrás de los botones */
+        z-index: 5 !important;
 
         animation: flotarCopaMobile 3s ease-in-out infinite !important;
 
@@ -1295,7 +1289,7 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
     max-width: 440px !important; 
 
-    height: 85vh !important; /* <--- Esto congela la altura en escritorio */
+    height: 85vh !important;
 
     margin-top: 7vh;
 
@@ -1335,7 +1329,7 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
     #modal-puntos .portero-final-img[src*="copa.png"] { position: absolute !important;
 
-        bottom: 5% !important;        /* Ajusta este valor (ej. 5% o 10%) para moverlo verticalmente */
+        bottom: 5% !important;
 
         top: auto !important; 
 
@@ -1343,11 +1337,11 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
 
         transform: translateX(-50%) !important;
 
-        width: 170px !important;      /* Tamaño fijo para escritorio */
+        width: 170px !important;
 
         filter: drop-shadow(0 0 25px rgba(255,215,0,0.6)); 
 
-        z-index: 5 !important;        /* Detrás de los botones */
+        z-index: 5 !important;
 
         animation: flotarCopa 3s ease-in-out infinite; 
 
@@ -1492,4 +1486,3 @@ body:has(#modal-feedback[style*="display: flex"]) #portero { opacity: 0; }
     font-family: 'Montserrat', sans-serif;
 
 }
-
