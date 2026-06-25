@@ -139,7 +139,19 @@ body, html {
 
 .top-icon { height: 45px; cursor: pointer; transition: 0.2s; }
 
+/* NUEVO: Pulso de animación para el ícono de INFO */
+.btn-info-trigger {
+    animation: pulsoZoom 2s ease-in-out infinite;
+}
 
+@keyframes pulsoZoom {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
 
 #game-container.game-on header { 
 
